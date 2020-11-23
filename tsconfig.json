@@ -7,6 +7,39 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
-  }
+    "strict": true,
+    "allowJs": false,
+    "baseUrl": "./src",
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "paths": {
+      "@components": ["components/index"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@config": ["config/index"],
+      "@services": ["services/index"],
+      "@services/*": ["services/*"],
+      "@screens": ["screens/index"],
+      "@screens/*": ["screens/*"],
+      "@hooks": ["hooks/index"],
+      "@hooks/*": ["hooks/*"],
+      "@navigation": ["navigation/index"],
+      "@navigation/*": ["navigation/*"],
+      "@utils/*": ["utils/*"],
+      "@assets": ["assets/index"],
+      "@theme": ["theme/index"],
+      "@api": ["api/index"],
+      "@api/*": ["api/*"]
+    },
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node"]
+  },
+  "exclude": ["node_modules"],
+  "include": ["index.js", "src"]
 }

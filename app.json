@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "book-dressing-mobile",
+    "name": "Book Dressing",
     "slug": "book-dressing-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,9 +24,6 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }
