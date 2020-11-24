@@ -21,13 +21,14 @@ export const RootNavigator = memo(() => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        setAuthentification(true)
-        user.getIdToken().then((accessToken) =>
-          auth.setValue({
+        user.getIdToken().then(async (accessToken) => {
+          await auth.setValue({
             accessToken,
             refreshToken: user.refreshToken,
+            userId: user.uid,
           })
-        )
+          setAuthentification(true)
+        })
       } else {
         setAuthentification(false)
         auth.clear()

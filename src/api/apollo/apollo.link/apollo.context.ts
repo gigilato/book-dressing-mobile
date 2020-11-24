@@ -4,8 +4,8 @@ import { config } from '@config'
 
 export const contextLink = setContext(() => {
   const value = auth.getValue()
-  if (!value?.token) return null
+  if (!value?.accessToken) return null
   const { authorizationScheme } = config.api
-  const context = { headers: { authorization: `${authorizationScheme} ${value.token}` } }
+  const context = { headers: { authorization: `${authorizationScheme} ${value.accessToken}` } }
   return context
 })

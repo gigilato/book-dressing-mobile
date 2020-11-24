@@ -6,7 +6,6 @@ export const loggerLink = new ApolloLink((operation, forward) => {
   const value = {
     type: operationType,
     variables: operation.variables,
-    context: operation.getContext(),
   }
   if (__DEV__) console.log(`Sending ${operationType}: ${operation.operationName}`, value)
   return forward(operation).map((result) => {

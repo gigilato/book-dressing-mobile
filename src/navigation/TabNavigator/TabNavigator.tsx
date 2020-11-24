@@ -3,6 +3,7 @@ import { View, Button } from 'react-native'
 import { firebase } from '@services'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { TabNavigatorParamList, TabNavigatorProps } from './TabNavigator.types'
+import { useMeQuery } from '@hooks/api'
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>()
 
@@ -16,6 +17,7 @@ const Placeholder = () => {
 }
 
 export const TabNavigator = memo<TabNavigatorProps>(() => {
+  useMeQuery()
   return (
     <Tab.Navigator tabBarOptions={{ showLabel: false }}>
       <Tab.Screen name="Placeholder" component={Placeholder} />

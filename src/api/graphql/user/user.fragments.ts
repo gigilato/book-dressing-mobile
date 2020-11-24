@@ -1,8 +1,12 @@
 import { gql } from '@apollo/client'
 
-export const meFragment = gql`
-  fragment Me on User {
+export const userFragment = gql`
+  fragment user on user {
     id
+    email
     username
+    description
+    pictureUrl
+    createdAt
   }
 `

@@ -4,6 +4,7 @@ import {
   ASYNC_STORAGE_ACCESS_TOKEN,
   ASYNC_STORAGE_REFRESH_TOKEN,
   ASYNC_STORAGE_CURRENT_USER,
+  ASYNC_STORAGE_CURRENT_USER_ID,
 } from './auth.constants'
 import { AuthValue } from './auth.types'
 import { Navigation } from '../navigation'
@@ -17,12 +18,14 @@ export class Auth {
     this.navigation = navigation
     const accessToken: string = await storage.load(ASYNC_STORAGE_ACCESS_TOKEN)
     const refreshToken: string = await storage.load(ASYNC_STORAGE_REFRESH_TOKEN)
+    const userId: string = await storage.load(ASYNC_STORAGE_CURRENT_USER_ID)
     const user: any = await storage.load(ASYNC_STORAGE_CURRENT_USER)
 
     this.value = {
       accessToken,
       refreshToken,
       user,
+      userId,
     }
     return this.value
   }
@@ -32,10 +35,11 @@ export class Auth {
 
   getValue = (): AuthValue | null => this.value
   setValue = async (value: Partial<AuthValue>): Promise<void> => {
-    const { accessToken, refreshToken, user } = value
+    const { accessToken, refreshToken, user, userId } = value
     if (accessToken) await storage.save(ASYNC_STORAGE_ACCESS_TOKEN, accessToken)
     if (refreshToken) await storage.save(ASYNC_STORAGE_REFRESH_TOKEN, refreshToken)
     if (user) await storage.save(ASYNC_STORAGE_CURRENT_USER, user)
+    if (userId) await storage.save(ASYNC_STORAGE_CURRENT_USER_ID, userId)
     const newValue: AuthValue = { ...this.value, ...value }
     this.value = newValue
   }
@@ -45,12 +49,14 @@ export class Auth {
       user: undefined,
       accessToken: undefined,
       refreshToken: undefined,
+      userId: undefined,
     }
     Promise.all([
       this.client?.cache.reset(),
       storage.remove(ASYNC_STORAGE_CURRENT_USER),
       storage.remove(ASYNC_STORAGE_ACCESS_TOKEN),
       storage.remove(ASYNC_STORAGE_REFRESH_TOKEN),
+      storage.remove(ASYNC_STORAGE_CURRENT_USER_ID),
     ])
     this.navigation?.resetRoot()
   }
