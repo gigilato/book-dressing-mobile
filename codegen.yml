@@ -1,10 +1,8 @@
 overwrite: true
 schema:
-  "https://parseapi.back4app.com/graphql":
+  "https://book-dressing.hasura.app/v1/graphql":
     headers:
-      - X-Parse-Application-Id: kNKlKPDlHxtmH9D0ZdAXwilMCF3kMeJ7rRm4G7Xi
-      - X-Parse-Master-Key: W8cQXzpS41t8gTHK1KbsAh5UhclpeEy58Pz4ZyTH
-      - X-Parse-Client-Key: BOxqPOsqcqv4JyqPjtZbJLkqmXjujR5keFxXUNkx
+      - x-hasura-admin-secret: b4D(%HJ)cjx@s5/5
 documents: src/api/graphql/**/*.ts
 generates:
   src/hooks/api/generated/index.ts:
