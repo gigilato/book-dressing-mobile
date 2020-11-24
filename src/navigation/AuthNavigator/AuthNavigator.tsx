@@ -10,6 +10,7 @@ export const AuthNavigator = memo(() => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerShown: false,
         ...defaultStackScreenOptions,
       }}>
       <Stack.Screen name="SignIn" component={SignIn} />

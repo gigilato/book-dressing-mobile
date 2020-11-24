@@ -1,4 +1,8 @@
 export const config = {
+  api: {
+    uri: 'https://book-dressing.hasura.app/v1/graphql',
+    authorizationScheme: 'Bearer',
+  },
   firebase: {
     apiKey: 'AIzaSyBGsbzK5F4l8hhYp7SjhaGTaYsqIq5ah6g',
     authDomain: 'book-dressing.firebaseapp.com',

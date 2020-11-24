@@ -1,8 +1,10 @@
 import React, { memo, useCallback, useState } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { ApolloProvider } from '@apollo/client'
 import { AppLoading } from '@components'
 import { AuthProvider } from '@components/providers'
 import { RootNavigator } from '@navigation'
+import { client } from '@api/apollo'
 
 export const App = memo(() => {
   const [loading, isLoading] = useState(true)
@@ -11,10 +13,12 @@ export const App = memo(() => {
   if (loading) return <AppLoading onFinishLoading={onFinishLoading} />
 
   return (
-    <SafeAreaProvider>
-      <AuthProvider>
-        <RootNavigator />
-      </AuthProvider>
-    </SafeAreaProvider>
+    <ApolloProvider client={client}>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <RootNavigator />
+        </AuthProvider>
+      </SafeAreaProvider>
+    </ApolloProvider>
   )
 })

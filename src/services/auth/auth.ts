@@ -1,4 +1,5 @@
 import { createContext, Context } from 'react'
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { Subject, Subscription } from 'rxjs'
 import * as storage from '@utils/storage'
 import { ASYNC_STORAGE_TOKEN_KEY, ASYNC_STORAGE_CURRENT_USER } from './auth.constants'
@@ -10,6 +11,7 @@ export class Auth {
   private subject = new Subject<AuthValue>()
   private context: Context<AuthValue> | null = null
   private navigation: Navigation | null = null
+  private client: ApolloClient<NormalizedCacheObject> | null = null
 
   setup = async (navigation: Navigation): Promise<AuthValue> => {
     this.navigation = navigation
@@ -25,6 +27,7 @@ export class Auth {
     return this.value
   }
 
+  setApolloClient = (client: ApolloClient<NormalizedCacheObject>) => (this.client = client)
   isAuthenticated = () => !!this.value?.token
 
   getValue = (): AuthValue | null => this.value
@@ -39,12 +42,16 @@ export class Auth {
 
   clear = async (): Promise<void> => {
     const value: AuthValue = {
-      ...this.value,
+      user: undefined,
       token: undefined,
     }
     this.subject.next(value)
     this.value = value
-    await storage.remove(ASYNC_STORAGE_TOKEN_KEY)
+    Promise.all([
+      this.client?.cache.reset(),
+      storage.remove(ASYNC_STORAGE_CURRENT_USER),
+      storage.remove(ASYNC_STORAGE_TOKEN_KEY),
+    ])
     this.navigation?.resetRoot()
   }
 
