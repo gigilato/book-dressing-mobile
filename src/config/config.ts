@@ -1,9 +1,12 @@
 export const config = {
-  api: {
-    headers: {
-      'X-Parse-Application-Id': 'kNKlKPDlHxtmH9D0ZdAXwilMCF3kMeJ7rRm4G7Xi',
-      'X-Parse-Master-Key': 'W8cQXzpS41t8gTHK1KbsAh5UhclpeEy58Pz4ZyTH',
-      'X-Parse-Client-Key': 'BOxqPOsqcqv4JyqPjtZbJLkqmXjujR5keFxXUNkx',
-    },
+  firebase: {
+    apiKey: 'AIzaSyBGsbzK5F4l8hhYp7SjhaGTaYsqIq5ah6g',
+    authDomain: 'book-dressing.firebaseapp.com',
+    databaseURL: 'https://book-dressing.firebaseio.com',
+    projectId: 'book-dressing',
+    storageBucket: 'book-dressing.appspot.com',
+    messagingSenderId: '102349844131',
+    appId: '1:102349844131:web:6b0a0eb068f7074bd81916',
+    measurementId: 'G-9T9PG2GEXQ',
   },
 }
