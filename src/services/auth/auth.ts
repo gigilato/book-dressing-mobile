@@ -1,62 +1,59 @@
-import { createContext, Context } from 'react'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
-import { Subject, Subscription } from 'rxjs'
 import * as storage from '@utils/storage'
-import { ASYNC_STORAGE_TOKEN_KEY, ASYNC_STORAGE_CURRENT_USER } from './auth.constants'
+import {
+  ASYNC_STORAGE_ACCESS_TOKEN,
+  ASYNC_STORAGE_REFRESH_TOKEN,
+  ASYNC_STORAGE_CURRENT_USER,
+} from './auth.constants'
 import { AuthValue } from './auth.types'
 import { Navigation } from '../navigation'
 
 export class Auth {
   private value: AuthValue | null = null
-  private subject = new Subject<AuthValue>()
-  private context: Context<AuthValue> | null = null
   private navigation: Navigation | null = null
   private client: ApolloClient<NormalizedCacheObject> | null = null
 
   setup = async (navigation: Navigation): Promise<AuthValue> => {
     this.navigation = navigation
-    const token: string = await storage.load(ASYNC_STORAGE_TOKEN_KEY)
+    const accessToken: string = await storage.load(ASYNC_STORAGE_ACCESS_TOKEN)
+    const refreshToken: string = await storage.load(ASYNC_STORAGE_REFRESH_TOKEN)
     const user: any = await storage.load(ASYNC_STORAGE_CURRENT_USER)
 
     this.value = {
-      token,
+      accessToken,
+      refreshToken,
       user,
     }
-    this.context = createContext<AuthValue>(this.value)
-    this.subject.next(this.value)
     return this.value
   }
 
   setApolloClient = (client: ApolloClient<NormalizedCacheObject>) => (this.client = client)
-  isAuthenticated = () => !!this.value?.token
+  isAuthenticated = () => !!this.value?.accessToken
 
   getValue = (): AuthValue | null => this.value
   setValue = async (value: Partial<AuthValue>): Promise<void> => {
-    const { token, user } = value
-    if (token) await storage.save(ASYNC_STORAGE_TOKEN_KEY, token)
+    const { accessToken, refreshToken, user } = value
+    if (accessToken) await storage.save(ASYNC_STORAGE_ACCESS_TOKEN, accessToken)
+    if (refreshToken) await storage.save(ASYNC_STORAGE_REFRESH_TOKEN, refreshToken)
     if (user) await storage.save(ASYNC_STORAGE_CURRENT_USER, user)
     const newValue: AuthValue = { ...this.value, ...value }
-    this.subject.next(newValue)
     this.value = newValue
   }
 
   clear = async (): Promise<void> => {
-    const value: AuthValue = {
+    this.value = {
       user: undefined,
-      token: undefined,
+      accessToken: undefined,
+      refreshToken: undefined,
     }
-    this.subject.next(value)
-    this.value = value
     Promise.all([
       this.client?.cache.reset(),
       storage.remove(ASYNC_STORAGE_CURRENT_USER),
-      storage.remove(ASYNC_STORAGE_TOKEN_KEY),
+      storage.remove(ASYNC_STORAGE_ACCESS_TOKEN),
+      storage.remove(ASYNC_STORAGE_REFRESH_TOKEN),
     ])
     this.navigation?.resetRoot()
   }
-
-  subscribe = (callback: (data: any) => any): Subscription => this.subject.subscribe(callback)
-  getContext = (): Context<AuthValue> | null => this.context
 }
 
 export const auth = new Auth()

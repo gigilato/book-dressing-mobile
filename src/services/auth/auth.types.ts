@@ -1,4 +1,5 @@
 export interface AuthValue {
-  token?: string
+  accessToken?: string
+  refreshToken?: string
   user?: any
 }

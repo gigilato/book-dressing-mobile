@@ -1,9 +1,9 @@
-import React, { memo, useRef, useEffect, useMemo } from 'react'
+import React, { memo, useRef, useEffect, useState } from 'react'
+import firebase from 'firebase'
 import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
-import { navigation } from '@services'
-import { useAuth } from '@hooks'
+import { navigation, auth } from '@services'
 import { RootNavigatorParamList } from './RootNavigator.types'
 import { TabNavigator } from '../TabNavigator'
 import { AuthNavigator } from '../AuthNavigator'
@@ -16,25 +16,24 @@ export const RootNavigator = memo(() => {
   useEffect(() => {
     navigation.setRef(navigationRef)
   })
-  const { isAuthenticated } = useAuth()
+  const [isAuthenticated, setAuthentification] = useState(!!auth.getValue())
 
-  const CurrentNavigator = useMemo(
-    () =>
-      isAuthenticated ? (
-        <Stack.Screen
-          name="TabNavigator"
-          component={TabNavigator}
-          options={{ stackAnimation: 'none' }}
-        />
-      ) : (
-        <Stack.Screen
-          name="AuthNavigator"
-          component={AuthNavigator}
-          options={{ stackAnimation: 'none' }}
-        />
-      ),
-    [isAuthenticated]
-  )
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setAuthentification(true)
+        user.getIdToken().then((accessToken) =>
+          auth.setValue({
+            accessToken,
+            refreshToken: user.refreshToken,
+          })
+        )
+      } else {
+        setAuthentification(false)
+        auth.clear()
+      }
+    })
+  }, [])
 
   return (
     <NavigationContainer
@@ -46,7 +45,19 @@ export const RootNavigator = memo(() => {
           headerShown: false,
           stackPresentation: 'modal',
         }}>
-        {CurrentNavigator}
+        {isAuthenticated ? (
+          <Stack.Screen
+            name="TabNavigator"
+            component={TabNavigator}
+            options={{ stackAnimation: 'none' }}
+          />
+        ) : (
+          <Stack.Screen
+            name="AuthNavigator"
+            component={AuthNavigator}
+            options={{ stackAnimation: 'none' }}
+          />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   )
