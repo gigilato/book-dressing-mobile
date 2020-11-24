@@ -3,7 +3,9 @@ import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
 import { RootNavigationProp, RootNavigatorParamList } from '../RootNavigator'
 
 export type TabNavigatorParamList = {
-  Placeholder: undefined
+  RequestNavigator: undefined
+  ProfileNavigator: undefined
+  ExplorerNavigator: undefined
 }
 
 export type TabNavigationProp = CompositeNavigationProp<
