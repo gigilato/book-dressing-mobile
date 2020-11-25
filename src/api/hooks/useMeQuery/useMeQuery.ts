@@ -1,5 +1,5 @@
 import { QueryHookOptions } from '@apollo/client'
-import { MeQuery, MeQueryVariables, useMeQuery as useDefaultMeQuery } from '@hooks/api/generated'
+import { MeQuery, MeQueryVariables, useMeQuery as useDefaultMeQuery } from '@api/hooks/generated'
 import { auth } from '@services'
 
 export const useMeQuery = (

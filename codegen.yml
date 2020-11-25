@@ -5,7 +5,7 @@ schema:
       - x-hasura-admin-secret: b4D(%HJ)cjx@s5/5
 documents: src/api/graphql/**/*.ts
 generates:
-  src/hooks/api/generated/index.ts:
+  src/api/hooks/generated/index.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
