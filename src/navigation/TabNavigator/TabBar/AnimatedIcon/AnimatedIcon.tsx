@@ -14,7 +14,7 @@ export const AnimatedIcon = memo<AnimatedIconProps>(({ color, size, name }) => {
           key={index}
           d={d}
           stroke={color}
-          strokeWidth={1}
+          strokeWidth={0}
           fill={color}
           fillRule="evenodd"
           strokeLinecap="round"
