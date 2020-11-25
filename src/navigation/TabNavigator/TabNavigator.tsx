@@ -19,9 +19,9 @@ export const TabNavigator = memo<TabNavigatorProps>(() => {
       tabBarOptions={{ showLabel: false }}
       tabBar={(tabBarProps) => <TabBar {...tabBarProps} />}>
       <Tab.Screen
-        name="RequestNavigator"
-        component={RequestNavigator}
-        options={{ tabBarLabel: t('RequestNavigator') }}
+        name="ProfileNavigator"
+        component={ProfileNavigator}
+        options={{ tabBarLabel: t('ProfileNavigator') }}
       />
       <Tab.Screen
         name="ExplorerNavigator"
@@ -29,9 +29,9 @@ export const TabNavigator = memo<TabNavigatorProps>(() => {
         options={{ tabBarLabel: t('ExplorerNavigator') }}
       />
       <Tab.Screen
-        name="ProfileNavigator"
-        component={ProfileNavigator}
-        options={{ tabBarLabel: t('ProfileNavigator') }}
+        name="RequestNavigator"
+        component={RequestNavigator}
+        options={{ tabBarLabel: t('RequestNavigator') }}
       />
     </Tab.Navigator>
   )
