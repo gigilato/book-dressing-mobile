@@ -33,6 +33,7 @@
       "@navigation/*": ["navigation/*"],
       "@utils/*": ["utils/*"],
       "@assets": ["assets/index"],
+      "@assets/*": ["assets/*"],
       "@theme": ["theme/index"],
       "@api": ["api/index"],
       "@api/*": ["api/*"]
