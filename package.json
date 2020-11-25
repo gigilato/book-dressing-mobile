@@ -23,6 +23,7 @@
     "date-fns": "^2.16.1",
     "expo": "~39.0.2",
     "expo-asset": "~8.2.0",
+    "expo-blur": "~8.2.0",
     "expo-splash-screen": "~0.6.2",
     "expo-status-bar": "~1.0.2",
     "firebase": "7.9.0",

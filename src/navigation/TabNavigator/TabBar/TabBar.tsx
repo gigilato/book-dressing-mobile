@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { View } from 'react-native'
+import { BlurView } from 'expo-blur'
 import AnimatedTabBar, { TabsConfig, BubbleTabBarItemConfig } from '@gorhom/animated-tabbar'
 import { useSafeAreaInsets } from '@hooks'
 import { getRgbaCode } from '@utils/color'
@@ -54,7 +54,7 @@ const tabs: TabsConfig<BubbleTabBarItemConfig> = {
 export const TabBar = memo<TabBarProps>(({ ...props }) => {
   const { bottom } = useSafeAreaInsets()
   return (
-    <View style={[styles.container, { bottom }]}>
+    <BlurView tint="light" intensity={100} style={[styles.container, { bottom }]}>
       <AnimatedTabBar
         tabs={tabs}
         style={styles.tabBar}
@@ -62,6 +62,6 @@ export const TabBar = memo<TabBarProps>(({ ...props }) => {
         itemOuterSpace={{ vertical: 0 }}
         {...props}
       />
-    </View>
+    </BlurView>
   )
 })

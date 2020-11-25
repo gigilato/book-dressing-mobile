@@ -12,5 +12,6 @@ export const styles = StyleSheet.create({
   tabBar: {
     height: 70,
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
 })
