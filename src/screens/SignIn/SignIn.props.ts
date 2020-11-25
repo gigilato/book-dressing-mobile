@@ -9,3 +9,8 @@ export type SignInProps = {
   >
   route: RouteProp<AuthNavigatorParamList, 'SignIn'>
 }
+
+export type SignInFormInputs = {
+  email: string
+  password: string
+}
