@@ -1,8 +1,11 @@
 import React, { memo } from 'react'
+import { View } from 'react-native'
 import AnimatedTabBar, { TabsConfig, BubbleTabBarItemConfig } from '@gorhom/animated-tabbar'
+import { useSafeAreaInsets } from '@hooks'
 import { getRgbaCode } from '@utils/color'
 import { AnimatedIcon } from './AnimatedIcon'
 import { TabBarProps, BubbleComponentProps } from './TabBar.props'
+import { styles } from './TabBar.styles'
 
 const color1 = '#5B37B7'
 const color2 = '#4361ee'
@@ -49,5 +52,16 @@ const tabs: TabsConfig<BubbleTabBarItemConfig> = {
 }
 
 export const TabBar = memo<TabBarProps>(({ ...props }) => {
-  return <AnimatedTabBar tabs={tabs} {...props} />
+  const { bottom } = useSafeAreaInsets()
+  return (
+    <View style={[styles.container, { bottom }]}>
+      <AnimatedTabBar
+        tabs={tabs}
+        style={styles.tabBar}
+        safeAreaInsets={{ bottom: 0 }}
+        itemOuterSpace={{ vertical: 0 }}
+        {...props}
+      />
+    </View>
+  )
 })
