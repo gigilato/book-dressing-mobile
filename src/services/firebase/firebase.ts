@@ -7,29 +7,10 @@ export class Firebase {
     app.initializeApp(config.firebase)
   }
 
-  signIn = async (email: string, password: string) => {
-    try {
-      const user = await app.auth().signInWithEmailAndPassword(email, password)
-      return user
-    } catch (error) {
-      // TODO: handle dropdown
-      const errorCode = error.code
-      const errorMessage = error.message
-      console.log(errorCode, errorMessage)
-      return null
-    }
-  }
+  signIn = (email: string, password: string) =>
+    app.auth().signInWithEmailAndPassword(email, password)
 
-  signOut = async () => {
-    try {
-      await app.auth().signOut()
-    } catch (error) {
-      // TODO: handle dropdown
-      const errorCode = error.code
-      const errorMessage = error.message
-      console.log(errorCode, errorMessage)
-    }
-  }
+  signOut = () => app.auth().signOut()
 }
 
 export const firebase = new Firebase()

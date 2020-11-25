@@ -14,4 +14,8 @@ export const fr = {
     passwordPlaceholder: 'Mot de passe',
     passwordErrorRequired: 'Ce champs est requis',
   },
+  errors: {
+    signInErrorTitle: 'Erreur de connection',
+    signInErrorContent: 'Email ou mot de passe incorrect',
+  },
 }

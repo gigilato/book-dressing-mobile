@@ -3,6 +3,7 @@ import firebase from 'firebase'
 import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import FlashMessage from 'react-native-flash-message'
 import { navigation, auth } from '@services'
 import { RootNavigatorParamList } from './RootNavigator.types'
 import { TabNavigator } from '../TabNavigator'
@@ -60,6 +61,7 @@ export const RootNavigator = memo(() => {
           />
         )}
       </Stack.Navigator>
+      <FlashMessage position="top" />
     </NavigationContainer>
   )
 })
