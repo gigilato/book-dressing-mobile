@@ -1,8 +1,9 @@
-import { ColorProps, SpaceProps } from '@theme'
+import { ColorProps, SpaceProps, TypoProps } from '@theme'
 
-export type TextVariant = 'body' | 'title'
+export type TextVariant = 'body' | 'title' | 'header'
 
 export type TextProps = ColorProps &
-  SpaceProps & {
+  SpaceProps &
+  TypoProps & {
     variant?: TextVariant
   }

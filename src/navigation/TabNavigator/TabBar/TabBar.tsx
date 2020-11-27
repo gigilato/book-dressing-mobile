@@ -3,7 +3,6 @@ import { BlurView } from 'expo-blur'
 import { useTheme } from 'styled-components'
 import AnimatedTabBar, { TabsConfig, BubbleTabBarItemConfig } from '@gorhom/animated-tabbar'
 import { useSafeAreaInsets } from '@hooks'
-import { Theme } from '@theme'
 import { updateColorOpacity } from '@utils/color'
 import { AnimatedIcon } from './AnimatedIcon'
 import { TabBarProps, BubbleComponentProps } from './TabBar.props'
@@ -11,11 +10,11 @@ import { styles } from './TabBar.styles'
 
 export const TabBar = memo<TabBarProps>(({ ...props }) => {
   const { bottom } = useSafeAreaInsets()
-  const { colors } = useTheme() as Theme
+  const { colors } = useTheme()
   const tabs = useMemo(() => {
     const activeColor = colors.reverseText
     const inactiveColor = colors.text
-    const labelStyle = { color: activeColor }
+    const labelStyle = { color: activeColor, fontFamily: 'poppins500' }
     const background = {
       activeColor: colors.reverseBackground,
       inactiveColor: updateColorOpacity(colors.reverseBackground, 0),
