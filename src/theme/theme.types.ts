@@ -9,3 +9,4 @@ export type LayoutProps = SS.LayoutProps<RequiredTheme>
 export type FlexProps = SS.FlexProps<RequiredTheme>
 export type PositionProps = SS.PositionProps<RequiredTheme>
 export type TypoProps = SS.TypographyProps<RequiredTheme>
+export type RadiiProps = SS.BorderRadiusProps<RequiredTheme>

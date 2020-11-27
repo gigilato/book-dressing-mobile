@@ -1,16 +1,27 @@
 import React, { memo, useMemo } from 'react'
-import { BlurView } from 'expo-blur'
+import { BlurView as RNBlurView } from 'expo-blur'
+import styled from 'styled-components/native'
 import { useTheme } from 'styled-components'
+import { position, space, borderRadius } from 'styled-system'
 import AnimatedTabBar, { TabsConfig, BubbleTabBarItemConfig } from '@gorhom/animated-tabbar'
 import { useSafeAreaInsets } from '@hooks'
 import { updateColorOpacity } from '@utils/color'
 import { AnimatedIcon } from './AnimatedIcon'
-import { TabBarProps, BubbleComponentProps } from './TabBar.props'
+import { TabBarProps, BubbleComponentProps, BlurProps } from './TabBar.props'
 import { styles } from './TabBar.styles'
+
+const BlurView = styled<BlurProps>(RNBlurView)`
+  position: absolute
+  right:0
+  left:0
+  ${position}
+  ${space}
+  ${borderRadius}
+`
 
 export const TabBar = memo<TabBarProps>(({ ...props }) => {
   const { bottom } = useSafeAreaInsets()
-  const { colors } = useTheme()
+  const { colors, sizes } = useTheme()
   const tabs = useMemo(() => {
     const activeColor = colors.reverseText
     const inactiveColor = colors.text
@@ -57,10 +68,10 @@ export const TabBar = memo<TabBarProps>(({ ...props }) => {
   }, [colors])
 
   return (
-    <BlurView tint="dark" intensity={100} style={[styles.container, { bottom }]}>
+    <BlurView tint="dark" intensity={100} bottom={bottom} borderRadius="l" mx="xl">
       <AnimatedTabBar
         tabs={tabs}
-        style={styles.tabBar}
+        style={{ height: sizes.tabBarHeight, ...styles.tabBar }}
         safeAreaInsets={{ bottom: 0 }}
         itemOuterSpace={{ vertical: 0 }}
         {...props}
