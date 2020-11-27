@@ -27,7 +27,7 @@ export const Input = memo<InputProps>(
     return (
       <Box>
         <Text variant="label">{label}</Text>
-        <Box mt="xxs">
+        <Box>
           <StyledInput
             variant="default"
             color="text"

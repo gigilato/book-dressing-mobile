@@ -8,10 +8,12 @@ import {
   RadiiProps,
 } from '@theme'
 
+export type BoxVariant = 'screen' | 'absoluteFill'
+
 export type BoxProps = ColorProps &
   BorderProps &
   SpaceProps &
   LayoutProps &
   FlexProps &
   PositionProps &
-  RadiiProps
+  RadiiProps & { variant?: BoxVariant }

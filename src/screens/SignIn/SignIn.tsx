@@ -30,7 +30,7 @@ export const SignIn = memo<SignInProps>(() => {
   )
   return (
     <FormProvider {...methods}>
-      <Box flex={1}>
+      <Box variant="screen">
         <Box flex={1} />
         <Box flex={1} justifyContent="center">
           <FormInput name="email" rules={{ required: true }} autoCapitalize="none" />
