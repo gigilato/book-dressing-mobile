@@ -4,7 +4,9 @@ import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 import FlashMessage from 'react-native-flash-message'
+import { useTheme } from 'styled-components'
 import { navigation, auth } from '@services'
+import { Theme } from '@theme'
 import { RootNavigatorParamList } from './RootNavigator.types'
 import { TabNavigator } from '../TabNavigator'
 import { AuthNavigator } from '../AuthNavigator'
@@ -12,12 +14,13 @@ import { AuthNavigator } from '../AuthNavigator'
 const Stack = createNativeStackNavigator<RootNavigatorParamList>()
 
 export const RootNavigator = memo(() => {
-  const navigationRef = useRef<NavigationContainerRef>()
+  const navigationRef = useRef<NavigationContainerRef>(null)
+  const theme = useTheme() as Theme
+  const [isAuthenticated, setAuthentification] = useState(!!auth.getValue())
 
   useEffect(() => {
     navigation.setRef(navigationRef)
   })
-  const [isAuthenticated, setAuthentification] = useState(!!auth.getValue())
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -38,9 +41,7 @@ export const RootNavigator = memo(() => {
   }, [])
 
   return (
-    <NavigationContainer
-      //@ts-ignore
-      ref={navigationRef}>
+    <NavigationContainer ref={navigationRef} theme={{ dark: true, ...theme }}>
       <StatusBar backgroundColor="transparent" translucent style="auto" />
       <Stack.Navigator
         screenOptions={{

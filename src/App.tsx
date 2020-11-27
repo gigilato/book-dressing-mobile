@@ -1,7 +1,9 @@
 import React, { memo, useCallback, useState } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { ApolloProvider } from '@apollo/client'
+import { ThemeProvider } from 'styled-components'
 import { AppLoading } from '@components'
+import { theme } from '@theme'
 import { RootNavigator } from '@navigation'
 import { client } from '@api/apollo'
 
@@ -14,7 +16,9 @@ export const App = memo(() => {
   return (
     <ApolloProvider client={client}>
       <SafeAreaProvider>
-        <RootNavigator />
+        <ThemeProvider theme={theme}>
+          <RootNavigator />
+        </ThemeProvider>
       </SafeAreaProvider>
     </ApolloProvider>
   )

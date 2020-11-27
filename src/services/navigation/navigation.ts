@@ -2,9 +2,9 @@ import { MutableRefObject } from 'react'
 import { PartialState, NavigationState, NavigationContainerRef } from '@react-navigation/native'
 
 export class Navigation {
-  private ref: MutableRefObject<NavigationContainerRef | undefined> | undefined
+  private ref: MutableRefObject<NavigationContainerRef | null> | undefined
 
-  setRef = (ref: MutableRefObject<NavigationContainerRef | undefined>): void => {
+  setRef = (ref: MutableRefObject<NavigationContainerRef | null>): void => {
     this.ref = ref
   }
 

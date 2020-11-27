@@ -1,60 +1,64 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { BlurView } from 'expo-blur'
+import { useTheme } from 'styled-components'
 import AnimatedTabBar, { TabsConfig, BubbleTabBarItemConfig } from '@gorhom/animated-tabbar'
 import { useSafeAreaInsets } from '@hooks'
-import { getRgbaCode } from '@utils/color'
+import { Theme } from '@theme'
+import { updateColorOpacity } from '@utils/color'
 import { AnimatedIcon } from './AnimatedIcon'
 import { TabBarProps, BubbleComponentProps } from './TabBar.props'
 import { styles } from './TabBar.styles'
 
-const color1 = '#5B37B7'
-const color2 = '#4361ee'
-const color3 = '#FFBD00'
-const inactiveColor = 'rgba(0,0,0,1)'
-
-const tabs: TabsConfig<BubbleTabBarItemConfig> = {
-  RequestNavigator: {
-    labelStyle: { color: color1 },
-    icon: {
-      component: (props: BubbleComponentProps) => <AnimatedIcon {...props} name="notification" />,
-      activeColor: getRgbaCode(color1),
-      inactiveColor,
-    },
-    background: {
-      activeColor: 'rgba(223,215,243,1)',
-      inactiveColor: 'rgba(223,215,243,0)',
-    },
-  },
-  ExplorerNavigator: {
-    labelStyle: { color: color2 },
-    icon: {
-      component: (props: BubbleComponentProps) => <AnimatedIcon {...props} name="book" />,
-      activeColor: getRgbaCode(color2),
-      inactiveColor,
-    },
-    background: {
-      activeColor: 'rgba(207,235,255,1)',
-      inactiveColor: 'rgba(207,235,239,0)',
-    },
-  },
-  ProfileNavigator: {
-    labelStyle: { color: color3 },
-    icon: {
-      component: (props: BubbleComponentProps) => <AnimatedIcon {...props} name="user" />,
-      activeColor: getRgbaCode(color3),
-      inactiveColor,
-    },
-    background: {
-      activeColor: 'rgba(255,235,178,1)',
-      inactiveColor: 'rgba(207,235,239,0)',
-    },
-  },
-}
-
 export const TabBar = memo<TabBarProps>(({ ...props }) => {
   const { bottom } = useSafeAreaInsets()
+  const { colors } = useTheme() as Theme
+  const tabs = useMemo(() => {
+    const activeColor = colors.reverseText
+    const inactiveColor = colors.text
+    const labelStyle = { color: activeColor }
+    const background = {
+      activeColor: colors.reverseBackground,
+      inactiveColor: updateColorOpacity(colors.reverseBackground, 0),
+    }
+    return {
+      RequestNavigator: {
+        labelStyle,
+        icon: {
+          component: (iconProps: BubbleComponentProps) => (
+            <AnimatedIcon {...iconProps} name="notification" />
+          ),
+          activeColor,
+          inactiveColor,
+        },
+        background,
+      },
+      ExplorerNavigator: {
+        labelStyle,
+        icon: {
+          component: (iconProps: BubbleComponentProps) => (
+            <AnimatedIcon {...iconProps} name="book" />
+          ),
+          activeColor,
+          inactiveColor,
+        },
+        background,
+      },
+      ProfileNavigator: {
+        labelStyle,
+        icon: {
+          component: (iconProps: BubbleComponentProps) => (
+            <AnimatedIcon {...iconProps} name="user" />
+          ),
+          activeColor,
+          inactiveColor,
+        },
+        background,
+      },
+    } as TabsConfig<BubbleTabBarItemConfig>
+  }, [colors])
+
   return (
-    <BlurView tint="light" intensity={100} style={[styles.container, { bottom }]}>
+    <BlurView tint="dark" intensity={100} style={[styles.container, { bottom }]}>
       <AnimatedTabBar
         tabs={tabs}
         style={styles.tabBar}
