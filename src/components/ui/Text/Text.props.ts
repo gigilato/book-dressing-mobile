@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { TextProps as RNTextProps } from 'react-native'
 import { ColorProps, SpaceProps, TypoProps } from '@theme'
 
-export type TextVariant = 'body' | 'title' | 'header'
+export type TextVariant = 'body' | 'title' | 'header' | 'label' | 'error'
 
 export type StyledTextProps = ColorProps & SpaceProps & TypoProps & { variant?: TextVariant }
 export type TextProps = Omit<RNTextProps, 'style' | 'selectionColor'> & {

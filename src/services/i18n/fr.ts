@@ -10,9 +10,11 @@ export const fr = {
     ProfileNavigator: 'Profil',
   },
   form: {
-    emailPlaceholder: 'Email',
+    emailLabel: 'Email',
+    emailPlaceholder: 'Entrer un email',
     emailErrorRequired: 'Ce champs est requis',
-    passwordPlaceholder: 'Mot de passe',
+    passwordLabel: 'Mot de passe',
+    passwordPlaceholder: 'Entrer un mot de passe',
     passwordErrorRequired: 'Ce champs est requis',
   },
   errors: {

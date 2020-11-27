@@ -26,6 +26,16 @@ const StyledText = styled.Text<StyledTextProps>`
         color: 'text',
         fontSize: 'h1',
       },
+      label: {
+        color: 'text',
+        fontFamily: 'poppins400',
+        fontSize: 'big',
+      },
+      error: {
+        color: 'error',
+        fontFamily: 'poppins200',
+        fontSize: 'small',
+      },
     },
   })}
 `

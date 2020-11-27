@@ -1,9 +1,9 @@
 import React, { memo, useEffect } from 'react'
 import DefaultFlashMessage, { FlashMessageProps } from 'react-native-flash-message'
-import { useTheme, DefaultTheme } from 'styled-components'
+import { useTheme } from 'styled-components'
 
 export const FlashMessage = memo<FlashMessageProps>((props) => {
-  const { colors } = useTheme() as DefaultTheme
+  const { colors } = useTheme()
   useEffect(() => {
     DefaultFlashMessage.setColorTheme({ danger: colors.error })
   }, [colors])

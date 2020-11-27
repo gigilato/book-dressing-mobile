@@ -15,11 +15,11 @@ const Stack = createNativeStackNavigator<RootNavigatorParamList>()
 export const RootNavigator = memo(() => {
   const navigationRef = useRef<NavigationContainerRef>(null)
   const theme = useTheme()
-  const [isAuthenticated, setAuthentification] = useState(!!auth.getValue())
+  const [isAuthenticated, setAuthentification] = useState(!!auth.getValue()?.accessToken)
 
   useEffect(() => {
     navigation.setRef(navigationRef)
-  })
+  }, [])
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {

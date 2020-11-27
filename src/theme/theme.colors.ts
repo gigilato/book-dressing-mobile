@@ -6,6 +6,7 @@ export const colors = {
   background: palette.yami,
   reverseBackground: palette.cultured,
   text: palette.cultured,
+  placeholder: palette.gunMetal,
   reverseText: palette.yami,
   card: palette.yami,
   border: palette.gunMetal,
