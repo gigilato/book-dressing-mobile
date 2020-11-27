@@ -41,7 +41,7 @@ export const RootNavigator = memo(() => {
 
   return (
     <NavigationContainer ref={navigationRef} theme={{ dark: true, ...theme }}>
-      <StatusBar backgroundColor="transparent" translucent style="auto" />
+      <StatusBar backgroundColor="transparent" translucent style="light" />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,

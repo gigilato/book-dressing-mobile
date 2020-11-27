@@ -4,6 +4,7 @@ export const fr = {
     forgotPassword: 'Mot de passe oublié',
   },
   navigation: {
+    Profile: 'Profil',
     RequestNavigator: 'Demandes',
     ExplorerNavigator: 'Explorer',
     ProfileNavigator: 'Profil',
