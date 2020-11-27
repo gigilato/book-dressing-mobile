@@ -10,4 +10,4 @@ export const colors = {
   card: palette.yami,
   border: palette.gunMetal,
   notification: palette.oceanGreen,
-}
+} as const

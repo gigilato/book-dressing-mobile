@@ -1,3 +1,10 @@
-import { theme } from './theme'
+import { DefaultTheme } from 'styled-components'
+import * as SS from 'styled-system'
 
-export type Theme = typeof theme
+export type RequiredTheme = Required<DefaultTheme>
+export type ColorProps = SS.ColorProps<RequiredTheme>
+export type BorderProps = SS.BorderProps<RequiredTheme>
+export type SpaceProps = SS.SpaceProps<RequiredTheme>
+export type LayoutProps = SS.LayoutProps<RequiredTheme>
+export type FlexProps = SS.FlexProps<RequiredTheme>
+export type PositionProps = SS.PositionProps<RequiredTheme>
