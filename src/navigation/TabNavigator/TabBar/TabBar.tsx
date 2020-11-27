@@ -7,10 +7,10 @@ import AnimatedTabBar, { TabsConfig, BubbleTabBarItemConfig } from '@gorhom/anim
 import { useSafeAreaInsets } from '@hooks'
 import { updateColorOpacity } from '@utils/color'
 import { AnimatedIcon } from './AnimatedIcon'
-import { TabBarProps, BubbleComponentProps, BlurProps } from './TabBar.props'
+import { TabBarProps, BubbleComponentProps, BlurViewComponent } from './TabBar.props'
 import { styles } from './TabBar.styles'
 
-const BlurView = styled<BlurProps>(RNBlurView)`
+const BlurView = styled<BlurViewComponent>(RNBlurView)`
   position: absolute
   right:0
   left:0
