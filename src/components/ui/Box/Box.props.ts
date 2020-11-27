@@ -1,8 +1,17 @@
-import { ColorProps, BorderProps, SpaceProps, LayoutProps, FlexProps, PositionProps } from '@theme'
+import {
+  ColorProps,
+  BorderProps,
+  SpaceProps,
+  LayoutProps,
+  FlexProps,
+  PositionProps,
+  RadiiProps,
+} from '@theme'
 
 export type BoxProps = ColorProps &
   BorderProps &
   SpaceProps &
   LayoutProps &
   FlexProps &
-  PositionProps
+  PositionProps &
+  RadiiProps
