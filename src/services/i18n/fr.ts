@@ -12,10 +12,10 @@ export const fr = {
   form: {
     emailLabel: 'Email',
     emailPlaceholder: 'Entrer un email',
-    emailErrorRequired: '(obligatoire)*',
+    emailErrorRequired: 'obligatoire*',
     passwordLabel: 'Mot de passe',
     passwordPlaceholder: 'Entrer un mot de passe',
-    passwordErrorRequired: '(obligatoire)*',
+    passwordErrorRequired: 'obligatoire*',
   },
   errors: {
     signInErrorTitle: 'Erreur de connection',

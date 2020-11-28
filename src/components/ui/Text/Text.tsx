@@ -38,8 +38,8 @@ const StyledText = styled.Text<StyledTextProps>`
       },
       button: {
         color: 'text',
-        fontFamily: 'poppins400',
-        fontSize: 'normal',
+        fontFamily: 'poppins600',
+        fontSize: 'big',
       },
     },
   })}
