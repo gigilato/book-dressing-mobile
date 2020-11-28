@@ -4,7 +4,8 @@ import { useTheme } from 'styled-components'
 
 export const useSafeAreaInsets = () => {
   const {
-    sizes: { defaultBottomInset },
+    sizes: { defaultBottomInset, tabBarHeight },
+    space,
   } = useTheme()
   const { bottom, ...insets } = useDefaultSafeAreaInsets()
   const bottomInset = useMemo(() => (bottom === 0 ? defaultBottomInset : bottom), [
@@ -14,5 +15,6 @@ export const useSafeAreaInsets = () => {
   return {
     ...insets,
     bottom: bottomInset,
+    tab: tabBarHeight + bottomInset + space.s,
   }
 }

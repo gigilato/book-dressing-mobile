@@ -13,7 +13,21 @@ export const config = {
     appId: '1:102349844131:web:6b0a0eb068f7074bd81916',
     measurementId: 'G-9T9PG2GEXQ',
   },
-  googleBook: {
-    uri: 'https://www.googleapis.com/books/v1/volumes?q=',
+  googleBooks: {
+    uri: 'https://www.googleapis.com/books/v1',
+    endpoint: '/volumes',
+    params: {
+      query: {
+        key: 'q',
+      },
+      offset: {
+        key: 'startIndex',
+        default: 0,
+      },
+      limit: {
+        key: 'maxResults',
+        default: 21,
+      },
+    },
   },
 }

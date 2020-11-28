@@ -4,6 +4,7 @@ import { TabNavigationProp, TabNavigatorParamList } from '../TabNavigator'
 
 export type ProfileNavigatorParamList = {
   Profile: undefined
+  SearchBook: undefined
 }
 
 export type ProfileNavigationProp = CompositeNavigationProp<
