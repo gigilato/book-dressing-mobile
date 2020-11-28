@@ -28,5 +28,5 @@ export type StyledPressableProps = ColorProps &
 
 export type PressableProps = Omit<RNPressableProps, 'style'> & {
   scale?: number
-  debounce?: boolean
+  control?: 'debounce' | 'throttle'
 } & StyledPressableProps

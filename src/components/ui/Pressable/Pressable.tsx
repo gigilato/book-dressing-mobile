@@ -53,7 +53,7 @@ export const Pressable = memo<PressableProps>(
     onPressIn: onPressInCallback,
     onPressOut: onPressOutCallback,
     children,
-    debounce,
+    control,
     scale = 1,
     ...props
   }) => {
@@ -72,6 +72,17 @@ export const Pressable = memo<PressableProps>(
           onPress(event)
           timeout.current = undefined
         }, 1000)
+      },
+      [onPress]
+    )
+    const throttledOnPress = useCallback(
+      (event: GestureResponderEvent) => {
+        if (!onPress || timeout.current) return
+        timeout.current = setTimeout(() => {
+          clearTimeout(timeout.current)
+          timeout.current = undefined
+        }, 1000)
+        onPress(event)
       },
       [onPress]
     )
@@ -94,7 +105,13 @@ export const Pressable = memo<PressableProps>(
 
     return (
       <StyledPressable
-        onPress={debounce ? debouncedOnPress : onPress}
+        onPress={
+          control === 'debounce'
+            ? debouncedOnPress
+            : control === 'throttle'
+            ? throttledOnPress
+            : onPress
+        }
         onPressIn={onPressIn}
         onPressOut={onPressOut}
         style={{ transform: [{ scale: scaleAnimation }] }}

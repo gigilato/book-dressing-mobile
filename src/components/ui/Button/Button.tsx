@@ -6,12 +6,12 @@ import { ButtonProps } from './Button.props'
 import { useTheme } from 'styled-components'
 
 export const Button = memo<ButtonProps>(
-  ({ title, loading, variant = 'primary', debounce = true, ...props }) => {
+  ({ title, loading, variant = 'primary', control = 'throttle', ...props }) => {
     const { colors } = useTheme()
     return (
       <Pressable
-        debounce={debounce}
-        scale={variant === 'text' ? 0.9 : 0.8}
+        control={control}
+        scale={variant === 'text' ? 0.98 : 0.95}
         variant={variant !== 'text' ? variant : undefined}
         {...props}>
         {loading ? (
