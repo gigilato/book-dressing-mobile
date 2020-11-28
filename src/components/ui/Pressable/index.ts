@@ -1,2 +1,2 @@
 export * from './Pressable'
-export * from './Pressable.props'
+export { PressableProps } from './Pressable.props'

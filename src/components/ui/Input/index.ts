@@ -1,2 +1,2 @@
 export * from './Input'
-export * from './Input.props'
+export { InputProps } from './Input.props'
