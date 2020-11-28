@@ -28,13 +28,18 @@ const StyledText = styled.Text<StyledTextProps>`
       },
       label: {
         color: 'text',
-        fontFamily: 'poppins400',
+        fontFamily: 'poppins600',
         fontSize: 'big',
       },
       error: {
         color: 'error',
         fontFamily: 'poppins200',
         fontSize: 'small',
+      },
+      button: {
+        color: 'text',
+        fontFamily: 'poppins400',
+        fontSize: 'normal',
       },
     },
   })}

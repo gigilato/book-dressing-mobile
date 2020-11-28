@@ -26,17 +26,17 @@ export const Input = memo<InputProps>(
     const { colors } = useTheme()
     return (
       <Box>
-        <Text variant="label">{label}</Text>
-        <Box>
-          <StyledInput
-            variant="default"
-            color="text"
-            placeholderTextColor={colors.placeholder}
-            ref={ref}
-            {...props}
-          />
-          {error && error.length !== 0 && <Text variant="error">{error}</Text>}
-        </Box>
+        <Text>
+          <Text variant="label">{label}</Text>
+          {error && error.length !== 0 && <Text variant="error">{`  ${error}`}</Text>}
+        </Text>
+        <StyledInput
+          variant="default"
+          color="text"
+          placeholderTextColor={colors.placeholder}
+          ref={ref}
+          {...props}
+        />
       </Box>
     )
   })

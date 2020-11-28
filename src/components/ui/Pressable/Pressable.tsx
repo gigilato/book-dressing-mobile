@@ -2,8 +2,13 @@ import React, { memo, useCallback, useRef } from 'react'
 import { Pressable as RNPressable, GestureResponderEvent } from 'react-native'
 import Animated, { useValue } from 'react-native-reanimated'
 import styled from 'styled-components/native'
-import { color, border, space, flex, layout, position, borderRadius } from 'styled-system'
-import { PressableProps, AnimatedPressableComponent } from './Pressable.props'
+import { color, border, space, flex, layout, position, borderRadius, variant } from 'styled-system'
+import {
+  PressableProps,
+  AnimatedPressableComponent,
+  StyledPressableProps,
+  PressableVariant,
+} from './Pressable.props'
 
 const ANIM_START = 0
 const ANIM_END = 1
@@ -29,6 +34,17 @@ const StyledPressable = styled<AnimatedPressableComponent>(AnimatedPressable)`
   ${flex}
   ${layout}
   ${borderRadius}
+  ${variant<StyledPressableProps, PressableVariant>({
+    variants: {
+      primary: {
+        px: 'm',
+        py: 's',
+        backgroundColor: 'primary',
+        borderRadius: 'l',
+        alignItems: 'center',
+      },
+    },
+  })}
 `
 
 export const Pressable = memo<PressableProps>(

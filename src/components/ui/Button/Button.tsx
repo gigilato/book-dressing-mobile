@@ -1,32 +1,27 @@
-import React, { FC } from 'react'
-import { Pressable, TextStyle, ViewStyle } from 'react-native'
-import styled from 'styled-components/native'
-import { variant } from 'styled-system'
-import { ButtonProps, ButtonVariant } from './Button.props'
+import React, { memo } from 'react'
+import { ActivityIndicator } from 'react-native'
+import { Pressable } from '@components/ui/Pressable'
+import { Text } from '@components/ui/Text'
+import { ButtonProps } from './Button.props'
+import { useTheme } from 'styled-components'
 
-const Container = styled(Pressable)<{ variant?: ButtonVariant }>(
-  variant<ViewStyle, ButtonVariant>({
-    variants: {
-      primary: {
-        backgroundColor: 'primary',
-      },
-    },
-  })
+export const Button = memo<ButtonProps>(
+  ({ title, loading, variant = 'primary', debounce = true, ...props }) => {
+    const { colors } = useTheme()
+    return (
+      <Pressable
+        debounce={debounce}
+        scale={variant === 'text' ? 0.9 : 0.8}
+        variant={variant !== 'text' ? variant : undefined}
+        {...props}>
+        {loading ? (
+          <ActivityIndicator color={colors.text} />
+        ) : (
+          <Text variant="button" textTransform="upperfirst">
+            {title}
+          </Text>
+        )}
+      </Pressable>
+    )
+  }
 )
-const Title = styled.Text<{ variant?: ButtonVariant }>(
-  variant<TextStyle, ButtonVariant, 'variant'>({
-    variants: {
-      primary: {
-        color: 'error',
-      },
-    },
-  })
-)
-
-export const Button: FC<ButtonProps> = ({ variant: variantProps }) => {
-  return (
-    <Container variant={variantProps}>
-      <Title variant={variantProps}>AHHHH</Title>
-    </Container>
-  )
-}

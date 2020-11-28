@@ -1,10 +1,9 @@
 import React, { memo, useCallback, useState } from 'react'
-import { Button, ActivityIndicator } from 'react-native'
 import { useForm, FormProvider } from 'react-hook-form'
 import { showMessage } from 'react-native-flash-message'
 import { firebase } from '@services'
 import { FormInput } from '@components/form'
-import { Box } from '@components/ui'
+import { Box, Button } from '@components/ui'
 import { SignInFormInputs, SignInProps } from './SignIn.props'
 import { useTranslation } from 'react-i18next'
 
@@ -41,11 +40,8 @@ export const SignIn = memo<SignInProps>(() => {
             autoCapitalize="none"
             secureTextEntry
           />
-          {loading ? (
-            <ActivityIndicator />
-          ) : (
-            <Button title={'signIn'} onPress={methods.handleSubmit(onSubmit)} />
-          )}
+          <Box height={50} />
+          <Button title={t('signIn')} onPress={methods.handleSubmit(onSubmit)} loading={loading} />
         </Box>
         <Box flex={1} />
       </Box>
