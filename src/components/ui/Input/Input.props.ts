@@ -10,4 +10,4 @@ export type StyledInputProps = ColorProps &
   TextInputProps & { variant?: InputVariant }
 export type StyledInputComponent = FunctionComponent<Omit<StyledInputProps, 'style'>>
 export type InputProps = Omit<TextInputProps, 'style'> &
-  StyledInputProps & { ref?: Ref<TextInput>; label: string; error?: string }
+  StyledInputProps & { ref?: Ref<TextInput>; label?: string; error?: string; full?: boolean }

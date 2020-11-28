@@ -1,4 +1,8 @@
 export const fr = {
+  common: {
+    search: 'rechercher',
+    cancel: 'annuler',
+  },
   signIn: {
     signIn: 'Se connecter',
     forgotPassword: 'Mot de passe oublié',

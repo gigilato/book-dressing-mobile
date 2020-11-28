@@ -1,8 +1,12 @@
-import { StyleProp, TextStyle } from 'react-native'
-import {} from '@expo/vector-icons'
+import { FunctionComponent } from 'react'
+import { ColorProps, SpaceProps, TypoProps, LayoutProps } from '@theme'
 
-export interface IconProps {
-  name: string
-  size?: number
-  style?: StyleProp<TextStyle>
-}
+export type IconProps = ColorProps &
+  SpaceProps &
+  TypoProps &
+  LayoutProps & {
+    name: string
+    size?: number
+  }
+
+export type StyledIconComponent = FunctionComponent<IconProps>

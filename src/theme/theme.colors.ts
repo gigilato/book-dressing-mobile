@@ -5,6 +5,8 @@ export const colors = {
   error: palette.imperialRed,
   background: palette.yami,
   reverseBackground: palette.cultured,
+  searchBackground: palette.gunMetal,
+  searchPlaceHolder: palette.crayola,
   text: palette.cultured,
   placeholder: palette.gunMetal,
   reverseText: palette.yami,
