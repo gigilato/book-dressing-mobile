@@ -71,7 +71,7 @@ export const Pressable = memo<PressableProps>(
         timeout.current = setTimeout(() => {
           onPress(event)
           timeout.current = undefined
-        }, 1000)
+        }, 500)
       },
       [onPress]
     )
