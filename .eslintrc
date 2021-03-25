@@ -3,8 +3,7 @@
   "extends": [
     "@react-native-community",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "prettier"
   ],
   "plugins": ["@typescript-eslint"],
   "rules": {

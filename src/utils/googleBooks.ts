@@ -1,5 +1,4 @@
 import { config } from '@config'
-import { Book } from '@api/hooks/generated'
 
 const {
   googleBooks: { uri, endpoint, params },
@@ -16,6 +15,8 @@ export type GoogleBooksItem = {
     imageLinks?: {
       smallThumbnail?: string
       thumbnail?: string
+      small?: string
+      medium?: string
     }
     categories?: string[]
   }
@@ -36,7 +37,7 @@ export const getQueryUrl = (
   }=${limit}&${params.offset.key}=${offset}`
 }
 
-export const parseGoogleBooksItems: (items: GoogleBooksItem[]) => Book[] = (items) =>
+export const parseGoogleBooksItems: (items: GoogleBooksItem[]) => any[] = (items) =>
   items.map(
     ({
       id,
@@ -51,6 +52,11 @@ export const parseGoogleBooksItems: (items: GoogleBooksItem[]) => Book[] = (item
       authors: authors ?? [],
       categories: categories ?? [],
       createdAt: new Date(),
-      thumbnailUrl: imageLinks?.thumbnail ?? imageLinks?.smallThumbnail ?? '',
+      thumbnailUrl:
+        imageLinks?.medium ??
+        imageLinks?.small ??
+        imageLinks?.thumbnail ??
+        imageLinks?.smallThumbnail ??
+        '',
     })
   )

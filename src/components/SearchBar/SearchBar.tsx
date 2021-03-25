@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Icon, Button, Input } from '@components/ui'
 import { SearchBarProps } from './SearchBar.props'
 
-export const SearchBar = memo<SearchBarProps>(({ onSearch }) => {
+export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCancel }) => {
   const { t } = useTranslation()
 
   const {
@@ -23,14 +23,18 @@ export const SearchBar = memo<SearchBarProps>(({ onSearch }) => {
   }, [])
 
   const onCancel = useCallback(() => {
+    if (handleOnCancel) handleOnCancel()
     setValue('')
     input.current?.blur()
-  }, [])
+  }, [handleOnCancel])
 
   useEffect(() => {
-    const handler = setTimeout(() => onSearch(value), 500)
+    const handler = setTimeout(() => {
+      if (value !== '') onSearch(value)
+      else if (handleOnCancel) handleOnCancel()
+    }, 500)
     return () => clearTimeout(handler)
-  }, [value, onSearch])
+  }, [value, onSearch, handleOnCancel])
 
   return (
     <Box flexDirection="row" alignItems="center">

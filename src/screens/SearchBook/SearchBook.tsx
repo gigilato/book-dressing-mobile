@@ -31,9 +31,10 @@ export const SearchBook = memo<SearchBookProps>(() => {
     }
     setLoading(false)
   }, [])
+  const onCancel = useCallback(() => setData([]), [])
   return (
     <Box variant="screen">
-      <SearchBar onSearch={onSearch} />
+      <SearchBar onSearch={onSearch} onCancel={onCancel} />
       <Box mb="s" />
       {isLoading ? (
         <Box flex={1} justifyContent="center" alignItems="center">
