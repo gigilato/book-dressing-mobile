@@ -8,15 +8,14 @@ export type AnimatedPressableComponent = FunctionComponent<
   }
 >
 
-export type StyledPressableProps = ColorProps &
+export type PressableProps = Omit<RNPressableProps, 'style'> &
+  ColorProps &
   BorderProps &
   SpaceProps &
   LayoutProps &
   FlexProps &
-  PositionProps
-
-export type PressableProps = Omit<RNPressableProps, 'style'> & {
-  style?: StyleProp<ViewStyle>
-  scale?: number
-  control?: 'debounce' | 'throttle'
-} & StyledPressableProps
+  PositionProps & {
+    style?: StyleProp<ViewStyle>
+    scale?: number
+    control?: 'debounce' | 'throttle'
+  }

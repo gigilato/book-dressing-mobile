@@ -3,9 +3,9 @@ import firebase from 'firebase'
 import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
-import { useTheme } from 'styled-components'
 import { FlashMessage } from '@components'
 import { navigation, auth } from '@services'
+import { theme } from '@theme'
 import { RootNavigatorParamList } from './RootNavigator.types'
 import { TabNavigator } from '../TabNavigator'
 import { AuthNavigator } from '../AuthNavigator'
@@ -14,7 +14,6 @@ const Stack = createNativeStackNavigator<RootNavigatorParamList>()
 
 export const RootNavigator = memo(() => {
   const navigationRef = useRef<NavigationContainerRef>(null)
-  const theme = useTheme()
   const [isAuthenticated, setAuthentification] = useState(!!auth.getValue()?.accessToken)
 
   useEffect(() => {

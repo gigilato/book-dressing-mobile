@@ -1,21 +1,22 @@
 import React, { memo, useCallback, useState } from 'react'
 import { FlatList, ActivityIndicator } from 'react-native'
-import { useTheme } from 'styled-components'
 import axios from 'axios'
 import _ from 'lodash'
 import { View, Text } from '@components/ui'
 import { BookCard, SearchBar } from '@components'
+import { theme } from '@theme'
 import { getQueryUrl, GoogleBooksData, parseGoogleBooksItems } from '@utils/googleBooks'
 import { Book } from '@api/hooks/generated'
 import { useSafeAreaInsets } from '@hooks'
 import { SearchBookProps } from './SearchBook.props'
 
+const { colors } = theme
+
 export const SearchBook = memo<SearchBookProps>(() => {
   const [isLoading, setLoading] = useState(false)
   const [data, setData] = useState<Book[]>([])
   const [error, setError] = useState(false)
-  const { tab } = useSafeAreaInsets()
-  const { colors } = useTheme()
+  const { bottom } = useSafeAreaInsets()
 
   const onSearch = useCallback(async (search: string) => {
     setLoading(true)
@@ -33,7 +34,7 @@ export const SearchBook = memo<SearchBookProps>(() => {
   }, [])
   const onCancel = useCallback(() => setData([]), [])
   return (
-    <View variant="screen">
+    <View flex={1}>
       <SearchBar onSearch={onSearch} onCancel={onCancel} />
       <View mb="s" />
       {isLoading ? (
@@ -58,7 +59,7 @@ export const SearchBook = memo<SearchBookProps>(() => {
             </View>
           )}
           ItemSeparatorComponent={() => <View height="separator" />}
-          ListFooterComponent={() => <View height={tab} />}
+          ListFooterComponent={() => <View height={bottom} />}
         />
       )}
     </View>
