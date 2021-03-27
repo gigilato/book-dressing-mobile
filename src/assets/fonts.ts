@@ -38,4 +38,4 @@ export const fonts = {
   poppins800Italic: Poppins_800ExtraBold_Italic,
   poppins900: Poppins_900Black,
   poppins900Italic: Poppins_900Black_Italic,
-}
+} as const

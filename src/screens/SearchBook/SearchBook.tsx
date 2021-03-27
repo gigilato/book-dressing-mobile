@@ -2,8 +2,8 @@ import React, { memo, useCallback, useState } from 'react'
 import { FlatList, ActivityIndicator } from 'react-native'
 import { useTheme } from 'styled-components'
 import axios from 'axios'
-import { chunk, times } from 'lodash'
-import { Box, Text } from '@components/ui'
+import _ from 'lodash'
+import { View, Text } from '@components/ui'
 import { BookCard, SearchBar } from '@components'
 import { getQueryUrl, GoogleBooksData, parseGoogleBooksItems } from '@utils/googleBooks'
 import { Book } from '@api/hooks/generated'
@@ -33,34 +33,34 @@ export const SearchBook = memo<SearchBookProps>(() => {
   }, [])
   const onCancel = useCallback(() => setData([]), [])
   return (
-    <Box variant="screen">
+    <View variant="screen">
       <SearchBar onSearch={onSearch} onCancel={onCancel} />
-      <Box mb="s" />
+      <View mb="s" />
       {isLoading ? (
-        <Box flex={1} justifyContent="center" alignItems="center">
+        <View flex={1} justifyContent="center" alignItems="center">
           <ActivityIndicator color={colors.text} />
-        </Box>
+        </View>
       ) : error ? (
-        <Box flex={1} justifyContent="center" alignItems="center">
+        <View flex={1} justifyContent="center" alignItems="center">
           <Text>Error</Text>
-        </Box>
+        </View>
       ) : (
         <FlatList
-          data={chunk(data, 3)}
+          data={_.chunk(data, 3)}
           renderItem={({ item }) => (
-            <Box justifyContent="space-between" flexDirection="row">
+            <View justifyContent="space-between" flexDirection="row">
               {item.map((book) => (
                 <BookCard key={book.id} onPress={(b) => console.log(b)} data={book} />
               ))}
-              {times(3 - item.length, (n) => (
-                <Box key={n} height="bookCardHeight" width="bookCardWidth" />
+              {_.times(3 - item.length, (n) => (
+                <View key={n} height="bookCardHeight" width="bookCardWidth" />
               ))}
-            </Box>
+            </View>
           )}
-          ItemSeparatorComponent={() => <Box height="separator" />}
-          ListFooterComponent={() => <Box height={tab} />}
+          ItemSeparatorComponent={() => <View height="separator" />}
+          ListFooterComponent={() => <View height={tab} />}
         />
       )}
-    </Box>
+    </View>
   )
 })

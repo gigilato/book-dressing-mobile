@@ -1,16 +1,17 @@
 import React, { memo, useState, useCallback, useRef, useEffect } from 'react'
 import { LayoutAnimation, TextInput } from 'react-native'
-import { useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { Box, Icon, Button, Input } from '@components/ui'
+import { theme } from '@theme'
+import { View, Icon, Button, Input } from '@components/ui'
 import { SearchBarProps } from './SearchBar.props'
+
+const {
+  colors: { searchPlaceHolder },
+} = theme
 
 export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCancel }) => {
   const { t } = useTranslation()
 
-  const {
-    colors: { searchPlaceHolder },
-  } = useTheme()
   const [hasFocus, setFocus] = useState(false)
   const [value, setValue] = useState('')
   const input = useRef<TextInput>(null)
@@ -37,15 +38,14 @@ export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCan
   }, [value, onSearch, handleOnCancel])
 
   return (
-    <Box flexDirection="row" alignItems="center">
-      <Box
+    <View flexDirection="row" alignItems="center">
+      <View
         flexDirection="row"
         flex={1}
         bg="searchBackground"
         height={35}
         alignItems="center"
-        borderRadius="s"
-        px="xs">
+        borderRadius="s">
         <Icon name="search" color="searchPlaceHolder" />
         <Input
           ref={input}
@@ -53,15 +53,14 @@ export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCan
           onChangeText={onChangeText}
           placeholder={t('search')}
           placeholderTextColor={searchPlaceHolder}
-          full
-          ml="xs"
+          containerProps={{ ml: 'xs' }}
           onFocus={() => animateFocus(true)}
           onBlur={() => animateFocus(false)}
         />
-      </Box>
+      </View>
       {(hasFocus || value.length > 0) && (
         <Button title={t('cancel')} ml="s" variant="text" onPress={onCancel} />
       )}
-    </Box>
+    </View>
   )
 })

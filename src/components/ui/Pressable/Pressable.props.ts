@@ -1,16 +1,6 @@
 import { FunctionComponent } from 'react'
-import { PressableProps as RNPressableProps } from 'react-native'
-import {
-  ColorProps,
-  BorderProps,
-  SpaceProps,
-  LayoutProps,
-  FlexProps,
-  PositionProps,
-  RadiiProps,
-} from '@theme'
-
-export type PressableVariant = 'primary'
+import { PressableProps as RNPressableProps, StyleProp, ViewStyle } from 'react-native'
+import { ColorProps, BorderProps, SpaceProps, LayoutProps, FlexProps, PositionProps } from '@theme'
 
 export type AnimatedPressableComponent = FunctionComponent<
   Omit<RNPressableProps, 'style'> & {
@@ -23,10 +13,10 @@ export type StyledPressableProps = ColorProps &
   SpaceProps &
   LayoutProps &
   FlexProps &
-  PositionProps &
-  RadiiProps & { variant?: PressableVariant }
+  PositionProps
 
 export type PressableProps = Omit<RNPressableProps, 'style'> & {
+  style?: StyleProp<ViewStyle>
   scale?: number
   control?: 'debounce' | 'throttle'
 } & StyledPressableProps

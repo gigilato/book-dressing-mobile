@@ -5,11 +5,15 @@ import { palette } from './theme.palette'
 import { sizes } from './theme.sizes'
 import { radii } from './theme.radii'
 import { layouts } from './theme.layouts'
+import { fontSizes } from './theme.fontSizes'
+import { fonts } from './theme.fonts'
 
 export type Palette = keyof typeof palette
 export type Spacing = keyof typeof spacings
 export type Radii = keyof typeof radii
 export type Sizes = keyof typeof sizes
+export type FontSizes = keyof typeof fontSizes
+export type Fonts = keyof typeof fonts
 export type Layout = keyof typeof layouts
 export type Color = keyof Colors
 
@@ -32,9 +36,11 @@ export interface Colors {
 }
 
 export type ColorValue = LiteralUnion<Color | Palette>
+export type FontValue = LiteralUnion<Fonts>
 export type SpacingValue = Spacing | number
 export type RadiiValue = Radii | number
 export type SizeValue = LiteralUnion<Spacing | Sizes> | number
+export type FontSizeValue = FontSizes | number
 
 export interface ColorProps {
   bg?: ColorValue
@@ -50,6 +56,23 @@ export interface BorderProps {
   borderTopRightRadius?: RadiiValue
   borderBottomLeftRadius?: RadiiValue
   borderBottomRightRadius?: RadiiValue
+  BorderLeftRadius?: RadiiValue
+  BorderRightRadius?: RadiiValue
+  BorderTopRadius?: RadiiValue
+  BorderBottomRadius?: RadiiValue
+  borderTopLeftWidth?: number
+  borderTopRightWidth?: number
+  borderBottomLeftWidth?: number
+  borderBottomRightWidth?: number
+  BorderLeftWidth?: number
+  BorderRightWidth?: number
+  BorderTopWidth?: number
+  BorderBottomWidth?: number
+}
+
+export interface FontProps {
+  fontFamily?: FontValue
+  fontSize?: FontSizes
 }
 
 export interface SpaceProps {
@@ -58,15 +81,15 @@ export interface SpaceProps {
   mr?: SpacingValue
   mb?: SpacingValue
   ml?: SpacingValue
-  mh?: SpacingValue
-  mv?: SpacingValue
+  mx?: SpacingValue
+  my?: SpacingValue
   p?: SpacingValue
   pt?: SpacingValue
   pr?: SpacingValue
   pb?: SpacingValue
   pl?: SpacingValue
-  ph?: SpacingValue
-  pv?: SpacingValue
+  px?: SpacingValue
+  py?: SpacingValue
 }
 
 export interface LayoutProps {

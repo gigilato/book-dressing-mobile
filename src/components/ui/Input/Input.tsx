@@ -1,47 +1,31 @@
 import React, { memo, forwardRef } from 'react'
 import { TextInput } from 'react-native'
-import upperFirst from 'lodash/upperFirst'
-import styled, { useTheme } from 'styled-components/native'
-import { color, space, typography, fontSize, variant } from 'styled-system'
-import { Box } from '@components/ui/Box'
+import _ from 'lodash'
+import { View } from '@components/ui/View'
 import { Text } from '@components/ui/Text'
-import { StyledInputComponent, StyledInputProps, InputProps, InputVariant } from './Input.props'
+import { theme } from '@theme'
+import { InputProps } from './Input.props'
 
-const StyledInput = styled(TextInput)`
-  ${color}
-  ${space}
-  ${typography}
-  ${fontSize}
-  ${variant<StyledInputProps, InputVariant>({
-    variants: {
-      default: {
-        fontFamily: 'poppins400',
-        fontSize: 'big',
-      },
-    },
-  })}
-` as StyledInputComponent
+const { colors } = theme
 
 export const Input = memo<InputProps>(
-  forwardRef<TextInput, InputProps>(({ label, error, placeholder, full, ...props }, ref) => {
-    const { colors } = useTheme()
+  forwardRef<TextInput, InputProps>(({ label, error, placeholder, ...props }, ref) => {
     return (
-      <Box flex={full ? 1 : undefined}>
+      <View flex={1}>
         {label && (
           <Text>
-            <Text variant="label">{upperFirst(label)}</Text>
+            <Text variant="label">{_.upperFirst(label)}</Text>
             {error && error.length !== 0 && <Text variant="error">{`  ${error}`}</Text>}
           </Text>
         )}
-        <StyledInput
-          variant="default"
-          color="text"
+        <TextInput
+          style={{ color: colors.text }}
           placeholderTextColor={colors.placeholder}
-          placeholder={upperFirst(placeholder)}
+          placeholder={_.upperFirst(placeholder)}
           ref={ref}
           {...props}
         />
-      </Box>
+      </View>
     )
   })
 )

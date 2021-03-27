@@ -1,60 +1,31 @@
 import React, { memo, useMemo } from 'react'
-import styled from 'styled-components/native'
-import { color, space, typography, variant, fontSize } from 'styled-system'
-import { upperFirst, capitalize } from 'lodash'
-import { TextProps, TextVariant, StyledTextProps } from './Text.props'
+import { StyleProp, Text as RNText, TextStyle } from 'react-native'
+import _ from 'lodash'
+import { useStyle } from '@hooks/useStyle'
+import { TextProps } from './Text.props'
+import { textVariants } from './Text.utils'
 
-const StyledText = styled.Text<StyledTextProps>`
-  ${color}
-  ${space}
-  ${typography}
-  ${fontSize}
-  ${variant<StyledTextProps, TextVariant>({
-    variants: {
-      body: {
-        color: 'text',
-        fontFamily: 'poppins400',
-        fontSize: 'normal',
-      },
-      title: {
-        fontFamily: 'poppins500',
-        color: 'text',
-        fontSize: 'h3',
-      },
-      header: {
-        fontFamily: 'poppins600',
-        color: 'text',
-        fontSize: 'h1',
-      },
-      label: {
-        color: 'text',
-        fontFamily: 'poppins600',
-        fontSize: 'big',
-      },
-      error: {
-        color: 'error',
-        fontFamily: 'poppins200',
-        fontSize: 'small',
-      },
-      button: {
-        color: 'text',
-        fontFamily: 'poppins600',
-        fontSize: 'big',
-      },
-    },
-  })}
-`
-
-export const Text = memo<TextProps>(({ textTransform, children, ...props }) => {
-  const content = useMemo(() => {
-    if (typeof children !== 'string' || !textTransform) return children
-    return textTransform === 'lowercase'
-      ? children.toLowerCase()
-      : textTransform === 'uppercase'
-      ? children.toUpperCase()
-      : textTransform === 'capitalize'
-      ? capitalize(children)
-      : upperFirst(children)
-  }, [children, textTransform])
-  return <StyledText {...props}>{content}</StyledText>
-})
+export const Text = memo<TextProps>(
+  ({ textTransform, children, style, variant = 'body', ...props }) => {
+    const content = useMemo(() => {
+      if (typeof children !== 'string' || !textTransform) return children
+      return textTransform === 'lowercase'
+        ? children.toLowerCase()
+        : textTransform === 'uppercase'
+        ? children.toUpperCase()
+        : textTransform === 'capitalize'
+        ? _.capitalize(children)
+        : _.upperFirst(children)
+    }, [children, textTransform])
+    const [currentProps, themeStyle] = useStyle({ ...textVariants[variant], ...props })
+    const textStyle = useMemo(
+      () => _.flattenDeep<StyleProp<TextStyle>>([themeStyle, style]),
+      [themeStyle, style]
+    )
+    return (
+      <RNText style={textStyle} {...currentProps}>
+        {content}
+      </RNText>
+    )
+  }
+)

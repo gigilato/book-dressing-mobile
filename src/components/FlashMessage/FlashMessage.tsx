@@ -1,11 +1,10 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useLayoutEffect } from 'react'
 import DefaultFlashMessage, { FlashMessageProps } from 'react-native-flash-message'
-import { useTheme } from 'styled-components'
+import { theme } from '@theme'
 
 export const FlashMessage = memo<FlashMessageProps>((props) => {
-  const { colors } = useTheme()
-  useEffect(() => {
-    DefaultFlashMessage.setColorTheme({ danger: colors.error })
-  }, [colors])
+  useLayoutEffect(() => {
+    DefaultFlashMessage.setColorTheme({ danger: theme.colors.error })
+  }, [])
   return <DefaultFlashMessage position="top" {...props} />
 })

@@ -1,8 +1,8 @@
 import React, { memo, forwardRef } from 'react'
 import { TextInput } from 'react-native'
+import _ from 'lodash'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { toPairs, upperFirst } from 'lodash'
 import { Input } from '@components/ui'
 import { FormInputProps } from './FormInput.props'
 
@@ -30,10 +30,10 @@ export const FormInput = memo<FormInputProps>(
             />
           )}
           name={name}
-          rules={toPairs(rules).reduce(
+          rules={_.toPairs(rules).reduce(
             (result, [key, value]) => ({
               ...result,
-              [key]: { value, message: t(`${name}Error${upperFirst(key)}`) },
+              [key]: { value, message: t(`${name}Error${_.upperFirst(key)}`) },
             }),
             {}
           )}

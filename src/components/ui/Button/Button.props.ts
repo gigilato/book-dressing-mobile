@@ -1,7 +1,9 @@
-import { PressableProps, PressableVariant } from '@components/ui/Pressable'
+import { PressableProps } from '@components/ui/Pressable'
 
-export type ButtonProps = Omit<PressableProps, 'variant'> & {
+export type ButtonVariant = 'button' | 'text'
+
+export type ButtonProps = Omit<PressableProps, 'children'> & {
   title: string
   loading?: boolean
-  variant?: PressableVariant | 'text'
+  variant?: ButtonVariant
 }

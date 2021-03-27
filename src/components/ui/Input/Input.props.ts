@@ -1,13 +1,10 @@
-import { FunctionComponent, Ref } from 'react'
+import { Ref } from 'react'
 import { TextInputProps, TextInput } from 'react-native'
-import { ColorProps, SpaceProps, TypoProps } from '@theme'
+import { ViewProps } from '@components/ui/View'
 
-export type InputVariant = 'default'
-
-export type StyledInputProps = ColorProps &
-  SpaceProps &
-  TypoProps &
-  TextInputProps & { variant?: InputVariant }
-export type StyledInputComponent = FunctionComponent<Omit<StyledInputProps, 'style'>>
-export type InputProps = Omit<TextInputProps, 'style'> &
-  StyledInputProps & { ref?: Ref<TextInput>; label?: string; error?: string; full?: boolean }
+export type InputProps = TextInputProps & {
+  containerProps?: ViewProps
+  ref?: Ref<TextInput>
+  label?: string
+  error?: string
+}

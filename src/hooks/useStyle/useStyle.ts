@@ -1,91 +1,92 @@
 import { StyleProp, ViewStyle } from 'react-native'
-import { theme, ColorValue, Layout, SizeValue, SpacingValue, RadiiValue } from '@theme'
+import {
+  theme,
+  ColorValue,
+  Layout,
+  SizeValue,
+  SpacingValue,
+  RadiiValue,
+  FontSizeValue,
+} from '@theme'
 import { useMemo } from 'react'
+import { Style, Styler, Transformer } from './useStyle.types'
 
-type Style = StyleProp<ViewStyle>
-type Styler = (style: Style, key: string, value: any) => void
-type Handler = (value: any) => void
-
-const handle = (handler: Handler, alias?: string): Styler => {
+const handler = (transformer: Transformer, ...alias: string[]): Styler => {
   return (style: Style, key: string, value: any) => {
     if (!style) return
-    style[alias ? alias : key] = handler(value)
+    if (alias.length === 0) style[key] = transformer(value)
+    else alias.forEach((aliasKey) => (style[aliasKey] = transformer(value)))
   }
 }
 
-const getColor = (value: ColorValue) => {
-  const { palette, colors } = theme
-  return colors[value] ?? palette[value] ?? value
-}
+const { palette, colors, radii, sizes, spacings, layouts, fontSizes } = theme
 
-const getSpacing = (value: SpacingValue | SizeValue) => {
-  const { spacings, sizes } = theme
-  return spacings[value] ?? sizes[value] ?? value
-}
-
-const getLayout = (value: Layout) => {
-  const { layouts } = theme
-  return layouts[value] ?? value
-}
-
-const getRadius = (value: RadiiValue) => {
-  const { radii } = theme
-  return radii[value] ?? value
-}
+const getColor = (value: ColorValue) => colors[value] ?? palette[value] ?? value
+const getSpacing = (value: SpacingValue | SizeValue) => spacings[value] ?? sizes[value] ?? value
+const getLayout = (value: Layout) => layouts[value] ?? value
+const getRadius = (value: RadiiValue) => radii[value] ?? value
+const getFontSize = (value: FontSizeValue) => fontSizes[value] ?? value
 
 const styledProps: Record<string, Styler> = {
-  bg: handle(getColor, 'backgroundColor'),
-  backgroundColor: handle(getColor),
-  color: handle(getColor),
-  borderColor: handle(getColor),
-  borderRadius: handle(getRadius),
-  borderTopLeftRadius: handle(getRadius),
-  borderTopRightRadius: handle(getRadius),
-  borderBottomLeftRadius: handle(getRadius),
-  borderBottomRightRadius: handle(getRadius),
-  m: handle(getSpacing, 'margin'),
-  mt: handle(getSpacing, 'marginTop'),
-  mr: handle(getSpacing, 'marginRight'),
-  mb: handle(getSpacing, 'marginBottom'),
-  ml: handle(getSpacing, 'marginLeft'),
-  mh: handle(getSpacing, 'marginHorizontal'),
-  mv: handle(getSpacing, 'marginVertical'),
-  p: handle(getSpacing, 'padding'),
-  pt: handle(getSpacing, 'paddingTop'),
-  pr: handle(getSpacing, 'paddingRight'),
-  pb: handle(getSpacing, 'paddingBottom'),
-  pl: handle(getSpacing, 'paddingLeft'),
-  ph: handle(getSpacing, 'paddingHorizontal'),
-  pv: handle(getSpacing, 'paddingVertical'),
-  h: handle(getSpacing, 'height'),
-  w: handle(getSpacing, 'width'),
-  height: handle(getSpacing),
-  width: handle(getSpacing),
-  minHeight: handle(getSpacing),
-  minWidth: handle(getSpacing),
-  maxHeight: handle(getSpacing),
-  maxWidth: handle(getSpacing),
-  top: handle(getSpacing),
-  right: handle(getSpacing),
-  bottom: handle(getSpacing),
-  left: handle(getSpacing),
-  zIndex: handle(getLayout),
+  bg: handler(getColor, 'backgroundColor'),
+  backgroundColor: handler(getColor),
+  color: handler(getColor),
+  borderColor: handler(getColor),
+  borderRadius: handler(getRadius),
+  borderTopLeftRadius: handler(getRadius),
+  borderTopRightRadius: handler(getRadius),
+  borderBottomLeftRadius: handler(getRadius),
+  borderBottomRightRadius: handler(getRadius),
+  BorderLeftRadius: handler(getRadius, 'borderTopLeftRadius', 'borderBottomLeftWidth'),
+  BorderRightRadius: handler(getRadius, 'borderTopRightRadius', 'borderBottomRightWidth'),
+  BorderTopRadius: handler(getRadius, 'borderTopRightRadius', 'borderTopLeftRadius'),
+  BorderBottomRadius: handler(getRadius, 'borderBottomRightRadius', 'borderBottomLeftRadius'),
+  BorderTopWidth: handler(getRadius, 'borderTopRightWidth', 'borderTopLeftWidth'),
+  BorderBottomWidth: handler(getRadius, 'borderBottomRightWidth', 'borderBottomLeftWidth'),
+  m: handler(getSpacing, 'margin'),
+  mt: handler(getSpacing, 'marginTop'),
+  mr: handler(getSpacing, 'marginRight'),
+  mb: handler(getSpacing, 'marginBottom'),
+  ml: handler(getSpacing, 'marginLeft'),
+  mx: handler(getSpacing, 'marginHorizontal'),
+  my: handler(getSpacing, 'marginVertical'),
+  p: handler(getSpacing, 'padding'),
+  pt: handler(getSpacing, 'paddingTop'),
+  pr: handler(getSpacing, 'paddingRight'),
+  pb: handler(getSpacing, 'paddingBottom'),
+  pl: handler(getSpacing, 'paddingLeft'),
+  px: handler(getSpacing, 'paddingHorizontal'),
+  py: handler(getSpacing, 'paddingVertical'),
+  h: handler(getSpacing, 'height'),
+  w: handler(getSpacing, 'width'),
+  height: handler(getSpacing),
+  width: handler(getSpacing),
+  minHeight: handler(getSpacing),
+  minWidth: handler(getSpacing),
+  maxHeight: handler(getSpacing),
+  maxWidth: handler(getSpacing),
+  top: handler(getSpacing),
+  right: handler(getSpacing),
+  bottom: handler(getSpacing),
+  left: handler(getSpacing),
+  zIndex: handler(getLayout),
+  fontSize: handler(getFontSize),
 }
 
-export const useStyle = <T>(props: Record<string, any>): [T, StyleProp<ViewStyle>] => {
+export const useStyle = <T, S = ViewStyle>(props: Record<string, any>): [T, StyleProp<S>] => {
   const themedStyle = useMemo(() => {
-    const filteredProps: T = <T>{}
+    const currentProps: T = <T>{}
     const style = {}
 
     // Any props that doesn't need treatment will be directly added to the style object
     Object.keys(props).forEach((key) => {
       if (styledProps[key]) styledProps[key](style, key, props[key])
       else {
-        filteredProps[key] = props[key]
+        currentProps[key] = props[key]
         style[key] = props[key]
       }
     })
-    return [filteredProps, style] as [T, StyleProp<ViewStyle>]
+    return [currentProps, style] as [T, StyleProp<S>]
   }, [props])
 
   return themedStyle
