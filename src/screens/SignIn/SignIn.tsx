@@ -1,9 +1,9 @@
 import React, { memo, useCallback, useRef, useState } from 'react'
+import app from 'firebase'
 import { TextInput } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import { useForm, FormProvider } from 'react-hook-form'
 import { showMessage } from 'react-native-flash-message'
-import { firebase } from '@services'
 import { FormInput } from '@components/form'
 import { View, Button } from '@components/ui'
 import { SignInFormInputs, SignInProps } from './SignIn.props'
@@ -16,7 +16,7 @@ export const SignIn = memo<SignInProps>(() => {
     async ({ email, password }: SignInFormInputs) => {
       setLoading(true)
       try {
-        await firebase.signIn(email, password)
+        await app.auth().signInWithEmailAndPassword(email, password)
       } catch (error) {
         showMessage({
           message: t('errors:signInErrorTitle'),
@@ -33,7 +33,7 @@ export const SignIn = memo<SignInProps>(() => {
   const onBlurEmail = useCallback(() => passwordRef.current?.focus(), [])
   return (
     <FormProvider {...methods}>
-      <View>
+      <View variant="screen">
         <View flex={1} />
         <View flex={1} justifyContent="center">
           <FormInput

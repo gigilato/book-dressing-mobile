@@ -1,41 +1,21 @@
-import React, { memo, useRef, useEffect, useState } from 'react'
-import firebase from 'firebase'
+import React, { memo, useRef, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 import { FlashMessage } from '@components'
-import { navigation, auth } from '@services'
+import { navigation } from '@services'
 import { theme } from '@theme'
-import { RootNavigatorParamList } from './RootNavigator.types'
-import { TabNavigator } from '../TabNavigator'
-import { AuthNavigator } from '../AuthNavigator'
+import { TabNavigator } from '@navigation/TabNavigator'
+import { AuthNavigator } from '@navigation/AuthNavigator'
+import { RootNavigatorParamList, RootNavigatorProps } from './RootNavigator.types'
 
 const Stack = createNativeStackNavigator<RootNavigatorParamList>()
 
-export const RootNavigator = memo(() => {
+export const RootNavigator = memo<RootNavigatorProps>(({ isAuthenticated }) => {
   const navigationRef = useRef<NavigationContainerRef>(null)
-  const [isAuthenticated, setAuthentification] = useState(!!auth.getValue()?.accessToken)
 
   useEffect(() => {
     navigation.setRef(navigationRef)
-  }, [])
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        user.getIdToken().then(async (accessToken) => {
-          await auth.setValue({
-            accessToken,
-            refreshToken: user.refreshToken,
-            userId: user.uid,
-          })
-          setAuthentification(true)
-        })
-      } else {
-        setAuthentification(false)
-        auth.clear()
-      }
-    })
   }, [])
 
   return (

@@ -6,3 +6,7 @@ export type RootNavigatorParamList = {
 }
 
 export type RootNavigationProp = StackNavigationProp<RootNavigatorParamList>
+
+export type RootNavigatorProps = {
+  isAuthenticated: boolean
+}

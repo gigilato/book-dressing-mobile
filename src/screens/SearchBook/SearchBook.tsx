@@ -6,7 +6,6 @@ import { View, Text } from '@components/ui'
 import { BookCard, SearchBar } from '@components'
 import { theme } from '@theme'
 import { getQueryUrl, GoogleBooksData, parseGoogleBooksItems } from '@utils/googleBooks'
-import { Book } from '@api/hooks/generated'
 import { useSafeAreaInsets } from '@hooks'
 import { SearchBookProps } from './SearchBook.props'
 
@@ -14,7 +13,7 @@ const { colors } = theme
 
 export const SearchBook = memo<SearchBookProps>(() => {
   const [isLoading, setLoading] = useState(false)
-  const [data, setData] = useState<Book[]>([])
+  const [data, setData] = useState<any[]>([])
   const [error, setError] = useState(false)
   const { bottom } = useSafeAreaInsets()
 
