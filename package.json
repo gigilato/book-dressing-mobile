@@ -11,6 +11,7 @@
     "postuninstall": "infinite-flatlist-patch"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.13",
     "@expo-google-fonts/poppins": "^0.1.0",
     "@expo/vector-icons": "^12.0.4",
     "@react-native-async-storage/async-storage": "^1.14.1",
@@ -26,6 +27,7 @@
     "expo-splash-screen": "~0.9.0",
     "expo-status-bar": "~1.0.2",
     "firebase": "8.3.1",
+    "graphql": "^15.5.0",
     "i18next": "^20.1.0",
     "lodash": "^4.17.21",
     "react": "16.13.1",
@@ -41,6 +43,10 @@
   },
   "devDependencies": {
     "@babel/core": "~7.13.14",
+    "@graphql-codegen/cli": "^1.21.3",
+    "@graphql-codegen/typescript": "^1.21.1",
+    "@graphql-codegen/typescript-operations": "^1.17.15",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.3",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/color-string": "^1.5.0",
     "@types/lodash": "^4.14.168",

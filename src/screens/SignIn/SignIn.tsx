@@ -5,7 +5,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { showMessage } from 'react-native-flash-message'
 import { firebase } from '@services'
 import { FormInput } from '@components/form'
-import { Box, Button } from '@components/ui'
+import { View, Button } from '@components/ui'
 import { SignInFormInputs, SignInProps } from './SignIn.props'
 
 export const SignIn = memo<SignInProps>(() => {
@@ -33,16 +33,16 @@ export const SignIn = memo<SignInProps>(() => {
   const onBlurEmail = useCallback(() => passwordRef.current?.focus(), [])
   return (
     <FormProvider {...methods}>
-      <Box variant="screen">
-        <Box flex={1} />
-        <Box flex={1} justifyContent="center">
+      <View>
+        <View flex={1} />
+        <View flex={1} justifyContent="center">
           <FormInput
             name="email"
             rules={{ required: true }}
             autoCapitalize="none"
             onBlur={onBlurEmail}
           />
-          <Box height="separator" />
+          <View height="separator" />
           <FormInput
             ref={passwordRef}
             name="password"
@@ -50,11 +50,11 @@ export const SignIn = memo<SignInProps>(() => {
             autoCapitalize="none"
             secureTextEntry
           />
-          <Box height={50} />
+          <View height={50} />
           <Button title={t('signIn')} onPress={methods.handleSubmit(onSubmit)} loading={loading} />
-        </Box>
-        <Box flex={1} />
-      </Box>
+        </View>
+        <View flex={1} />
+      </View>
     </FormProvider>
   )
 })

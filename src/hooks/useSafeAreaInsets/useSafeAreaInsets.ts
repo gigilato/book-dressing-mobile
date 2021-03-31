@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useSafeAreaInsets as useDefaultSafeAreaInsets } from 'react-native-safe-area-context'
-import { theme } from 'theme'
+import { theme } from '@theme'
 
 const {
   sizes: { defaultBottomInset },

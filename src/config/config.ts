@@ -1,6 +1,6 @@
 export const config = {
   api: {
-    uri: 'https://book-dressing.hasura.app/v1/graphql',
+    uri: 'http://localhost:3333/graphql',
     authorizationScheme: 'Bearer',
   },
   firebase: {

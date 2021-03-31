@@ -1,0 +1,20 @@
+overwrite: true
+schema: http://localhost:3333/graphql
+documents: 'src/api/graphql/**/*.ts'
+generates:
+  src/api/hooks/generated/index.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      apolloReactCommonImportFrom: '@apollo/client'
+      apolloReactHooksImportFrom: '@apollo/client'
+      dedupeOperationSuffix: true
+      declarationKind: 'interface'
+hooks:
+  afterAllFileWrite:
+    - prettier --write
