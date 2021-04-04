@@ -13,4 +13,4 @@ web-build/
 .DS_Store
 
 #graphql
-src/hooks/api/generated
+src/api/hooks/generated
