@@ -5,7 +5,7 @@ import { ExplorerProps } from './Explorer.props'
 
 export const Explorer = memo<ExplorerProps>(() => {
   return (
-    <View variant="screen">
+    <View variant="screen" pt={0} pb={0}>
       <View py="m">
         <SearchBar onSearch={(search) => console.log(search)} />
       </View>

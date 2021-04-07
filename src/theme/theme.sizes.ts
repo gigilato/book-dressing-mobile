@@ -1,8 +1,8 @@
 export const sizes = {
   defaultTopInset: 24,
   defaultBottomInset: 24,
-  defaultLeftInset: 32,
-  defaultRightInset: 32,
+  defaultLeftInset: 24,
+  defaultRightInset: 24,
   separator: 15,
   bookCardHeight: 150,
   bookCardWidth: 100,
