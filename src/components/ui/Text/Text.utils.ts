@@ -10,6 +10,11 @@ export const textVariants: Record<
     fontFamily: 'poppins400',
     fontSize: 'normal',
   },
+  input: {
+    color: 'text',
+    fontFamily: 'poppins400',
+    fontSize: 'big',
+  },
   title: {
     fontFamily: 'poppins500',
     color: 'text',
@@ -23,7 +28,7 @@ export const textVariants: Record<
   label: {
     color: 'text',
     fontFamily: 'poppins600',
-    fontSize: 'big',
+    fontSize: 'normal',
   },
   error: {
     color: 'error',

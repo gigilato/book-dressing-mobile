@@ -5,11 +5,12 @@ import { View } from '@components/ui/View'
 import { Text } from '@components/ui/Text'
 import { theme } from '@theme'
 import { InputProps } from './Input.props'
+import { styles } from './input.styles'
 
 const { colors } = theme
 
 export const Input = memo<InputProps>(
-  forwardRef<TextInput, InputProps>(({ label, error, placeholder, ...props }, ref) => {
+  forwardRef<TextInput, InputProps>(({ label, error, placeholder, style, ...props }, ref) => {
     return (
       <View flex={1}>
         {label && (
@@ -19,7 +20,7 @@ export const Input = memo<InputProps>(
           </Text>
         )}
         <TextInput
-          style={{ color: colors.text }}
+          style={[styles.input, style]}
           placeholderTextColor={colors.placeholder}
           placeholder={_.upperFirst(placeholder)}
           ref={ref}

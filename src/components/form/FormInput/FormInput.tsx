@@ -10,11 +10,14 @@ export const FormInput = memo<FormInputProps>(
   forwardRef<TextInput, FormInputProps>(
     ({ name, rules, defaultValue = '', onBlur: handleOnBlur, ...props }, ref) => {
       const { t } = useTranslation('form')
-      const { control, errors } = useFormContext()
+      const {
+        control,
+        formState: { errors },
+      } = useFormContext()
       return (
         <Controller
           control={control}
-          render={({ onChange, onBlur, value }) => (
+          render={({ field: { onBlur, onChange, value } }) => (
             <Input
               ref={ref}
               label={t(`${name}Label`)}
