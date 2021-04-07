@@ -31,8 +31,8 @@ export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCan
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      if (value !== '') onSearch(value)
-      else if (handleOnCancel) handleOnCancel()
+      onSearch(value)
+      if (handleOnCancel) handleOnCancel()
     }, 500)
     return () => clearTimeout(handler)
   }, [value, onSearch, handleOnCancel])
