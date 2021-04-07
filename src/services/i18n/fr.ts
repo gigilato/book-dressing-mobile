@@ -25,5 +25,8 @@ export const fr = {
   errors: {
     signInErrorTitle: 'Erreur de connection',
     signInErrorContent: 'Email ou mot de passe incorrect',
+    errorStateContent: 'Une erreur est survenue...',
+    emptyStateContent: "Il n'y a rien à afficher...",
+    retry: 'recharger',
   },
 }

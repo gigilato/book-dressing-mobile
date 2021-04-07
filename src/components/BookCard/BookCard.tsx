@@ -11,7 +11,7 @@ const {
 export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
   const containerProps = useMemo(
     () => ({
-      bg: 'reverseBackground',
+      bg: 'charleston',
       borderRadius: radii.s,
       width: ratioWidth ?? bookCardWidth,
       height: ratioWidth ? (ratioWidth * bookCardHeight) / bookCardWidth : bookCardHeight,

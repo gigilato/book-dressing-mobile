@@ -1,36 +1,15 @@
-import React, {
-  memo,
-  ReactElement,
-  useCallback,
-  forwardRef,
-  useMemo,
-  useState,
-  useRef,
-} from 'react'
+import React, { memo, ReactElement, useCallback, forwardRef, useMemo, useRef } from 'react'
 import { FlatList, ActivityIndicator, RefreshControl } from 'react-native'
 import { NetworkStatus } from '@apollo/client'
-import { Text } from '@components/ui/Text'
+import { ErrorState } from '@components/ui/ErrorState'
 import { AsyncFlatListProps, ConnectionInterface, ConnectionNode } from './AsyncFlatList.props'
+import { styles } from './AsyncFlatList.styles'
 
 export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
   props: AsyncFlatListProps<T, K>
 ) => ReactElement | null = memo(
   forwardRef<FlatList, AsyncFlatListProps<any, any>>(
-    (
-      {
-        query,
-        data,
-        renderLoader,
-        renderFooter,
-        renderHeader,
-        renderEmptyState,
-        renderErrorState,
-        getDerivedData,
-        pageSize = 10,
-        ...props
-      },
-      ref
-    ) => {
+    ({ query, data, getDerivedData, pageSize = 10, ListFooterComponent, ...props }, ref) => {
       const { error, networkStatus, refetch, fetchMore, variables } = query
       const offset = useRef(0)
 
@@ -61,7 +40,14 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
 
       if (networkStatus === NetworkStatus.loading || networkStatus === NetworkStatus.setVariables)
         return <ActivityIndicator />
-      if (error) return <Text>error</Text>
+      if (error)
+        return (
+          <ErrorState
+            type="error"
+            onPressRetry={() => refetch()}
+            loading={networkStatus === NetworkStatus.refetch}
+          />
+        )
 
       return (
         <FlatList
@@ -76,16 +62,13 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
           }
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          // onEndReached={onEndReached}
+          onEndReached={onEndReached}
           onEndReachedThreshold={0.1}
-          ListEmptyComponent={(): ReactElement => <Text>empty</Text>}
-          ListHeaderComponent={renderHeader ? renderHeader(data) : null}
+          ListEmptyComponent={() => <ErrorState type="empty" />}
           ListFooterComponent={
-            renderFooter
-              ? renderFooter(data)
-              : !hasNextPage
-              ? null
-              : (): ReactElement => <ActivityIndicator size="large" />
+            hasNextPage
+              ? () => <ActivityIndicator size="small" style={styles.footerActivityIndicator} />
+              : ListFooterComponent
           }
           {...props}
         />

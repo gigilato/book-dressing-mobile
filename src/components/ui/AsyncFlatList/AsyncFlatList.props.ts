@@ -20,8 +20,6 @@ export interface AsyncFlatListProps<T, K extends ConnectionInterface<ConnectionN
   getDerivedData?: (data: K) => K
   renderItem: ListRenderItem<K['edges'][0]>
   renderLoader?: () => ReactElement
-  renderFooter?: (data: K) => ReactElement
-  renderHeader?: (data: K) => ReactElement
   renderEmptyState?: () => ReactElement
   renderErrorState?: () => ReactElement
 }

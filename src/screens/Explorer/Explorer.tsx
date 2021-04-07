@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { View } from '@components/ui'
-import { BookStatus } from '@api/hooks/generated'
-import { BookCard, BookList, SearchBar } from '@components'
+import { BookList, SearchBar } from '@components'
 import { ExplorerProps } from './Explorer.props'
 
 export const Explorer = memo<ExplorerProps>(() => {
@@ -10,7 +9,7 @@ export const Explorer = memo<ExplorerProps>(() => {
       <View py="m">
         <SearchBar onSearch={(search) => console.log(search)} />
       </View>
-      <BookList />
+      <BookList queryOptions={{ variables: { limit: 12 } }} />
     </View>
   )
 })

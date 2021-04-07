@@ -1,5 +1,5 @@
 overwrite: true
-schema: https://book-dressing.herokuapp.com/graphql
+schema: http://localhost:3333/graphql
 documents: 'src/api/graphql/**/*.ts'
 generates:
   src/api/hooks/generated/index.ts:

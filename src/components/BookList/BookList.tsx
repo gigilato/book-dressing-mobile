@@ -6,6 +6,9 @@ import { useBooksQuery } from '@api/hooks/generated'
 import { BookListProps } from './BookList.props'
 import { styles } from './BookList.styles'
 
+const numColumns = 3
+const columnSpace = 10
+
 export const BookList = memo<BookListProps>(({ queryOptions }) => {
   const { onLayout, width } = useLayout()
   const query = useBooksQuery({ notifyOnNetworkStatusChange: true, ...queryOptions })
@@ -15,15 +18,16 @@ export const BookList = memo<BookListProps>(({ queryOptions }) => {
       onLayout={onLayout}
       query={query}
       data={books}
-      numColumns={3}
+      numColumns={numColumns}
       renderItem={({ item }) => (
         <BookCard
-          data={{ ...item.node }}
+          data={item.node}
           onPress={(book) => console.log(book)}
-          ratioWidth={width === 0 ? undefined : width / 3 - 10}
+          ratioWidth={width === 0 ? undefined : width / numColumns - columnSpace}
         />
       )}
       ItemSeparatorComponent={() => <View h="s" />}
+      ListFooterComponent={() => <View h="defaultBottomInset" />}
       columnWrapperStyle={styles.columnWrapper}
     />
   )

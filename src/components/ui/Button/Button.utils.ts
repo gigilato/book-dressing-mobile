@@ -3,9 +3,9 @@ import { ButtonVariant } from './Button.props'
 export const buttonVariants: Record<ButtonVariant, any> = {
   button: {
     px: 'm',
-    py: 's',
+    py: 'xs',
     backgroundColor: 'primary',
-    borderRadius: 'l',
+    borderRadius: 's',
     alignItems: 'center',
   },
   text: {},
