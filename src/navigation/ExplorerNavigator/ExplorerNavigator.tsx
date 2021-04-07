@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { Profile } from '@screens'
+import { Explorer } from '@screens'
 import { defaultStackScreenOptions } from '../navigation.utils'
 import { ExplorerNavigatorParamList } from './ExplorerNavigator.types'
 
@@ -12,7 +12,7 @@ export const ExplorerNavigator = memo(() => {
       screenOptions={{
         ...defaultStackScreenOptions,
       }}>
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Explorer" component={Explorer} />
     </Stack.Navigator>
   )
 })

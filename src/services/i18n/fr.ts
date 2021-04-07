@@ -9,6 +9,7 @@ export const fr = {
   },
   navigation: {
     Profile: 'Profil',
+    Explorer: 'Book Dressing',
     RequestNavigator: 'Demandes',
     ExplorerNavigator: 'Explorer',
     ProfileNavigator: 'Profil',

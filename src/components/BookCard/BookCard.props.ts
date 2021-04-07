@@ -1,6 +1,7 @@
-import { Book } from '@api/hooks/generated'
+import { BookFragment } from '@api/hooks/generated'
 
 export type BookCardProps = {
-  data: Book
-  onPress: (book: Book) => any
+  data: BookFragment
+  onPress: (book: BookFragment) => any
+  ratioWidth?: number
 }

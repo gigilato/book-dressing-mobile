@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react'
 import { theme } from '@theme'
-import { Image, Pressable, View } from '@components/ui'
+import { Image, Pressable } from '@components/ui'
 import { BookCardProps } from './BookCard.props'
 
 const {
@@ -8,31 +8,31 @@ const {
   sizes: { bookCardHeight, bookCardWidth, bookCardNoCoverHeight, bookCardNoCoverWidth },
 } = theme
 
-export const BookCard = memo<BookCardProps>(({ data, onPress }) => {
+export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
   const containerProps = useMemo(
     () => ({
       bg: 'reverseBackground',
       borderRadius: radii.s,
-      width: bookCardWidth,
-      height: bookCardHeight,
+      width: ratioWidth ?? bookCardWidth,
+      height: ratioWidth ? (ratioWidth * bookCardHeight) / bookCardWidth : bookCardHeight,
     }),
-    []
+    [ratioWidth]
   )
   return (
-    <Pressable onPress={() => onPress(data)} scale={0.98} control="debounce">
-      {data.thumbnailUrl ? (
-        //@ts-ignore
-        <Image source={{ uri: data.thumbnailUrl }} resizeMode="cover" {...containerProps} />
+    <Pressable
+      onPress={() => onPress(data)}
+      scale={0.98}
+      control="debounce"
+      disabled={!data.pictureUrl}>
+      {data.pictureUrl ? (
+        <Image source={{ uri: data.pictureUrl }} resizeMode="cover" {...containerProps} />
       ) : (
-        //@ts-ignore
-        <View justifyContent="center" alignItems="center" {...containerProps}>
-          <Image
-            source={'bookUnavaliable'}
-            width={bookCardNoCoverWidth}
-            height={bookCardNoCoverHeight}
-            resizeMode="contain"
-          />
-        </View>
+        <Image
+          source={'bookUnavaliable'}
+          width={bookCardNoCoverWidth}
+          height={bookCardNoCoverHeight}
+          resizeMode="contain"
+        />
       )}
     </Pressable>
   )

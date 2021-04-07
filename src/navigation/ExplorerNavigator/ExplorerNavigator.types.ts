@@ -3,7 +3,7 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { TabNavigationProp, TabNavigatorParamList } from '../TabNavigator'
 
 export type ExplorerNavigatorParamList = {
-  Profile: undefined
+  Explorer: undefined
 }
 
 export type ExplorerNavigationProp = CompositeNavigationProp<
