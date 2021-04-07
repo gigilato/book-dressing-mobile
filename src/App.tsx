@@ -6,7 +6,7 @@ import app from 'firebase'
 import * as Font from 'expo-font'
 import { Asset } from 'expo-asset'
 import { fonts, images } from '@assets'
-import { i18n, firebase, Logger } from '@services'
+import { i18n, firebase, Logger, cache } from '@services'
 import { RootNavigator } from '@navigation'
 import { client } from '@api/apollo'
 
@@ -21,14 +21,16 @@ export const App = memo(() => {
       Font.loadAsync(fonts),
       Asset.loadAsync(Object.values(images)),
       i18n.setup(),
+      cache.setup(),
     ]).then(() => setAssetsLoading(false))
   }, [])
 
   useEffect(() => {
     const unsubscribe = app.auth().onAuthStateChanged(async (user) => {
       const idToken = await (async () => (user ? user.getIdToken() : null))()
-      firebase.setCurrentIdToken(idToken)
-      if (idToken) Logger.log(`idToken = ${idToken}`)
+      Logger.log(`idToken = ${idToken}`)
+      if (idToken) firebase.setCurrentIdToken(idToken)
+      if (!user) cache.reset()
       setAuthentication(!!user)
       setAuthLoading(false)
     })

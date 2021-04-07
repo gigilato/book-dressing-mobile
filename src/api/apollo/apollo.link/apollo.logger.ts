@@ -10,7 +10,6 @@ export const loggerLink = new ApolloLink((operation, forward) => {
       preview: operation.operationName,
       value: {
         variables: operation.variables,
-        context: operation.getContext(),
       },
     },
     'api'
@@ -24,7 +23,6 @@ export const loggerLink = new ApolloLink((operation, forward) => {
           value: {
             errors: result.errors,
             variables: operation.variables,
-            context: operation.getContext(),
           },
           important: true,
         },
@@ -38,7 +36,6 @@ export const loggerLink = new ApolloLink((operation, forward) => {
           value: {
             data: result.data,
             variables: operation.variables,
-            context: operation.getContext(),
           },
           important: true,
         },
