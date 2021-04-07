@@ -29,6 +29,7 @@ export const FormInput = memo<FormInputProps>(
               onChangeText={(text) => onChange(text)}
               value={value}
               error={errors[name]?.message}
+              variant="form"
               {...props}
             />
           )}

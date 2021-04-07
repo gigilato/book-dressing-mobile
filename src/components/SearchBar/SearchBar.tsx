@@ -44,16 +44,16 @@ export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCan
         flex={1}
         bg="searchBackground"
         height={35}
+        px="xs"
         alignItems="center"
         borderRadius="s">
-        <Icon name="search" color="searchPlaceHolder" />
+        <Icon name="search" color="searchPlaceHolder" mr="xs" />
         <Input
           ref={input}
           value={value}
           onChangeText={onChangeText}
           placeholder={t('search')}
           placeholderTextColor={searchPlaceHolder}
-          containerProps={{ ml: 'xs' }}
           onFocus={() => animateFocus(true)}
           onBlur={() => animateFocus(false)}
         />

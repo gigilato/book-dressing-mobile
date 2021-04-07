@@ -4,7 +4,6 @@ import { config } from '@config'
 import { Nullable } from '@utils/types'
 
 app.initializeApp(config.firebase)
-app.auth().useEmulator('http://localhost:9099')
 
 export class Firebase {
   private currentIdToken: Nullable<string> = null
