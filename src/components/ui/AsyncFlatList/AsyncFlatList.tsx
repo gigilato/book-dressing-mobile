@@ -38,6 +38,7 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
         })
       }, [hasNextPage, fetchMore, variables, pageSize])
 
+      return <ActivityIndicator />
       if (networkStatus === NetworkStatus.loading || networkStatus === NetworkStatus.setVariables)
         return <ActivityIndicator />
       if (error)
