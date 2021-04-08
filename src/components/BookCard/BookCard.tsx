@@ -3,11 +3,12 @@ import { Skeleton } from '@motify/skeleton'
 import { theme } from '@theme'
 import { Image, Pressable } from '@components/ui'
 import { BookCardProps, BookCardSkeletonProps } from './BookCard.props'
+import { SharedElement } from 'react-navigation-shared-element'
 
 const {
   radii,
   colors: { skeletonPrimaryColor, skeletonSecondaryColor },
-  sizes: { bookCardHeight, bookCardWidth, bookCardNoCoverHeight, bookCardNoCoverWidth },
+  sizes: { bookCardHeight, bookCardWidth },
 } = theme
 
 const borderRadius = radii.xs
@@ -24,20 +25,17 @@ export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
   )
   return (
     <Pressable
-      onPress={() => onPress(data)}
+      onPress={() => onPress && onPress(data)}
       scale={0.98}
       control="debounce"
-      disabled={!data.pictureUrl}>
-      {data.pictureUrl ? (
-        <Image source={{ uri: data.pictureUrl }} resizeMode="cover" {...containerProps} />
-      ) : (
+      disabled={!onPress}>
+      <SharedElement id={`book.${data.uuid}`}>
         <Image
-          source={'bookUnavaliable'}
-          width={bookCardNoCoverWidth}
-          height={bookCardNoCoverHeight}
-          resizeMode="contain"
+          source={data.pictureUrl ? { uri: data.pictureUrl } : 'bookUnavaliable'}
+          resizeMode="cover"
+          {...containerProps}
         />
-      )}
+      </SharedElement>
     </Pressable>
   )
 })

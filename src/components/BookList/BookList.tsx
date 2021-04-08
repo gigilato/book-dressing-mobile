@@ -13,7 +13,7 @@ const columnSpace = 10
 const loaderData = _.times(12, (n) => n.toString())
 const ItemSeparatorComponent = () => <View h="s" />
 
-export const BookList = memo<BookListProps>(({ queryOptions }) => {
+export const BookList = memo<BookListProps>(({ queryOptions, onPressBook }) => {
   const { onLayout, width } = useLayout()
   const query = useBooksQuery({ notifyOnNetworkStatusChange: true, ...queryOptions })
   const books = useMemo(() => query.data?.books, [query.data?.books])
@@ -27,7 +27,7 @@ export const BookList = memo<BookListProps>(({ queryOptions }) => {
       data={books}
       numColumns={numColumns}
       renderItem={({ item }) => (
-        <BookCard data={item.node} onPress={(book) => console.log(book)} ratioWidth={ratioWidth} />
+        <BookCard data={item.node} onPress={onPressBook} ratioWidth={ratioWidth} />
       )}
       renderLoader={() => (
         <FlatList

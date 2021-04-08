@@ -97,6 +97,7 @@ export interface LayoutProps {
   w?: SizeValue
   height?: SizeValue
   width?: SizeValue
+  size?: SizeValue
   minWidth?: SizeValue
   minHeight?: SizeValue
   maxWidth?: SizeValue
@@ -121,9 +122,9 @@ export interface FlexProps
 
 export interface PositionProps {
   zIndex?: Layout | number
-  top?: SpacingValue
-  right?: SpacingValue
-  bottom?: SpacingValue
-  left?: SpacingValue
+  top?: SizeValue
+  right?: SizeValue
+  bottom?: SizeValue
+  left?: SizeValue
   position?: FlexStyle['position']
 }

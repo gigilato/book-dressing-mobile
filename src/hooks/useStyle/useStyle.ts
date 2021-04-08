@@ -21,11 +21,12 @@ const handler = (transformer: Transformer, ...alias: string[]): Styler => {
 
 const { palette, colors, radii, sizes, spacings, layouts, fontSizes } = theme
 
-const getColor = (value: ColorValue) => colors[value] ?? palette[value] ?? value
-const getSpacing = (value: SpacingValue | SizeValue) => spacings[value] ?? sizes[value] ?? value
-const getLayout = (value: Layout) => layouts[value] ?? value
-const getRadius = (value: RadiiValue) => radii[value] ?? value
-const getFontSize = (value: FontSizeValue) => fontSizes[value] ?? value
+export const getColor = (value: ColorValue) => colors[value] ?? palette[value] ?? value
+export const getSpacing = (value: SpacingValue | SizeValue) =>
+  spacings[value] ?? sizes[value] ?? value
+export const getLayout = (value: Layout) => layouts[value] ?? value
+export const getRadius = (value: RadiiValue) => radii[value] ?? value
+export const getFontSize = (value: FontSizeValue) => fontSizes[value] ?? value
 
 const styledProps: Record<string, Styler> = {
   bg: handler(getColor, 'backgroundColor'),
@@ -59,6 +60,7 @@ const styledProps: Record<string, Styler> = {
   py: handler(getSpacing, 'paddingVertical'),
   h: handler(getSpacing, 'height'),
   w: handler(getSpacing, 'width'),
+  size: handler(getSpacing),
   height: handler(getSpacing),
   width: handler(getSpacing),
   minHeight: handler(getSpacing),

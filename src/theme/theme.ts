@@ -6,6 +6,7 @@ import { sizes } from './theme.sizes'
 import { layouts } from './theme.layouts'
 import { palette } from './theme.palette'
 import { radii } from './theme.radii'
+import { timings } from './theme.timings'
 
 export const theme = {
   colors,
@@ -16,6 +17,7 @@ export const theme = {
   layouts,
   palette,
   radii,
+  timings,
 } as const
 
 export type Theme = typeof theme

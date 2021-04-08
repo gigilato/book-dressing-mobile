@@ -6,6 +6,5 @@ export const sizes = {
   separator: 15,
   bookCardHeight: 150,
   bookCardWidth: 100,
-  bookCardNoCoverHeight: 60,
-  bookCardNoCoverWidth: 80,
+  navigationIcon: 40,
 }

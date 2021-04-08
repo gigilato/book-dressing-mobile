@@ -1,10 +1,12 @@
-import { ColorProps, SpaceProps, FlexProps, BorderProps, LayoutProps } from '@theme'
+import { ColorProps, SpaceProps, FlexProps, BorderProps, LayoutProps, PositionProps } from '@theme'
+import { PressableProps } from '@components/ui/Pressable'
 
 export type IconProps = ColorProps &
   SpaceProps &
   FlexProps &
   BorderProps &
-  LayoutProps & {
+  LayoutProps &
+  PositionProps & {
     name:
       | 'link'
       | 'search'
@@ -292,5 +294,6 @@ export type IconProps = ColorProps &
       | 'zap-off'
       | 'zoom-in'
       | 'zoom-out'
-    size?: number
+    onPress?: () => any
+    pressableProps?: PressableProps
   }
