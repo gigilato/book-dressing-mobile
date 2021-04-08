@@ -10,11 +10,13 @@ const {
   sizes: { bookCardHeight, bookCardWidth, bookCardNoCoverHeight, bookCardNoCoverWidth },
 } = theme
 
+const borderRadius = radii.xs
+
 export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
   const containerProps = useMemo(
     () => ({
       bg: 'charleston',
-      borderRadius: radii.s,
+      borderRadius: borderRadius,
       width: ratioWidth ?? bookCardWidth,
       height: ratioWidth ? (ratioWidth * bookCardHeight) / bookCardWidth : bookCardHeight,
     }),
@@ -43,7 +45,7 @@ export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
 export const BookCardSkeleton = memo<BookCardSkeletonProps>(({ ratioWidth }) => {
   return (
     <Skeleton
-      radius={radii.s}
+      radius={borderRadius}
       colors={[skeletonPrimaryColor, skeletonSecondaryColor]}
       height={ratioWidth ? (ratioWidth * bookCardHeight) / bookCardWidth : bookCardHeight}
       width={ratioWidth ?? bookCardWidth}
