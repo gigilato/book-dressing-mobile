@@ -9,7 +9,10 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
   props: AsyncFlatListProps<T, K>
 ) => ReactElement | null = memo(
   forwardRef<FlatList, AsyncFlatListProps<any, any>>(
-    ({ query, data, getDerivedData, pageSize = 10, ListFooterComponent, ...props }, ref) => {
+    (
+      { query, data, getDerivedData, pageSize = 10, ListFooterComponent, renderLoader, ...props },
+      ref
+    ) => {
       const { error, networkStatus, refetch, fetchMore, variables } = query
       const offset = useRef(0)
 
@@ -38,9 +41,8 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
         })
       }, [hasNextPage, fetchMore, variables, pageSize])
 
-      return <ActivityIndicator />
       if (networkStatus === NetworkStatus.loading || networkStatus === NetworkStatus.setVariables)
-        return <ActivityIndicator />
+        return renderLoader ? renderLoader() : <ActivityIndicator />
       if (error)
         return (
           <ErrorState

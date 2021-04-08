@@ -13,4 +13,6 @@ export const colors = {
   card: palette.yami,
   border: palette.gunMetal,
   notification: palette.oceanGreen,
+  skeletonPrimaryColor: palette.dark,
+  skeletonSecondaryColor: palette.gunMetal,
 } as const

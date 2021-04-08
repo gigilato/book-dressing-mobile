@@ -1,10 +1,12 @@
 import React, { memo, useMemo } from 'react'
+import { Skeleton } from '@motify/skeleton'
 import { theme } from '@theme'
 import { Image, Pressable } from '@components/ui'
-import { BookCardProps } from './BookCard.props'
+import { BookCardProps, BookCardSkeletonProps } from './BookCard.props'
 
 const {
   radii,
+  colors: { skeletonPrimaryColor, skeletonSecondaryColor },
   sizes: { bookCardHeight, bookCardWidth, bookCardNoCoverHeight, bookCardNoCoverWidth },
 } = theme
 
@@ -35,5 +37,16 @@ export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
         />
       )}
     </Pressable>
+  )
+})
+
+export const BookCardSkeleton = memo<BookCardSkeletonProps>(({ ratioWidth }) => {
+  return (
+    <Skeleton
+      radius={radii.s}
+      colors={[skeletonPrimaryColor, skeletonSecondaryColor]}
+      height={ratioWidth ? (ratioWidth * bookCardHeight) / bookCardWidth : bookCardHeight}
+      width={ratioWidth ?? bookCardWidth}
+    />
   )
 })

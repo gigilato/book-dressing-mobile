@@ -5,3 +5,5 @@ export type BookCardProps = {
   onPress: (book: BookFragment) => any
   ratioWidth?: number
 }
+
+export type BookCardSkeletonProps = Pick<BookCardProps, 'ratioWidth'>

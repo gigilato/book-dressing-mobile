@@ -13,5 +13,6 @@ export const palette = {
   davys: '#495057',
   gunMetal: '#343A40',
   charleston: '#252422',
+  dark: '#111111',
   yami: '#0b090a',
 } as const
