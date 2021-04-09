@@ -21,7 +21,7 @@ export const ErrorState = memo<ErrorStateProps>(
             duration: 200,
             easing: Easing.inOut(Easing.ease),
           }}>
-          <Icon color="text" name={type === 'error' ? 'tool' : 'meh'} size={150} />
+          <Icon color="text" name={type === 'error' ? 'construct' : 'information'} size={150} />
         </MotiView>
         <View my="m">
           <Text color="text">

@@ -1,9 +1,10 @@
 export const palette = {
   ultraMarine: '#4361ee',
   imperialRed: '#E5383B',
+  love: '#ce3a60',
   pumpkin: '#FF6D00',
   mango: '#FFBD00',
-  oceanGreen: '#52B788',
+  oceanGreen: '#59bb6d',
   cultured: '#f8f9fa',
   ghost: '#e9ecef',
   gainboro: '#DEE2E6',

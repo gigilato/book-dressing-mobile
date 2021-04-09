@@ -8,6 +8,10 @@ export const bookFragment = gql`
     description
     pictureUrl
     status
+    owner {
+      uuid
+      username
+    }
     createdAt
     updatedAt
   }

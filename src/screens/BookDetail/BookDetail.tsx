@@ -8,7 +8,7 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import { useTranslation } from 'react-i18next'
-import { View, Screen, Icon, Text, Button } from '@components/ui'
+import { View, Screen, Icon, Text, Button, Pressable } from '@components/ui'
 import { BookCard } from '@components'
 import { theme } from '@theme'
 import { ExplorerBookDetailProps, BookDetailProps } from './BookDetail.props'
@@ -42,7 +42,6 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
         <View alignItems="center">
           <BookCard data={data} ratioWidth={170} />
         </View>
-
         <Animated.View style={contentAnimatedStyle}>
           <Text fontFamily="poppins600" fontSize="h2" textAlign="center" mt="l">
             {data.title}
@@ -52,14 +51,26 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
             numberOfLines={1}
             ellipsizeMode="tail"
             px="l"
-            mb="l"
             fontSize="h3"
             textAlign="center">
             {data.author}
           </Text>
-          <Button title={t('askForLoan')} my="m" />
-          <View h="hairline" bg="grey" />
-          <Text fontFamily="poppins500" fontSize="h3" textTransform="upperfirst" mt="m" mb="xxs">
+          <View flexDirection="row" my="l">
+            <View flexDirection="row" flex={1} alignItems="center">
+              <Pressable>
+                <Text color="primary">{`@${data.owner.username}`}</Text>
+              </Pressable>
+            </View>
+            <View flexDirection="row" alignItems="center">
+              <Icon name="chatbubble" pressableProps={{ px: 's' }} />
+              <Text>0</Text>
+              <Icon name="heart" pressableProps={{ px: 's' }} />
+              <Text>0</Text>
+            </View>
+          </View>
+          <Button title={t('askForLoan')} />
+          <View h="hairline" bg="grey" mt="l" mb="m" />
+          <Text fontFamily="poppins500" fontSize="h3" textTransform="upperfirst" mb="xxs">
             {t('description')}
           </Text>
           <Text fontFamily="poppins300">{data.description}</Text>
@@ -67,7 +78,7 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
       </Screen>
       <Animated.View style={[styles.backIconContainer, backIconAnimatedStyle]}>
         <Icon
-          name="arrow-left"
+          name="chevron-back"
           size="navigationIcon"
           onPress={onGoBack}
           pressableProps={{ pl: 'defaultLeftInset', top, py: 'm', pr: 'l' }}

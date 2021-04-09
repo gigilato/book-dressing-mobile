@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
     paddingRight: defaultRightInset,
     paddingLeft: defaultLeftInset,
     paddingTop: defaultTopInset,
-    paddingBottom: defaultBottomInset,
   },
   scrollableContainer: {
     paddingRight: defaultRightInset,

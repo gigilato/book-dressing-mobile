@@ -1,12 +1,12 @@
 import React, { memo, useState } from 'react'
-import { View } from '@components/ui'
+import { View, Screen } from '@components/ui'
 import { BookList, SearchBar } from '@components'
 import { ExplorerProps } from './Explorer.props'
 
 export const Explorer = memo<ExplorerProps>(({ navigation }) => {
   const [search, setSearch] = useState('')
   return (
-    <View variant="screen" pt={0} pb={0}>
+    <Screen pt={0} pb={0}>
       <View py="m">
         <SearchBar onSearch={(value) => setSearch(value)} />
       </View>
@@ -14,6 +14,6 @@ export const Explorer = memo<ExplorerProps>(({ navigation }) => {
         queryOptions={{ variables: { limit: 12, where: { search } } }}
         onPressBook={(book) => navigation.navigate('ExplorerBookDetail', { data: book })}
       />
-    </View>
+    </Screen>
   )
 })

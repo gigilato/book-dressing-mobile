@@ -18,21 +18,27 @@ export const TabNavigator = memo<TabNavigatorProps>(() => {
         name="ExplorerNavigator"
         component={ExplorerNavigator}
         options={{
-          tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Icon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
         }}
       />
       <Tab.Screen
         name="RequestNavigator"
         component={RequestNavigator}
         options={{
-          tabBarIcon: ({ color }) => <Icon name="book" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Icon name={focused ? 'git-compare' : 'git-compare-outline'} color={color} />
+          ),
         }}
       />
       <Tab.Screen
         name="ProfileNavigator"
         component={ProfileNavigator}
         options={{
-          tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Icon name={focused ? 'person' : 'person-outline'} color={color} />
+          ),
         }}
       />
     </Tab.Navigator>
