@@ -29,4 +29,8 @@ export const fr = {
     emptyStateContent: "Il n'y a rien à afficher...",
     retry: 'recharger',
   },
+  book: {
+    askForLoan: 'Demander le livre',
+    description: 'résumé',
+  },
 }

@@ -6,7 +6,15 @@ import { TextProps } from './Text.props'
 import { textVariants } from './Text.utils'
 
 export const Text = memo<TextProps>(
-  ({ textTransform, children, style, variant = 'body', ...props }) => {
+  ({
+    textTransform,
+    children,
+    style,
+    variant = 'body',
+    numberOfLines,
+    ellipsizeMode,
+    ...props
+  }) => {
     const content = useMemo(() => {
       if (typeof children !== 'string' || !textTransform) return children
       return textTransform === 'lowercase'
@@ -23,7 +31,11 @@ export const Text = memo<TextProps>(
       [themeStyle, style]
     )
     return (
-      <RNText style={textStyle} {...currentProps}>
+      <RNText
+        numberOfLines={numberOfLines}
+        ellipsizeMode={ellipsizeMode}
+        style={textStyle}
+        {...currentProps}>
         {content}
       </RNText>
     )

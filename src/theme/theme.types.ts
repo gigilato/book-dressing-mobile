@@ -37,7 +37,7 @@ export interface Colors {
 
 export type ColorValue = LiteralUnion<Color | Palette>
 export type FontValue = LiteralUnion<Fonts>
-export type SpacingValue = Spacing | number
+export type SpacingValue = LiteralUnion<Spacing | Sizes> | number
 export type RadiiValue = Radii | number
 export type SizeValue = LiteralUnion<Spacing | Sizes> | number
 export type FontSizeValue = FontSizes | number
@@ -73,6 +73,7 @@ export interface BorderProps {
 export interface FontProps {
   fontFamily?: FontValue
   fontSize?: FontSizes
+  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify'
 }
 
 export interface SpaceProps {
