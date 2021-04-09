@@ -1,5 +1,4 @@
 import React, { memo, useCallback, useEffect } from 'react'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Animated, {
   useSharedValue,
   withSpring,
@@ -8,8 +7,8 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import { useTranslation } from 'react-i18next'
-import { View, Screen, Icon, Text, Button, Pressable } from '@components/ui'
-import { BookCard } from '@components'
+import { View, Screen, Text, Button, Pressable, BackIcon, LikeIcon } from '@components/ui'
+import { BookCard, Avatar } from '@components'
 import { theme } from '@theme'
 import { ExplorerBookDetailProps, BookDetailProps } from './BookDetail.props'
 import { styles } from './BookDetail.styles'
@@ -17,7 +16,6 @@ import { styles } from './BookDetail.styles'
 const { sharedElementOpen } = theme.timings
 
 const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
-  const { top } = useSafeAreaInsets()
   const { t } = useTranslation('book')
 
   const animatedOpacity = useSharedValue(0)
@@ -56,17 +54,17 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
             {data.author}
           </Text>
           <View flexDirection="row" my="l">
-            <View flexDirection="row" flex={1} alignItems="center">
+            <View flex={1}>
               <Pressable>
-                <Text color="primary">{`@${data.owner.username}`}</Text>
+                <View flexDirection="row" alignItems="center">
+                  <Avatar bg="red" size={40} uri={data.owner?.pictureUrl ?? undefined} />
+                  <Text fontSize="h3" ml="s">
+                    {data.owner.username}
+                  </Text>
+                </View>
               </Pressable>
             </View>
-            <View flexDirection="row" alignItems="center">
-              <Icon name="chatbubble" pressableProps={{ px: 's' }} />
-              <Text>0</Text>
-              <Icon name="heart" pressableProps={{ px: 's' }} />
-              <Text>0</Text>
-            </View>
+            <LikeIcon />
           </View>
           <Button title={t('askForLoan')} />
           <View h="hairline" bg="grey" mt="l" mb="m" />
@@ -77,12 +75,7 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
         </Animated.View>
       </Screen>
       <Animated.View style={[styles.backIconContainer, backIconAnimatedStyle]}>
-        <Icon
-          name="chevron-back"
-          size="navigationIcon"
-          onPress={onGoBack}
-          pressableProps={{ pl: 'defaultLeftInset', top, py: 'm', pr: 'l' }}
-        />
+        <BackIcon onPress={onGoBack} />
       </Animated.View>
     </>
   )

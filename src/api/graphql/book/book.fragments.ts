@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { userFragment } from '@api/graphql/user'
 
 export const bookFragment = gql`
   fragment BookFragment on Book {
@@ -9,10 +10,10 @@ export const bookFragment = gql`
     pictureUrl
     status
     owner {
-      uuid
-      username
+      ...UserFragment
     }
     createdAt
     updatedAt
   }
+  ${userFragment}
 `
