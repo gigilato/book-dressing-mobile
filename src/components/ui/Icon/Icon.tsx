@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import * as Haptics from 'expo-haptics'
 import { Ionicons } from '@expo/vector-icons'
@@ -6,7 +6,7 @@ import { getSpacing, useStyle } from '@hooks/useStyle'
 import { Pressable } from '@components/ui/Pressable'
 import { View } from '@components/ui/View'
 import { Text } from '@components/ui/Text'
-import { IconProps } from './Icon.props'
+import { IconProps, LikeIconProps } from './Icon.props'
 
 export const Icon = memo<IconProps>(
   ({ name, size = 20, rounded, color = 'text', onPress, pressableProps, ...props }) => {
@@ -37,26 +37,23 @@ export const BackIcon = memo<Omit<IconProps, 'name'>>((props) => {
   )
 })
 
-export const LikeIcon = memo<Omit<IconProps, 'name'>>(({ onPress, ...props }) => {
-  const [liked, setLiked] = useState(false)
-
+export const LikeIcon = memo<LikeIconProps>(({ onPress, hasLiked, likeCount, ...props }) => {
   const onPressHeart = useCallback(() => {
     Haptics.selectionAsync()
-    setLiked((current) => !current)
     onPress && onPress()
   }, [onPress])
 
-  const color = useMemo(() => (liked ? 'love' : 'text'), [liked])
+  const color = useMemo(() => (hasLiked ? 'love' : 'text'), [hasLiked])
 
   return (
     <View flexDirection="row" alignItems="center" justifyContent="space-between" w={50}>
       <Icon
-        name={liked ? 'heart' : 'heart-outline'}
+        name={hasLiked ? 'heart' : 'heart-outline'}
         color={color}
         onPress={onPressHeart}
         {...props}
       />
-      <Text color={color}>{liked ? 1 : 0}</Text>
+      <Text color={color}>{likeCount}</Text>
     </View>
   )
 })

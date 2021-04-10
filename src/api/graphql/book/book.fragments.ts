@@ -12,6 +12,8 @@ export const bookFragment = gql`
     owner {
       ...UserFragment
     }
+    hasLiked
+    likeCount
     currentRequest {
       uuid
       status

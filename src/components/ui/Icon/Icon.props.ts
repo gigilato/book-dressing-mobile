@@ -3693,3 +3693,8 @@ export type IconProps = ColorProps &
       | 'md-woman-outline'
       | 'md-woman-sharp'
   }
+
+export type LikeIconProps = Omit<IconProps, 'name'> & {
+  hasLiked: boolean
+  likeCount: number
+}
