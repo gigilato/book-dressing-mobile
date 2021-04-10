@@ -139,7 +139,7 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
                   {t('loanActive')}
                 </Text>
               ) : (
-                <Text fontSize="big" textAlign="center" color="danger">
+                <Text fontSize="big" textAlign="center" color="error">
                   {t('unavailable')}
                 </Text>
               )}

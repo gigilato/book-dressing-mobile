@@ -27,6 +27,7 @@ export const getSpacing = (value: SpacingValue | SizeValue) =>
 export const getLayout = (value: Layout) => layouts[value] ?? value
 export const getRadius = (value: RadiiValue) => radii[value] ?? value
 export const getFontSize = (value: FontSizeValue) => fontSizes[value] ?? value
+export const getPropsToStyle = (value: any) => value
 
 const styledProps: Record<string, Styler> = {
   bg: handler(getColor, 'backgroundColor'),
@@ -73,6 +74,8 @@ const styledProps: Record<string, Styler> = {
   left: handler(getSpacing),
   zIndex: handler(getLayout),
   fontSize: handler(getFontSize),
+  textAlign: handler(getPropsToStyle),
+  fontFamily: handler(getPropsToStyle),
 }
 
 export const useStyle = <T, S = ViewStyle>(props: Record<string, any>): [T, StyleProp<S>] => {
@@ -81,13 +84,9 @@ export const useStyle = <T, S = ViewStyle>(props: Record<string, any>): [T, Styl
     const style = {}
 
     // Any props that doesn't need treatment will be directly added to the style object
-    Object.keys(props).forEach((key) => {
-      if (styledProps[key]) styledProps[key](style, key, props[key])
-      else {
-        currentProps[key] = props[key]
-        style[key] = props[key]
-      }
-    })
+    Object.keys(props).forEach((key) =>
+      styledProps[key] ? styledProps[key](style, key, props[key]) : (currentProps[key] = props[key])
+    )
     return [currentProps, style] as [T, StyleProp<S>]
   }, [props])
 
