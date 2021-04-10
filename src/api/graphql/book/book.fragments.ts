@@ -12,8 +12,29 @@ export const bookFragment = gql`
     owner {
       ...UserFragment
     }
+    currentRequest {
+      uuid
+      status
+    }
     createdAt
     updatedAt
   }
   ${userFragment}
+`
+
+export const bookConnectionFragment = gql`
+  fragment BookConnectionFragment on BookConnection {
+    pageInfos {
+      hasNextPage
+    }
+    aggregate {
+      count
+    }
+    edges {
+      node {
+        ...BookFragment
+      }
+    }
+  }
+  ${bookFragment}
 `

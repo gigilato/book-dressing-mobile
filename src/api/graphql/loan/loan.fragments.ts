@@ -17,3 +17,20 @@ export const loanFragment = gql`
     }
   }
 `
+
+export const loanConnectionFragment = gql`
+  fragment LoanConnectionFragment on LoanConnection {
+    pageInfos {
+      hasNextPage
+    }
+    aggregate {
+      count
+    }
+    edges {
+      node {
+        ...LoanFragment
+      }
+    }
+  }
+  ${loanFragment}
+`

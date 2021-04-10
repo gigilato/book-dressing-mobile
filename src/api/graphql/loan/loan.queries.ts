@@ -1,42 +1,22 @@
 import { gql } from '@apollo/client'
-import { loanFragment } from './loan.fragments'
+import { loanFragment, loanConnectionFragment } from './loan.fragments'
 
 export const loansQuery = gql`
   query loans($limit: Int, $offset: Int) {
     loans(limit: $limit, offset: $offset) {
-      pageInfos {
-        hasNextPage
-      }
-      aggregate {
-        count
-      }
-      edges {
-        node {
-          ...LoanFragment
-        }
-      }
+      ...LoanConnectionFragment
     }
   }
-  ${loanFragment}
+  ${loanConnectionFragment}
 `
 
 export const requestsQuery = gql`
   query requests($limit: Int, $offset: Int) {
     requests(limit: $limit, offset: $offset) {
-      pageInfos {
-        hasNextPage
-      }
-      aggregate {
-        count
-      }
-      edges {
-        node {
-          ...LoanFragment
-        }
-      }
+      ...LoanConnectionFragment
     }
   }
-  ${loanFragment}
+  ${loanConnectionFragment}
 `
 
 export const requestLoanMutation = gql`
@@ -64,6 +44,14 @@ export const rejectLoanMutation = gql`
     }
   }
   ${loanFragment}
+`
+
+export const cancelLoanMutation = gql`
+  mutation cancelLoan($loanUuid: ID!) {
+    cancelLoan(loanUuid: $loanUuid) {
+      ...LoanFragment
+    }
+  }
 `
 
 export const finishLoanMutation = gql`
