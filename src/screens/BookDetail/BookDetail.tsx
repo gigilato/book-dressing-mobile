@@ -10,7 +10,15 @@ import { useTranslation } from 'react-i18next'
 import { View, Screen, Text, Button, Pressable, BackIcon, LikeIcon } from '@components/ui'
 import { BookCard, Avatar } from '@components'
 import { theme } from '@theme'
-import { useBookQuery, useLikeBookMutation } from '@api/hooks/generated'
+import {
+  useBookQuery,
+  useLikeBookMutation,
+  useRequestLoanMutation,
+  useCancelLoanMutation,
+  LoanStatus,
+} from '@api/hooks/generated'
+import { useMeQuery } from '@api/hooks'
+import { bookQuery } from '@api/graphql'
 import { ExplorerBookDetailProps, BookDetailProps } from './BookDetail.props'
 import { styles } from './BookDetail.styles'
 
@@ -18,8 +26,14 @@ const { sharedElementOpen } = theme.timings
 
 const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
   const { t } = useTranslation('book')
-  const query = useBookQuery({ variables: { bookUuid: data.uuid } })
+  const query = useBookQuery({
+    variables: { bookUuid: data.uuid },
+    fetchPolicy: 'cache-and-network',
+    nextFetchPolicy: 'cache-first',
+  })
   const book = useMemo(() => query.data?.book ?? data, [query.data, data])
+  const { data: userData } = useMeQuery({ fetchPolicy: 'cache-only' })
+  const isMyBook = useMemo(() => book.owner.uuid === userData?.me.uuid, [book.owner, userData])
 
   const animatedOpacity = useSharedValue(0)
 
@@ -31,9 +45,9 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
   const contentAnimatedStyle = useAnimatedStyle(() => ({ opacity: animatedOpacity.value }))
 
   const [likeBook] = useLikeBookMutation()
-  const onPressLike = useCallback(async () => {
+  const onPressLike = useCallback(() => {
     const { uuid, hasLiked, likeCount } = book
-    await likeBook({
+    likeBook({
       variables: { bookUuid: uuid },
       optimisticResponse: {
         __typename: 'Mutation',
@@ -45,6 +59,27 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
       },
     })
   }, [book, likeBook])
+
+  const [requestLoan, { loading: requestLoading }] = useRequestLoanMutation()
+  const onPressRequest = useCallback(() => {
+    requestLoan({
+      variables: { bookUuid: book.uuid },
+      refetchQueries: [{ query: bookQuery, variables: { bookUuid: book.uuid } }],
+      awaitRefetchQueries: true,
+    })
+  }, [book, requestLoan])
+
+  const [cancelLoan, { loading: cancelLoading }] = useCancelLoanMutation()
+  const onPressCancel = useCallback(
+    (loanUuid: string) => {
+      cancelLoan({
+        variables: { loanUuid },
+        refetchQueries: [{ query: bookQuery, variables: { bookUuid: book.uuid } }],
+        awaitRefetchQueries: true,
+      })
+    },
+    [book, cancelLoan]
+  )
 
   const onGoBack = useCallback(() => {
     // TODO: change that with spring call and runOnJS
@@ -72,7 +107,7 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
             textAlign="center">
             {book.author}
           </Text>
-          <View flexDirection="row" my="l">
+          <View flexDirection="row" mt="l">
             <View flex={1}>
               <Pressable>
                 <View flexDirection="row" alignItems="center">
@@ -85,7 +120,31 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
             </View>
             <LikeIcon onPress={onPressLike} hasLiked={book.hasLiked} likeCount={book.likeCount} />
           </View>
-          <Button title={t('askForLoan')} />
+          {!isMyBook && (
+            <View mt="l">
+              {book.available && !book.currentRequest ? (
+                <Button
+                  title={t('requestLoan')}
+                  loading={requestLoading}
+                  onPress={onPressRequest}
+                />
+              ) : book.currentRequest && book.currentRequest.status === LoanStatus.Request ? (
+                <Button
+                  title={t('cancelLoan')}
+                  loading={cancelLoading}
+                  onPress={() => onPressCancel(book.currentRequest!.uuid)}
+                />
+              ) : book.currentRequest && book.currentRequest.status === LoanStatus.Active ? (
+                <Text fontSize="big" textAlign="center">
+                  {t('loanActive')}
+                </Text>
+              ) : (
+                <Text fontSize="big" textAlign="center" color="danger">
+                  {t('unavailable')}
+                </Text>
+              )}
+            </View>
+          )}
           <View h="hairline" bg="grey" mt="l" mb="m" />
           <Text fontFamily="poppins500" fontSize="h3" textTransform="upperfirst" mb="xxs">
             {t('description')}

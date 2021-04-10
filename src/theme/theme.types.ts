@@ -19,20 +19,20 @@ export type Color = keyof Colors
 
 type ColorVal = LiteralUnion<Palette>
 export interface Colors {
-  transparent: ColorVal
-  background: ColorVal
-  backgroundReverse: ColorVal
   primary: ColorVal
-  active: ColorVal
-  inactive: ColorVal
+  error: ColorVal
+  background: ColorVal
+  reverseBackground: ColorVal
+  searchBackground: ColorVal
+  searchPlaceHolder: ColorVal
   text: ColorVal
-  textReverse: ColorVal
-  textDisabled: ColorVal
-  danger: ColorVal
-  success: ColorVal
-  input: ColorVal
   placeholder: ColorVal
-  secondaryText: ColorVal
+  reverseText: ColorVal
+  card: ColorVal
+  border: ColorVal
+  notification: ColorVal
+  skeletonPrimaryColor: ColorVal
+  skeletonSecondaryColor: ColorVal
 }
 
 export type ColorValue = LiteralUnion<Color | Palette>

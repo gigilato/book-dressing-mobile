@@ -12,6 +12,7 @@ export const bookFragment = gql`
     owner {
       ...UserFragment
     }
+    available
     hasLiked
     likeCount
     currentRequest {

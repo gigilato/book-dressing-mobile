@@ -30,7 +30,10 @@ export const fr = {
     retry: 'recharger',
   },
   book: {
-    askForLoan: 'Demander le livre',
+    requestLoan: 'Demander le livre',
+    cancelLoan: 'Annuler la demande',
+    unavailable: "Ce livre n'est pas disponible",
+    loanActive: 'Vous empruntez ce livre',
     description: 'résumé',
   },
 }
