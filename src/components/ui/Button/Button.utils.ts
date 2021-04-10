@@ -1,11 +1,19 @@
 import { ButtonVariant } from './Button.props'
 
 export const buttonVariants: Record<ButtonVariant, any> = {
-  button: {
+  primary: {
     px: 'm',
     py: 'xs',
     backgroundColor: 'primary',
-    borderRadius: 's',
+    borderRadius: 'xs',
+    alignItems: 'center',
+  },
+  secondary: {
+    px: 'm',
+    py: 'xxs',
+    borderWidth: 'hairline',
+    borderColor: 'text',
+    borderRadius: 'xs',
     alignItems: 'center',
   },
   text: {},

@@ -11,7 +11,7 @@ export const Explorer = memo<ExplorerProps>(({ navigation }) => {
         <SearchBar onSearch={(value) => setSearch(value)} />
       </View>
       <BookList
-        queryOptions={{ variables: { limit: 12, where: { search } } }}
+        queryOptions={{ variables: { limit: 12, where: { search, onlyActive: true } } }}
         onPressBook={(book) => navigation.navigate('ExplorerBookDetail', { data: book })}
       />
     </Screen>

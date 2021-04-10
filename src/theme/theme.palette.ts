@@ -1,5 +1,5 @@
 export const palette = {
-  ultraMarine: '#4361ee',
+  ultraMarine: '#4FA3D9',
   imperialRed: '#E5383B',
   love: '#ce3a60',
   pumpkin: '#FF6D00',

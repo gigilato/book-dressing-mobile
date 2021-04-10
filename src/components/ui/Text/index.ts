@@ -1,2 +1,2 @@
 export * from './Text'
-export { TextProps } from './Text.props'
+export * from './Text.props'

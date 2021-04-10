@@ -11,26 +11,8 @@ export const bookQuery = gql`
 `
 
 export const booksQuery = gql`
-  query books($limit: Int, $offset: Int, $where: BooksWhereInput) {
+  query books($limit: Int, $offset: Int, $where: BooksWhereInput!) {
     books(where: $where, limit: $limit, offset: $offset) {
-      ...BookConnectionFragment
-    }
-  }
-  ${bookConnectionFragment}
-`
-
-export const userBooksQuery = gql`
-  query userBooks($limit: Int, $offset: Int, $where: UserBooksWhereInput!) {
-    userBooks(where: $where, limit: $limit, offset: $offset) {
-      ...BookConnectionFragment
-    }
-  }
-  ${bookConnectionFragment}
-`
-
-export const myBooksQuery = gql`
-  query myBooks($limit: Int, $offset: Int, $where: BooksWhereInput) {
-    myBooks(where: $where, limit: $limit, offset: $offset) {
       ...BookConnectionFragment
     }
   }

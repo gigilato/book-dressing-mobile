@@ -36,4 +36,8 @@ export const fr = {
     loanActive: 'Vous empruntez ce livre',
     description: 'résumé',
   },
+  profile: {
+    updateProfile: 'Modifier le profil',
+    addBook: 'Modifier le profil',
+  },
 }

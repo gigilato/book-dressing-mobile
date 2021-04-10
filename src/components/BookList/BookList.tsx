@@ -7,6 +7,7 @@ import { BookCard, BookCardSkeleton } from '@components/BookCard'
 import { useBooksQuery } from '@api/hooks/generated'
 import { BookListProps } from './BookList.props'
 import { styles } from './BookList.styles'
+import { emptyBookData } from './BookList.utils'
 
 const numColumns = 3
 const columnSpace = 10
@@ -16,7 +17,16 @@ const ItemSeparatorComponent = () => <View h="s" />
 export const BookList = memo<BookListProps>(({ queryOptions, onPressBook }) => {
   const { onLayout, width } = useLayout()
   const query = useBooksQuery({ notifyOnNetworkStatusChange: true, ...queryOptions })
-  const books = useMemo(() => query.data?.books, [query.data?.books])
+  const books = useMemo(() => {
+    if (!query.data?.books) return undefined
+    const { edges } = query.data.books
+    return edges.length % numColumns === numColumns - 1
+      ? {
+          ...query.data.books,
+          edges: [...query.data.books.edges, { node: emptyBookData }],
+        }
+      : query.data.books
+  }, [query.data?.books])
   const ratioWidth = useMemo(() => (width === 0 ? undefined : width / numColumns - columnSpace), [
     width,
   ])
@@ -26,9 +36,13 @@ export const BookList = memo<BookListProps>(({ queryOptions, onPressBook }) => {
       query={query}
       data={books}
       numColumns={numColumns}
-      renderItem={({ item }) => (
-        <BookCard data={item.node} onPress={onPressBook} ratioWidth={ratioWidth} />
-      )}
+      renderItem={({ item }) =>
+        item.node.uuid === emptyBookData.uuid ? (
+          <View w={ratioWidth} />
+        ) : (
+          <BookCard data={item.node} onPress={onPressBook} ratioWidth={ratioWidth} />
+        )
+      }
       renderLoader={() => (
         <FlatList
           data={loaderData}

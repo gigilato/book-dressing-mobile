@@ -1,11 +1,19 @@
 import { RouteProp, CompositeNavigationProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { ProfileNavigatorParamList, ProfileNavigationProp } from '@navigation'
+import { BookFragment, UserFragment } from '@api/hooks/generated'
 
-export type ProfileProps = {
+export type MyProfileProps = {
   navigation: CompositeNavigationProp<
-    StackNavigationProp<ProfileNavigatorParamList, 'Profile'>,
+    StackNavigationProp<ProfileNavigatorParamList, 'MyProfile'>,
     ProfileNavigationProp
   >
-  route: RouteProp<ProfileNavigatorParamList, 'Profile'>
+  route: RouteProp<ProfileNavigatorParamList, 'MyProfile'>
+}
+
+export type UserProfileProps = {
+  data: UserFragment
+  isMyProfile: boolean
+  onPressBook: (book: BookFragment) => any
+  onPressEdit?: () => any
 }

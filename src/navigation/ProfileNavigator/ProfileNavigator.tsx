@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { Profile, SearchBook } from '@screens'
-import { defaultStackScreenOptions } from '../navigation.utils'
+import { MyProfile, SearchBook } from '@screens'
+import { defaultStackScreenOptions, HeaderTitle } from '../navigation.utils'
 import { ProfileNavigatorParamList } from './ProfileNavigator.types'
 
 const Stack = createStackNavigator<ProfileNavigatorParamList>()
@@ -9,11 +9,19 @@ const Stack = createStackNavigator<ProfileNavigatorParamList>()
 export const ProfileNavigator = memo(() => {
   return (
     <Stack.Navigator
-      initialRouteName="SearchBook"
+      initialRouteName="MyProfile"
       screenOptions={{
         ...defaultStackScreenOptions,
       }}>
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="MyProfile"
+        component={MyProfile}
+        options={({ route }) => ({
+          headerTitle: ({ onLayout }) => (
+            <HeaderTitle onLayout={onLayout}>{route.params?.data?.username ?? ''}</HeaderTitle>
+          ),
+        })}
+      />
       <Stack.Screen name="SearchBook" component={SearchBook} />
     </Stack.Navigator>
   )

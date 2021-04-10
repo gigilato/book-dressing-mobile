@@ -3,7 +3,7 @@ import { StackNavigationOptions, StackHeaderTitleProps } from '@react-navigation
 import { useTranslation } from 'react-i18next'
 import { Text } from '@components/ui'
 
-const HeaderTitle = memo<StackHeaderTitleProps>((props) => {
+export const HeaderTitle = memo<StackHeaderTitleProps>((props) => {
   const { t } = useTranslation('navigation')
   return <Text variant="header">{t(props.children as string)}</Text>
 })

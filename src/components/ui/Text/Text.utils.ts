@@ -23,7 +23,7 @@ export const textVariants: Record<
   header: {
     fontFamily: 'poppins600',
     color: 'text',
-    fontSize: 'h1',
+    fontSize: 'h2',
   },
   label: {
     color: 'text',
@@ -35,7 +35,17 @@ export const textVariants: Record<
     fontFamily: 'poppins200',
     fontSize: 'small',
   },
-  button: {
+  buttonPrimary: {
+    color: 'text',
+    fontFamily: 'poppins600',
+    fontSize: 'normal',
+  },
+  buttonSecondary: {
+    color: 'text',
+    fontFamily: 'poppins500',
+    fontSize: 'normal',
+  },
+  buttonText: {
     color: 'text',
     fontFamily: 'poppins600',
     fontSize: 'big',
