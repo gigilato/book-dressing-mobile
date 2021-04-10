@@ -19,7 +19,11 @@ import {
 } from '@api/hooks/generated'
 import { useMeQuery } from '@api/hooks'
 import { bookQuery } from '@api/graphql'
-import { ExplorerBookDetailProps, BookDetailProps } from './BookDetail.props'
+import {
+  ExplorerBookDetailProps,
+  BookDetailProps,
+  ProfileBookDetailProps,
+} from './BookDetail.props'
 import { styles } from './BookDetail.styles'
 
 const { sharedElementOpen } = theme.timings
@@ -160,6 +164,17 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
 })
 
 export const ExplorerBookDetail = memo<ExplorerBookDetailProps>(
+  ({
+    navigation,
+    route: {
+      params: { data },
+    },
+  }) => {
+    return <BookDetail data={data} onPressBack={() => navigation.goBack()} />
+  }
+)
+
+export const ProfileBookDetail = memo<ProfileBookDetailProps>(
   ({
     navigation,
     route: {

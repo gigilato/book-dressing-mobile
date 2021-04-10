@@ -1,4 +1,4 @@
 export const timings = {
-  sharedElementOpen: 500,
+  sharedElementOpen: 300,
   sharedElementClose: 300,
 }

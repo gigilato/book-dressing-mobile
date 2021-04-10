@@ -34,6 +34,11 @@ export const MyProfile = memo<MyProfileProps>(({ navigation }) => {
     navigation.setParams({ data: me })
   }, [me, navigation])
   return (
-    <UserProfile data={me} isMyProfile={true} onPressEdit={() => null} onPressBook={() => null} />
+    <UserProfile
+      data={me}
+      isMyProfile={true}
+      onPressEdit={() => null}
+      onPressBook={(book) => navigation.navigate('ProfileBookDetail', { data: book })}
+    />
   )
 })

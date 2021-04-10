@@ -1,13 +1,15 @@
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { TabNavigationProp, TabNavigatorParamList } from '@navigation/TabNavigator'
-import { UserFragment } from '@api/hooks/generated'
+import { BookFragment, UserFragment } from '@api/hooks/generated'
 
 export type ProfileNavigatorParamList = {
   MyProfile: {
     data?: UserFragment
   }
-  SearchBook: undefined
+  ProfileBookDetail: {
+    data: BookFragment
+  }
 }
 
 export type ProfileNavigationProp = CompositeNavigationProp<
