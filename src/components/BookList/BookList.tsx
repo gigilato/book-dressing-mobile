@@ -13,7 +13,7 @@ const columnSpace = 10
 const loaderData = _.times(12, (n) => n.toString())
 const ItemSeparatorComponent = () => <View h="s" />
 
-export const BookList = memo<BookListProps>(({ queryOptions, onPressBook }) => {
+export const BookList = memo<BookListProps>(({ queryOptions, onPressBook, ...props }) => {
   const [width, setWidth] = useState(0)
   const query = useBooksQuery({ notifyOnNetworkStatusChange: true, ...queryOptions })
   const books = useMemo(() => {
@@ -58,6 +58,7 @@ export const BookList = memo<BookListProps>(({ queryOptions, onPressBook }) => {
       ItemSeparatorComponent={() => <ItemSeparatorComponent />}
       ListFooterComponent={() => <View h="defaultBottomInset" />}
       columnWrapperStyle={styles.columnWrapper}
+      {...props}
     />
   )
 })
