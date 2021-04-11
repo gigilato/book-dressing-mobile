@@ -10,6 +10,8 @@ export type ProfileNavigatorParamList = {
   ProfileBookDetail: {
     data: BookFragment
   }
+  UpdateProfile: undefined
+  UpdatePassword: undefined
 }
 
 export type ProfileNavigationProp = CompositeNavigationProp<
