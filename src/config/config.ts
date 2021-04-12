@@ -1,6 +1,6 @@
 export const config = {
   api: {
-    uri: 'http://localhost:3333/graphql',
+    uri: 'http://192.168.1.96:3333/graphql',
     authorizationScheme: 'Bearer',
   },
   firebase: {

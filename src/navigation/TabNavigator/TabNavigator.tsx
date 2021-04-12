@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from '@components/ui'
 import { RequestNavigator } from '@navigation/RequestNavigator'
@@ -35,10 +36,14 @@ export const TabNavigator = memo<TabNavigatorProps>(() => {
       <Tab.Screen
         name="ProfileNavigator"
         component={ProfileNavigator}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Icon name={focused ? 'person' : 'person-outline'} color={color} />
-          ),
+        options={({ route }) => {
+          const routeName = getFocusedRouteNameFromRoute(route)
+          return {
+            tabBarIcon: ({ color, focused }) => (
+              <Icon name={focused ? 'person' : 'person-outline'} color={color} />
+            ),
+            tabBarVisible: routeName !== 'UpdateProfile' && routeName !== 'UpdatePassword',
+          }
         }}
       />
     </Tab.Navigator>

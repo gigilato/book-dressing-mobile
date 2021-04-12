@@ -39,7 +39,7 @@ export const BackIcon = memo<Omit<IconProps, 'name'>>((props) => {
 
 export const LikeIcon = memo<LikeIconProps>(({ onPress, hasLiked, likeCount, ...props }) => {
   const onPressHeart = useCallback(() => {
-    Haptics.selectionAsync()
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
     onPress && onPress()
   }, [onPress])
 

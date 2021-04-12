@@ -23,8 +23,8 @@ export interface Colors {
   error: ColorVal
   background: ColorVal
   reverseBackground: ColorVal
-  searchBackground: ColorVal
-  searchPlaceHolder: ColorVal
+  secondaryBackground: ColorVal
+  ternaryBackground: ColorVal
   text: ColorVal
   placeholder: ColorVal
   reverseText: ColorVal

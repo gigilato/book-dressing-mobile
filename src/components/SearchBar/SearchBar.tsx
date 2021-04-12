@@ -6,7 +6,7 @@ import { View, Icon, Button, Input } from '@components/ui'
 import { SearchBarProps } from './SearchBar.props'
 
 const {
-  colors: { searchPlaceHolder },
+  colors: { ternaryBackground },
 } = theme
 
 export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCancel }) => {
@@ -42,19 +42,19 @@ export const SearchBar = memo<SearchBarProps>(({ onSearch, onCancel: handleOnCan
       <View
         flexDirection="row"
         flex={1}
-        bg="searchBackground"
+        bg="secondaryBackground"
         height={35}
         px="xs"
         alignItems="center"
         borderRadius="s">
-        <Icon name="search" color="searchPlaceHolder" mr="xs" />
+        <Icon name="search" color="ternaryBackground" mr="xs" />
         <Input
           ref={input}
           value={value}
           onChangeText={onChangeText}
           placeholder={t('search')}
           containerProps={{ flex: 1 }}
-          placeholderTextColor={searchPlaceHolder}
+          placeholderTextColor={ternaryBackground}
           onFocus={() => animateFocus(true)}
           onBlur={() => animateFocus(false)}
         />

@@ -1,5 +1,6 @@
 import { HttpLink } from '@apollo/client'
+import { config } from '@config'
 
-export const httpLink = new HttpLink({
-  uri: 'http://localhost:3333/graphql',
-})
+const { uri } = config.api
+
+export const httpLink = new HttpLink({ uri })

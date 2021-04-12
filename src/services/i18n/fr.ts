@@ -2,6 +2,8 @@ export const fr = {
   common: {
     search: 'rechercher',
     cancel: 'annuler',
+    finish: 'terminer',
+    confirm: 'confimer',
     book: 'livre',
     book_plural: 'livres',
   },

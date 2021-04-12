@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useForm, FormProvider } from 'react-hook-form'
 import { showMessage } from 'react-native-flash-message'
 import { FormInput } from '@components/form'
-import { View, Button } from '@components/ui'
+import { View, Button, Screen } from '@components/ui'
 import { SignInFormInputs, SignInProps } from './SignIn.props'
 
 export const SignIn = memo<SignInProps>(() => {
@@ -33,7 +33,7 @@ export const SignIn = memo<SignInProps>(() => {
   const onBlurEmail = useCallback(() => passwordRef.current?.focus(), [])
   return (
     <FormProvider {...methods}>
-      <View variant="screen">
+      <Screen>
         <View flex={1} />
         <View flex={1} justifyContent="center">
           <FormInput
@@ -54,7 +54,7 @@ export const SignIn = memo<SignInProps>(() => {
           <Button title={t('signIn')} onPress={methods.handleSubmit(onSubmit)} loading={loading} />
         </View>
         <View flex={1} />
-      </View>
+      </Screen>
     </FormProvider>
   )
 })
