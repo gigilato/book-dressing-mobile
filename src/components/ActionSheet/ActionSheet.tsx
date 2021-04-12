@@ -1,14 +1,19 @@
 import React, { memo, forwardRef, useMemo, useCallback, useState, MutableRefObject } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, Alert } from 'react-native'
 import Animated, { interpolate, Extrapolate, useAnimatedStyle } from 'react-native-reanimated'
 import BottomSheet from '@gorhom/bottom-sheet'
+import * as ImagePicker from 'expo-image-picker'
 import { useTranslation } from 'react-i18next'
 import { View, Button, ButtonProps } from '@components/ui'
 import { theme } from '@theme'
 import { useSafeAreaInsets } from '@hooks'
-import { ActionSheetBackdropProps, ActionSheetProps } from './ActionSheet.props'
+import { openAppSettings } from '@utils/intent'
+import {
+  ActionSheetBackdropProps,
+  ActionSheetProps,
+  MediaPickerActionSheetProps,
+} from './ActionSheet.props'
 import { styles } from './ActionSheet.styles'
-import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types'
 
 const { spacings, sizes } = theme
 const ActionSheetItemHeight = 50
@@ -49,7 +54,7 @@ export const ActionSheet = memo<ActionSheetProps>(
     const [visible, setVisibility] = useState(false)
     const onChange = useCallback((index: number) => setVisibility(index !== 0), [])
     const onPressCancel = useCallback(
-      () => (ref as MutableRefObject<BottomSheetMethods>)?.current?.collapse(),
+      () => (ref as MutableRefObject<BottomSheet>)?.current?.collapse(),
       [ref]
     )
 
@@ -103,5 +108,62 @@ export const ActionSheet = memo<ActionSheetProps>(
         </View>
       </BottomSheet>
     )
+  })
+)
+
+export const MediaPickerActionSheet = memo<MediaPickerActionSheetProps>(
+  forwardRef<BottomSheet, MediaPickerActionSheetProps>(({ title, onPress }, ref) => {
+    const { t } = useTranslation()
+    const onPressOption = useCallback(
+      async (option: 'camera' | 'library') => {
+        ;(ref as MutableRefObject<BottomSheet>)?.current?.collapse()
+        const { granted } =
+          option === 'camera'
+            ? await ImagePicker.requestCameraPermissionsAsync()
+            : await ImagePicker.requestMediaLibraryPermissionsAsync()
+        if (!granted)
+          return Alert.alert(
+            t('errors:permissionsMissingTitle'),
+            t(
+              option === 'camera'
+                ? 'errors:cameraPermissionsMissingContent'
+                : 'errors:libraryPermissionsMissingContent'
+            ),
+            [
+              {
+                text: t('cancel'),
+                onPress: () => (ref as MutableRefObject<BottomSheet>)?.current?.collapse(),
+                style: 'cancel',
+              },
+              {
+                text: t('settings'),
+                onPress: () => openAppSettings(),
+              },
+            ]
+          )
+        const pickerOptions = { mediaTypes: ImagePicker.MediaTypeOptions.Images }
+        const result =
+          option === 'camera'
+            ? await ImagePicker.launchCameraAsync(pickerOptions)
+            : await ImagePicker.launchImageLibraryAsync(pickerOptions)
+        if (result.cancelled) return
+        onPress(result.uri)
+      },
+      [onPress, ref, t]
+    )
+    const options = useMemo(
+      () => [
+        {
+          title: t('updatePictureFromCamera'),
+          onPress: async () => onPressOption('camera'),
+        },
+        {
+          title: t('updatePictureFromLibrary'),
+          onPress: async () => onPressOption('library'),
+        },
+      ],
+      [t, onPressOption]
+    )
+    return <ActionSheet ref={ref} title={title} options={options} />
   })
 )

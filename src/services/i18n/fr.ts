@@ -6,6 +6,9 @@ export const fr = {
     confirm: 'confimer',
     book: 'livre',
     book_plural: 'livres',
+    updatePictureFromCamera: 'Prendre une photo',
+    updatePictureFromLibrary: 'Choisir dans la bibliothèque',
+    settings: 'réglages',
   },
   signIn: {
     signIn: 'Se connecter',
@@ -33,6 +36,10 @@ export const fr = {
     errorStateContent: 'Une erreur est survenue...',
     emptyStateContent: "Il n'y a rien à afficher...",
     retry: 'recharger',
+    permissionsMissingTitle: 'Permissions manquantes',
+    cameraPermissionsMissingContent: "Vous devez permettre à l'application d'utiliser la camera",
+    libraryPermissionsMissingContent:
+      "Vous devez permettre à l'application d'accèder à la bibliothèque",
   },
   book: {
     requestLoan: 'Demander le livre',

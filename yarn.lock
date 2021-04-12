@@ -5748,6 +5748,11 @@ expo-image-picker@~10.1.1:
     unimodules-permissions-interface "~6.1.0"
     uuid "7.0.2"
 
+expo-intent-launcher@~9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/expo-intent-launcher/-/expo-intent-launcher-9.0.0.tgz#2348f5e4c5acbd684ac701a30a071d155f058c9f"
+  integrity sha512-il6y13pedgS206RzWf/YphXGWTVbw+bDUzDO3AxFKc9oJMwpBCLURnOUqaDwGgill13D+oo1IGT2DoTd5/YOoQ==
+
 expo-keep-awake@~9.1.1:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-9.1.1.tgz#d56d520ae62bc22b9178afacaafea73a1adc89cf"
