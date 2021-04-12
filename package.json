@@ -33,6 +33,7 @@
     "expo-image-picker": "~10.1.1",
     "expo-intent-launcher": "~9.0.0",
     "expo-linear-gradient": "~9.1.0",
+    "expo-random": "^11.0.0",
     "expo-splash-screen": "~0.10.0",
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
@@ -53,7 +54,8 @@
     "react-native-shared-element": "0.7.0",
     "react-navigation": "4.4.4",
     "react-navigation-shared-element": "^3.0.0",
-    "react-navigation-stack": "2.10.4"
+    "react-navigation-stack": "2.10.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
@@ -67,6 +69,7 @@
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "babel-plugin-lodash": "^3.3.4",

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import BottomSheet from '@gorhom/bottom-sheet'
 import { Pressable, Screen, View, Button } from '@components/ui'
 import { Avatar, MediaPickerActionSheet } from '@components'
+import { firebase } from '@services'
 import { UpdateProfileProps } from './UpdateProfile.props'
 
 export const UpdateProfile = memo<UpdateProfileProps>(
@@ -33,7 +34,11 @@ export const UpdateProfile = memo<UpdateProfileProps>(
         <MediaPickerActionSheet
           ref={ref}
           title={t('updatePicture')}
-          onPress={(uri) => console.log(uri)}
+          onPress={async (uri) => {
+            console.log('start upload')
+            await firebase.uploadImageAsync(uri, 'user')
+            console.log('end upload')
+          }}
         />
       </>
     )

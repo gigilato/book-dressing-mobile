@@ -3552,6 +3552,11 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
 
+"@types/uuid@^8.3.0":
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.0.tgz#215c231dff736d5ba92410e6d602050cce7e273f"
+  integrity sha512-eQ9qFW/fhfGJF8WKHGEHZEyVWfZxrT+6CLIJGBcZPfxUh/+BnEj+UCGYMlr9qZuX/2AltsvwrGqp0LhEW8D0zQ==
+
 "@types/websocket@1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/websocket/-/websocket-1.0.2.tgz#d2855c6a312b7da73ed16ba6781815bf30c6187a"
@@ -5767,6 +5772,13 @@ expo-permissions@~12.0.0:
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-12.0.0.tgz#e1a92611a70612c1df9e02d1b81d19d03ce7a4e0"
   integrity sha512-hq8SQoqXJoF8VxPuSNG4CJ0ase6HYvPXxXOrUwZSiKvazJE+/HsOWttxL8yPg97ok9RuQD8k/46mCFQ6gRWg9Q==
+
+expo-random@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/expo-random/-/expo-random-11.0.0.tgz#95a4ff0e4ac34f5c232407f983537a1f9b666544"
+  integrity sha512-5x+F4KZlO2v9MZI79fvhuHUdSLCXAz1l8a6a7ABU+3/eBD5TIwtgBuu3YLtGldadVV7hX19HGfZy4GCO2R1dFA==
+  dependencies:
+    base64-js "^1.3.0"
 
 expo-splash-screen@~0.10.0:
   version "0.10.0"
@@ -10730,6 +10742,11 @@ uuid@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
   integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache@^2.0.3:
   version "2.2.0"
