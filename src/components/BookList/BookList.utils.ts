@@ -17,6 +17,7 @@ export const emptyBookData: BookFragment = {
     email: '',
     username: '',
     uuid: '',
+    bookCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },

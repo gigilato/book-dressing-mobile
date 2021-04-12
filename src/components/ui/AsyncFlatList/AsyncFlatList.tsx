@@ -10,7 +10,16 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
 ) => ReactElement | null = memo(
   forwardRef<FlatList, AsyncFlatListProps<any, any>>(
     (
-      { query, data, getDerivedData, pageSize = 10, ListFooterComponent, renderLoader, ...props },
+      {
+        query,
+        data,
+        getDerivedData,
+        pageSize = 10,
+        ListFooterComponent,
+        renderLoader,
+        errorStateStyle,
+        ...props
+      },
       ref
     ) => {
       const { error, networkStatus, refetch, fetchMore, variables } = query
@@ -67,7 +76,7 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
           showsVerticalScrollIndicator={false}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.1}
-          ListEmptyComponent={() => <ErrorState type="empty" />}
+          ListEmptyComponent={() => <ErrorState containerStyle={errorStateStyle} type="empty" />}
           ListFooterComponent={
             hasNextPage
               ? () => <ActivityIndicator size="small" style={styles.footerActivityIndicator} />

@@ -1,4 +1,4 @@
-import { FlatListProps, ListRenderItem, FlatList } from 'react-native'
+import { FlatListProps, ListRenderItem, FlatList, StyleProp, ViewStyle } from 'react-native'
 import { ReactElement, Ref } from 'react'
 import { QueryResult } from '@apollo/client'
 
@@ -19,6 +19,7 @@ export interface AsyncFlatListProps<T, K extends ConnectionInterface<ConnectionN
   pageSize?: number
   getDerivedData?: (data: K) => K
   renderItem: ListRenderItem<K['edges'][0]>
+  errorStateStyle?: StyleProp<ViewStyle>
   renderLoader?: () => ReactElement
   renderEmptyState?: () => ReactElement
   renderErrorState?: () => ReactElement

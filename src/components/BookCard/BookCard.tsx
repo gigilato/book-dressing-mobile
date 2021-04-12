@@ -26,7 +26,7 @@ export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
   return (
     <Pressable
       onPress={() => onPress && onPress(data)}
-      scale={0.98}
+      pressScale={0.98}
       control="debounce"
       disabled={!onPress}>
       <SharedElement id={`book.${data.uuid}`}>

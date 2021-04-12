@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 import { HeaderStyleInterpolators } from '@react-navigation/stack'
-import { MyProfile, ProfileBookDetail } from '@screens'
+import { MyProfile, ProfileBookDetail, UpdateProfile, UpdatePassword } from '@screens'
 import { theme } from '@theme'
 import { defaultStackScreenOptions, HeaderTitle } from '@navigation/navigation.utils'
 import { ProfileNavigatorParamList } from './ProfileNavigator.types'
@@ -48,6 +48,8 @@ export const ProfileNavigator = memo(() => {
           return [{ id: `book.${route.params.data.uuid}` }]
         }}
       />
+      <Stack.Screen name="UpdateProfile" component={UpdateProfile} />
+      <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
     </Stack.Navigator>
   )
 })

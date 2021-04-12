@@ -10,7 +10,9 @@ export type ProfileNavigatorParamList = {
   ProfileBookDetail: {
     data: BookFragment
   }
-  UpdateProfile: undefined
+  UpdateProfile: {
+    data: UserFragment
+  }
   UpdatePassword: undefined
 }
 

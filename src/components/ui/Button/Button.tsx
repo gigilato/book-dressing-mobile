@@ -12,7 +12,8 @@ export const Button = memo<ButtonProps>(
     return (
       <Pressable
         control={control}
-        scale={variant === 'text' ? 0.98 : 0.95}
+        pressScale={variant === 'text' ? 1 : 0.98}
+        pressOpacity={variant === 'text' ? 0.8 : 1}
         {...buttonVariants[variant]}
         {...props}>
         {loading ? (

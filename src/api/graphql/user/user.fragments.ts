@@ -8,6 +8,7 @@ export const userFragment = gql`
     firstname
     lastname
     pictureUrl
+    bookCount
     createdAt
     updatedAt
   }

@@ -1,11 +1,16 @@
 import _ from 'lodash'
 import React, { memo, useCallback, useMemo, useRef } from 'react'
 import { Pressable as RNPressable, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native'
-import Animated, { useValue } from 'react-native-reanimated'
-import { useStyle } from '../../../hooks/useStyle'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  interpolate,
+  withSpring,
+} from 'react-native-reanimated'
+import { useStyle } from '@hooks/useStyle'
 import { PressableProps, AnimatedPressableComponent } from './Pressable.props'
 import {
-  getPressableAnimationConfig,
+  pressableAnimationConfig,
   PRESSABLE_ANIM_END,
   PRESSABLE_ANIM_START,
 } from './Pressable.utils'
@@ -17,19 +22,33 @@ const AnimatedPressable = Animated.createAnimatedComponent(
 export const Pressable = memo<PressableProps>(
   ({
     onPress,
-    onPressIn: onPressInCallback,
-    onPressOut: onPressOutCallback,
+    onPressIn: handleOnPressIn,
+    onPressOut: handleOnPressOut,
     children,
     control,
-    scale = 1,
+    pressOpacity = 1,
+    pressScale = 1,
     style,
     ...props
   }) => {
-    const animatedValue = useValue(PRESSABLE_ANIM_START)
-    const scaleAnimation = animatedValue.interpolate({
-      inputRange: [PRESSABLE_ANIM_START, PRESSABLE_ANIM_END],
-      outputRange: [1, scale],
-    })
+    const animatedScale = useSharedValue(PRESSABLE_ANIM_START)
+    const animatedOpacity = useSharedValue(PRESSABLE_ANIM_START)
+    const animatedStyle = useAnimatedStyle(() => ({
+      opacity: interpolate(
+        animatedOpacity.value,
+        [PRESSABLE_ANIM_START, PRESSABLE_ANIM_END],
+        [1, pressOpacity]
+      ),
+      transform: [
+        {
+          scale: interpolate(
+            animatedScale.value,
+            [PRESSABLE_ANIM_START, PRESSABLE_ANIM_END],
+            [1, pressScale]
+          ),
+        },
+      ],
+    }))
 
     const timeout = useRef<ReturnType<typeof setTimeout>>()
     const debouncedOnPress = useCallback(
@@ -57,18 +76,20 @@ export const Pressable = memo<PressableProps>(
 
     const onPressIn = useCallback(
       (event: GestureResponderEvent) => {
-        Animated.spring(animatedValue, getPressableAnimationConfig(PRESSABLE_ANIM_END)).start()
-        if (onPressInCallback) onPressInCallback(event)
+        animatedScale.value = withSpring(PRESSABLE_ANIM_END, pressableAnimationConfig)
+        animatedOpacity.value = withSpring(PRESSABLE_ANIM_END, pressableAnimationConfig)
+        handleOnPressIn && handleOnPressIn(event)
       },
-      [onPressInCallback, animatedValue]
+      [animatedOpacity, animatedScale, handleOnPressIn]
     )
 
     const onPressOut = useCallback(
       (event: GestureResponderEvent) => {
-        Animated.spring(animatedValue, getPressableAnimationConfig(PRESSABLE_ANIM_START)).start()
-        if (onPressOutCallback) onPressOutCallback(event)
+        animatedScale.value = withSpring(PRESSABLE_ANIM_START, pressableAnimationConfig)
+        animatedOpacity.value = withSpring(PRESSABLE_ANIM_START, pressableAnimationConfig)
+        handleOnPressOut && handleOnPressOut(event)
       },
-      [onPressOutCallback, animatedValue]
+      [animatedOpacity, animatedScale, handleOnPressOut]
     )
 
     const [currentProps, themeStyle] = useStyle(props)
@@ -88,7 +109,7 @@ export const Pressable = memo<PressableProps>(
         }
         onPressIn={onPressIn}
         onPressOut={onPressOut}
-        style={[...pressableStyles, { transform: [{ scale: scaleAnimation }] }]}
+        style={[...pressableStyles, animatedStyle]}
         {...currentProps}>
         {children}
       </AnimatedPressable>

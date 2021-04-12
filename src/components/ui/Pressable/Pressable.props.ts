@@ -16,6 +16,7 @@ export type PressableProps = Omit<RNPressableProps, 'style'> &
   FlexProps &
   PositionProps & {
     style?: StyleProp<ViewStyle>
-    scale?: number
     control?: 'debounce' | 'throttle'
+    pressScale?: number
+    pressOpacity?: number
   }

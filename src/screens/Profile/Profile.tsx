@@ -6,7 +6,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { useLayout } from '@react-native-community/hooks'
 import { useTranslation } from 'react-i18next'
-import { View, Button, Screen } from '@components/ui'
+import { View, Button, Screen, Text } from '@components/ui'
 import { Avatar, BookList } from '@components'
 import { theme } from '@theme'
 import { useMeQuery } from '@api/hooks'
@@ -37,11 +37,22 @@ const UserProfile = memo<UserProfileProps>(({ data, isMyProfile, onPressEdit, on
   return (
     <Screen pt={0}>
       <Animated.View style={[styles.header, headerAnimatedStyle]} onLayout={onLayout}>
-        <View>
+        <View flexDirection="row" justifyContent="center">
           <Avatar size={80} uri={data.pictureUrl} />
+          <View ml="l" alignItems="center" justifyContent="center">
+            <Text variant="title">{data.bookCount}</Text>
+            <Text variant="title" textTransform="upperfirst">
+              {t('common:book', { count: data.bookCount })}
+            </Text>
+          </View>
         </View>
         {isMyProfile && (
-          <Button mt="l" variant="secondary" title={t('updateProfile')} onPress={onPressEdit} />
+          <Button
+            mt="l"
+            variant="secondary"
+            title={t('updateProfile')}
+            onPress={() => onPressEdit && onPressEdit()}
+          />
         )}
         <View my="l" bg="reverseBackground" h="hairline" />
       </Animated.View>
@@ -77,7 +88,7 @@ export const MyProfile = memo<MyProfileProps>(({ navigation }) => {
     <UserProfile
       data={me}
       isMyProfile={true}
-      onPressEdit={() => null}
+      onPressEdit={() => navigation.navigate('UpdateProfile', { data: me })}
       onPressBook={(book) => navigation.navigate('ProfileBookDetail', { data: book })}
     />
   )

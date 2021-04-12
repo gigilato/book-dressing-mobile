@@ -9,5 +9,6 @@ export const styles = StyleSheet.create({
     top: defaultTopInset,
     left: defaultLeftInset,
     right: defaultRightInset,
+    zIndex: 1,
   },
 })

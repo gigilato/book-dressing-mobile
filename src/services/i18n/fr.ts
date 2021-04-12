@@ -2,6 +2,8 @@ export const fr = {
   common: {
     search: 'rechercher',
     cancel: 'annuler',
+    book: 'livre',
+    book_plural: 'livres',
   },
   signIn: {
     signIn: 'Se connecter',
@@ -13,6 +15,7 @@ export const fr = {
     RequestNavigator: 'Demandes',
     ExplorerNavigator: 'Explorer',
     ProfileNavigator: 'Profil',
+    UpdateProfile: 'Modifier le profil',
   },
   form: {
     emailLabel: 'Email',
@@ -39,5 +42,6 @@ export const fr = {
   profile: {
     updateProfile: 'Modifier le profil',
     addBook: 'Modifier le profil',
+    updatePicture: 'Modifier la photo de profil',
   },
 }
