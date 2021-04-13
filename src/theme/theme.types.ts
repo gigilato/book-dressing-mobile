@@ -46,6 +46,7 @@ export interface ColorProps {
   bg?: ColorValue
   backgroundColor?: ColorValue
   color?: ColorValue
+  opacity?: number
 }
 
 export interface BorderProps {

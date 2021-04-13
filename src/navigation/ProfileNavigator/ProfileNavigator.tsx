@@ -3,7 +3,12 @@ import { createSharedElementStackNavigator } from 'react-navigation-shared-eleme
 import { HeaderStyleInterpolators, TransitionPresets } from '@react-navigation/stack'
 import { MyProfile, ProfileBookDetail, UpdateProfile, UpdatePassword } from '@screens'
 import { theme } from '@theme'
-import { defaultStackScreenOptions, HeaderTitle } from '@navigation/navigation.utils'
+import {
+  DefaultCancelHeaderLeft,
+  DefaultFinishHeaderRight,
+  defaultStackScreenOptions,
+  HeaderTitle,
+} from '@navigation/navigation.utils'
 import { ProfileNavigatorParamList } from './ProfileNavigator.types'
 
 const Stack = createSharedElementStackNavigator<ProfileNavigatorParamList>()
@@ -51,9 +56,30 @@ export const ProfileNavigator = memo(() => {
       <Stack.Screen
         name="UpdateProfile"
         component={UpdateProfile}
-        options={{ ...TransitionPresets.ModalSlideFromBottomIOS }}
+        options={({ route }) => {
+          const { loading, onPressHeaderRight } = route.params
+          return {
+            headerLeft: (props) => <DefaultCancelHeaderLeft {...props} />,
+            headerRight: () => (
+              <DefaultFinishHeaderRight onPress={onPressHeaderRight} loading={loading} />
+            ),
+            ...TransitionPresets.ModalSlideFromBottomIOS,
+          }
+        }}
       />
-      <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
+      <Stack.Screen
+        name="UpdatePassword"
+        component={UpdatePassword}
+        options={({ route }) => {
+          const { loading, onPressHeaderRight } = route.params
+          return {
+            headerLeft: (props) => <DefaultCancelHeaderLeft {...props} />,
+            headerRight: () => (
+              <DefaultFinishHeaderRight onPress={onPressHeaderRight} loading={loading} />
+            ),
+          }
+        }}
+      />
     </Stack.Navigator>
   )
 })

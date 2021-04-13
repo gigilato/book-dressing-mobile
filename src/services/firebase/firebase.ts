@@ -3,7 +3,6 @@ import 'firebase/auth'
 import 'firebase/storage'
 import { config } from '@config'
 import { Nullable } from '@utils/types'
-import { generateUuid } from '@utils/uuid'
 
 app.initializeApp(config.firebase)
 
@@ -19,7 +18,7 @@ export class Firebase {
     return this.currentIdToken
   }
 
-  uploadImageAsync = async (uri: string, type: 'book' | 'user') => {
+  uploadImageAsync = async (uri: string, type: 'book' | 'user', fileName: string) => {
     const blob: Blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
       xhr.onload = function () {
@@ -33,7 +32,7 @@ export class Firebase {
       xhr.send(null)
     })
 
-    const ref = app.storage().ref().child(`${type}/${generateUuid()}`)
+    const ref = app.storage().ref().child(`${type}/${fileName}`)
     const snapshot = await ref.put(blob)
 
     return snapshot.ref.getDownloadURL()

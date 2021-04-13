@@ -27,7 +27,7 @@ export const textVariants: Record<
   },
   label: {
     color: 'text',
-    fontFamily: 'poppins600',
+    fontFamily: 'poppins500',
     fontSize: 'normal',
   },
   error: {
@@ -47,7 +47,7 @@ export const textVariants: Record<
   },
   buttonText: {
     color: 'text',
-    fontFamily: 'poppins600',
+    fontFamily: 'poppins500',
     fontSize: 'big',
   },
 }

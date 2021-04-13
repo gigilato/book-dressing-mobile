@@ -11,8 +11,18 @@ export const meQuery = gql`
 `
 
 export const updateProfileMutation = gql`
-  mutation updateProfile($username: String, $firstname: String, $lastname: String) {
-    updateProfile(username: $username, firstname: $firstname, lastname: $lastname) {
+  mutation updateProfile(
+    $username: String
+    $name: String
+    $description: String
+    $pictureUrl: String
+  ) {
+    updateProfile(
+      username: $username
+      name: $name
+      description: $description
+      pictureUrl: $pictureUrl
+    ) {
       ...UserFragment
     }
   }

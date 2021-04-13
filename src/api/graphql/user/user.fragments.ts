@@ -5,8 +5,8 @@ export const userFragment = gql`
     uuid
     email
     username
-    firstname
-    lastname
+    name
+    description
     pictureUrl
     bookCount
     createdAt

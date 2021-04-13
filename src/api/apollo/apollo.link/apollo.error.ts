@@ -8,7 +8,7 @@ import { firebase } from '@services'
 
 const logoutErrorOperations = ['Unauthorized']
 const expiredErrorOperations = ['Expired']
-const selfHandlingErrorOperations = ['']
+const selfHandlingErrorOperations = ['updateProfile']
 
 export const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
   const {

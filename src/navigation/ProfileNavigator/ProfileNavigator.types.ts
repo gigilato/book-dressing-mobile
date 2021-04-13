@@ -12,8 +12,13 @@ export type ProfileNavigatorParamList = {
   }
   UpdateProfile: {
     data: UserFragment
+    loading?: boolean
+    onPressHeaderRight?: () => any
   }
-  UpdatePassword: undefined
+  UpdatePassword: {
+    loading?: boolean
+    onPressHeaderRight?: () => any
+  }
 }
 
 export type ProfileNavigationProp = CompositeNavigationProp<
