@@ -8,7 +8,7 @@ import { FormInput } from '@components/form'
 import { View, Button, Screen } from '@components/ui'
 import { SignInFormInputs, SignInProps } from './SignIn.props'
 
-export const SignIn = memo<SignInProps>(() => {
+export const SignIn = memo<SignInProps>(({ navigation }) => {
   const { t } = useTranslation('signIn')
   const [loading, setLoading] = useState(false)
   const methods = useForm<SignInFormInputs>({ mode: 'onBlur' })
@@ -40,6 +40,7 @@ export const SignIn = memo<SignInProps>(() => {
             name="email"
             rules={{ required: true }}
             autoCapitalize="none"
+            keyboardType="email-address"
             onBlur={onBlurEmail}
           />
           <View height="separator" />
@@ -50,8 +51,19 @@ export const SignIn = memo<SignInProps>(() => {
             autoCapitalize="none"
             secureTextEntry
           />
-          <View height={50} />
-          <Button title={t('signIn')} onPress={methods.handleSubmit(onSubmit)} loading={loading} />
+          <Button
+            variant="text"
+            title={t('forgotPassword')}
+            mt="m"
+            textProps={{ variant: 'label', textAlign: 'right' }}
+            onPress={() => navigation.navigate('ForgotPassword')}
+          />
+          <Button
+            mt={50}
+            title={t('signIn')}
+            onPress={methods.handleSubmit(onSubmit)}
+            loading={loading}
+          />
         </View>
         <View flex={1} />
       </Screen>

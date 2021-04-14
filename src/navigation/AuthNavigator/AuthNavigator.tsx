@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { SignIn } from '@screens'
+import { SignIn, ForgotPassword } from '@screens'
 import { defaultStackScreenOptions } from '../navigation.utils'
 import { AuthNavigatorParamList } from './AuthNavigator.types'
 
@@ -14,6 +14,7 @@ export const AuthNavigator = memo(() => {
         ...defaultStackScreenOptions,
       }}>
       <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
     </Stack.Navigator>
   )
 })

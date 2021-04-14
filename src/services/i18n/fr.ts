@@ -15,6 +15,9 @@ export const fr = {
   signIn: {
     signIn: 'Se connecter',
     forgotPassword: 'Mot de passe oublié',
+    resetPasswordText: 'Entrez votre email pour récupérer votre mot de passe',
+    resetPasswordErrorTitle: 'Récupération mot de passe',
+    resetPasswordErrorContent: 'Un email a été envoyé',
   },
   navigation: {
     Profile: 'Profil',

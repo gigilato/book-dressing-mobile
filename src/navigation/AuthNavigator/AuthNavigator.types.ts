@@ -4,6 +4,7 @@ import { RootNavigationProp, RootNavigatorParamList } from '../RootNavigator'
 
 export type AuthNavigatorParamList = {
   SignIn: undefined
+  ForgotPassword: undefined
 }
 
 export type AuthNavigationProp = CompositeNavigationProp<
