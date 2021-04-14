@@ -62,17 +62,10 @@ const UserProfile = memo<UserProfileProps>(({ data, isMyProfile, onPressEdit, on
         }}
         onPressBook={onPressBook}
         onScroll={onScroll}
-        renderScrollComponent={({ ...scrollProps }) => (
-          <Animated.ScrollView
-            {...scrollProps}
-            scrollEventThrottle={16}
-            contentContainerStyle={{
-              marginTop: height + defaultTopInset,
-              paddingBottom: height + defaultTopInset,
-            }}
-            onScroll={onScroll}
-          />
-        )}
+        contentContainerStyle={{
+          marginTop: height + defaultTopInset,
+          paddingBottom: height + defaultTopInset,
+        }}
       />
     </Screen>
   )

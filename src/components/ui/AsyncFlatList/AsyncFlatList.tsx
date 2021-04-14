@@ -1,9 +1,12 @@
 import React, { memo, ReactElement, useCallback, forwardRef, useMemo, useRef } from 'react'
 import { FlatList, ActivityIndicator, RefreshControl } from 'react-native'
+import Animated from 'react-native-reanimated'
 import { NetworkStatus } from '@apollo/client'
 import { ErrorState } from '@components/ui/ErrorState'
 import { AsyncFlatListProps, ConnectionInterface, ConnectionNode } from './AsyncFlatList.props'
 import { styles } from './AsyncFlatList.styles'
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
   props: AsyncFlatListProps<T, K>
@@ -62,9 +65,9 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
         )
 
       return (
-        <FlatList
+        <AnimatedFlatList
           ref={ref}
-          keyExtractor={(item) => item.node.uuid}
+          keyExtractor={(item) => (item as any).node.uuid}
           data={edges}
           refreshControl={
             <RefreshControl
@@ -76,6 +79,7 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
           showsVerticalScrollIndicator={false}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.1}
+          scrollEventThrottle={16}
           ListEmptyComponent={() => <ErrorState containerStyle={errorStateStyle} type="empty" />}
           ListFooterComponent={
             hasNextPage
