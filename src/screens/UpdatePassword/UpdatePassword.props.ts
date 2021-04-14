@@ -9,3 +9,9 @@ export type UpdatePasswordProps = {
   >
   route: RouteProp<ProfileNavigatorParamList, 'UpdatePassword'>
 }
+
+export type UpdatePasswordFormInputs = {
+  currentPassword: string
+  newPassword: string
+  confirmPassword: string
+}

@@ -9,6 +9,7 @@ export const Avatar = memo<AvatarProps>(({ uri, size = 20, ...props }) => {
       h={size}
       w={size}
       borderRadius={size / 2}
+      bg="secondaryBackground"
       {...props}
     />
   )

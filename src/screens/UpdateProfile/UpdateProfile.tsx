@@ -1,8 +1,9 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { ActivityIndicator } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import BottomSheet from '@gorhom/bottom-sheet'
 import { showMessage } from 'react-native-flash-message'
-import { ActivityIndicator } from 'react-native'
+import app from 'firebase'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
 import { Pressable, Screen, View, Button } from '@components/ui'
 import { FormInput } from '@components/form'
@@ -139,6 +140,7 @@ export const UpdateProfile = memo<UpdateProfileProps>(
             justifyContent="center"
             title={t('logout')}
             textProps={{ color: 'error' }}
+            onPress={() => app.auth().signOut()}
           />
         </Screen>
         <MediaPickerActionSheet ref={ref} title={t('updatePicture')} onPress={handlePickerResult} />
