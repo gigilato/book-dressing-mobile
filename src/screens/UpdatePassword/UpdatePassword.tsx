@@ -1,10 +1,11 @@
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import app from 'firebase'
 import { useForm, FormProvider } from 'react-hook-form'
 import { Screen, View } from '@components/ui'
 import { FormInput } from '@components/form'
 import { UpdatePasswordProps, UpdatePasswordFormInputs } from './UpdatePassword.props'
+import { TextInput } from 'react-native'
 
 export const UpdatePassword = memo<UpdatePasswordProps>(({ navigation }) => {
   const { t } = useTranslation('form')
@@ -48,6 +49,11 @@ export const UpdatePassword = memo<UpdatePasswordProps>(({ navigation }) => {
     navigation.setParams({ onPressHeaderRight: handleSubmit(onSubmit) })
   }, [handleSubmit, navigation, onSubmit])
 
+  const newPasswordRef = useRef<TextInput>(null)
+  const onBlurCurrentPassword = useCallback(() => newPasswordRef.current?.focus(), [])
+  const confirmPasswordRef = useRef<TextInput>(null)
+  const onBlurNewPassword = useCallback(() => confirmPasswordRef.current?.focus(), [])
+
   return (
     <Screen>
       <FormProvider
@@ -60,9 +66,12 @@ export const UpdatePassword = memo<UpdatePasswordProps>(({ navigation }) => {
           secureTextEntry
           autoCapitalize="none"
           rules={{ required: true }}
+          onBlur={onBlurCurrentPassword}
         />
         <View h="separator" />
         <FormInput
+          ref={newPasswordRef}
+          onBlur={onBlurNewPassword}
           name="newPassword"
           secureTextEntry
           autoCapitalize="none"
@@ -70,6 +79,7 @@ export const UpdatePassword = memo<UpdatePasswordProps>(({ navigation }) => {
         />
         <View h="separator" />
         <FormInput
+          ref={confirmPasswordRef}
           name="confirmPassword"
           secureTextEntry
           autoCapitalize="none"
