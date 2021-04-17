@@ -16,4 +16,10 @@ export const styles = StyleSheet.create({
     paddingTop: defaultTopInset,
     paddingBottom: defaultBottomInset,
   },
+  noPadding: {
+    paddingRight: 0,
+    paddingLeft: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
 })

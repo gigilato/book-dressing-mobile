@@ -1,9 +1,9 @@
 import React, { memo, useMemo } from 'react'
 import { Skeleton } from '@motify/skeleton'
+import { SharedElement } from 'react-navigation-shared-element'
 import { theme } from '@theme'
 import { Image, Pressable } from '@components/ui'
 import { BookCardProps, BookCardSkeletonProps } from './BookCard.props'
-import { SharedElement } from 'react-navigation-shared-element'
 
 const {
   radii,

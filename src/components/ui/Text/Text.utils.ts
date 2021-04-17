@@ -30,6 +30,11 @@ export const textVariants: Record<
     fontFamily: 'poppins500',
     fontSize: 'normal',
   },
+  span: {
+    color: 'text',
+    fontFamily: 'poppins400Italic',
+    fontSize: 'small',
+  },
   error: {
     color: 'error',
     fontFamily: 'poppins200',

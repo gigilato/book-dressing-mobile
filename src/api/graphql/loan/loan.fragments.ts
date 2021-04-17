@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { bookFragment } from '@api/graphql/book'
 
 export const loanFragment = gql`
   fragment LoanFragment on Loan {
@@ -10,12 +11,13 @@ export const loanFragment = gql`
     user {
       uuid
       username
+      pictureUrl
     }
     book {
-      uuid
-      title
+      ...BookFragment
     }
   }
+  ${bookFragment}
 `
 
 export const loanConnectionFragment = gql`

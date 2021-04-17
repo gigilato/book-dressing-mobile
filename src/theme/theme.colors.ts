@@ -4,6 +4,7 @@ export const colors = {
   primary: palette.ultraMarine,
   error: palette.imperialRed,
   success: palette.oceanGreen,
+  warning: palette.mango,
   background: palette.yami,
   reverseBackground: palette.cultured,
   secondaryBackground: palette.gunMetal,

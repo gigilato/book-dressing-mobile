@@ -7,7 +7,7 @@ import { ScreenProps } from './Screen.props'
 import { styles } from './Screen.styles'
 
 export const Screen = memo<ScreenProps>(
-  ({ style, variant, children, safeBottom, safeTop, ...props }) => {
+  ({ style, variant, children, safeBottom, safeTop, noPadding, ...props }) => {
     const [currentProps, themeStyle] = useStyle(props)
     const viewStyles = useMemo(
       () => _.flattenDeep<StyleProp<ViewStyle>>([themeStyle, style]),
@@ -18,7 +18,12 @@ export const Screen = memo<ScreenProps>(
 
     if (variant === 'scrollable')
       return (
-        <ScrollView contentContainerStyle={[styles.scrollableContainer, viewStyles]}>
+        <ScrollView
+          contentContainerStyle={[
+            styles.scrollableContainer,
+            noPadding && styles.noPadding,
+            viewStyles,
+          ]}>
           {safeTop && <RNView style={{ height: top }} />}
           {children}
           {safeBottom && <RNView style={{ height: bottom }} />}
@@ -26,7 +31,9 @@ export const Screen = memo<ScreenProps>(
       )
 
     return (
-      <RNView style={[styles.container, viewStyles]} {...currentProps}>
+      <RNView
+        style={[styles.container, noPadding && styles.noPadding, viewStyles]}
+        {...currentProps}>
         {safeTop && <RNView style={{ height: top }} />}
         {children}
         {safeBottom && <RNView style={{ height: bottom }} />}

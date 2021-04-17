@@ -50,7 +50,7 @@ export interface ColorProps {
 }
 
 export interface BorderProps {
-  borderWidth?: number
+  borderWidth?: number | 'hairline'
   borderColor?: ColorValue
   borderRadius?: RadiiValue
   borderTopLeftRadius?: RadiiValue

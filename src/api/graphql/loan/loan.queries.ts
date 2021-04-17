@@ -2,17 +2,8 @@ import { gql } from '@apollo/client'
 import { loanFragment, loanConnectionFragment } from './loan.fragments'
 
 export const loansQuery = gql`
-  query loans($limit: Int, $offset: Int) {
-    loans(limit: $limit, offset: $offset) {
-      ...LoanConnectionFragment
-    }
-  }
-  ${loanConnectionFragment}
-`
-
-export const requestsQuery = gql`
-  query requests($limit: Int, $offset: Int) {
-    requests(limit: $limit, offset: $offset) {
+  query loans($where: LoansWhereInput!, $limit: Int, $offset: Int) {
+    loans(where: $where, limit: $limit, offset: $offset) {
       ...LoanConnectionFragment
     }
   }

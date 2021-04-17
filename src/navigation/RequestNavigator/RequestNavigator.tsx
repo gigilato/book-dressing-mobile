@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
+import { Loans } from '@screens'
 import { createStackNavigator } from '@react-navigation/stack'
-import { Profile } from '@screens'
 import { defaultStackScreenOptions } from '../navigation.utils'
 import { RequestNavigatorParamList } from './RequestNavigator.types'
 
@@ -12,7 +12,7 @@ export const RequestNavigator = memo(() => {
       screenOptions={{
         ...defaultStackScreenOptions,
       }}>
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Loans" component={Loans} />
     </Stack.Navigator>
   )
 })

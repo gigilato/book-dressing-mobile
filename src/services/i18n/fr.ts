@@ -26,7 +26,8 @@ export const fr = {
     ExplorerNavigator: 'Explorer',
     ProfileNavigator: 'Profil',
     UpdateProfile: 'Modifier profil',
-    UpdatePassword: ' Mot de passe',
+    UpdatePassword: 'Mot de passe',
+    Loans: 'Échanges',
   },
   form: {
     emailLabel: 'Email',
@@ -85,5 +86,13 @@ export const fr = {
     updatePicture: 'Modifier la photo de profil',
     updatePassword: 'Modifier le mot de passe',
     logout: 'Se déconnecter',
+  },
+  loans: {
+    loans: 'Emprunts',
+    requests: 'Requêtes',
+    pending: 'en attente',
+    active: 'en cours',
+    finished: 'terminé',
+    endLoan: 'Terminer le prêt',
   },
 }

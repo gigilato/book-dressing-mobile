@@ -12,6 +12,7 @@ export type TextVariant =
   | 'buttonSecondary'
   | 'buttonText'
   | 'input'
+  | 'span'
 
 export interface TextProps
   extends Omit<RNTextProps, 'fontSize' | 'fontFamily'>,

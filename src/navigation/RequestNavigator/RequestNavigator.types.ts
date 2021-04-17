@@ -3,7 +3,7 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { TabNavigationProp, TabNavigatorParamList } from '../TabNavigator'
 
 export type RequestNavigatorParamList = {
-  Profile: undefined
+  Loans: undefined
 }
 
 export type RequestNavigationProp = CompositeNavigationProp<

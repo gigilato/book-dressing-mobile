@@ -9,4 +9,5 @@ export interface ScreenProps extends ViewProperties, ColorProps, FlexProps, Spac
   children?: ReactNode
   safeTop?: boolean
   safeBottom?: boolean
+  noPadding?: boolean
 }
