@@ -3,6 +3,7 @@ import { palette } from './theme.palette'
 export const colors = {
   primary: palette.ultraMarine,
   error: palette.imperialRed,
+  success: palette.oceanGreen,
   background: palette.yami,
   reverseBackground: palette.cultured,
   secondaryBackground: palette.gunMetal,

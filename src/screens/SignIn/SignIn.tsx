@@ -3,31 +3,28 @@ import app from 'firebase'
 import { TextInput } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import { useForm, FormProvider } from 'react-hook-form'
-import { showMessage } from 'react-native-flash-message'
 import { FormInput } from '@components/form'
 import { View, Button, Screen } from '@components/ui'
+import { notifier } from '@services'
 import { SignInFormInputs, SignInProps } from './SignIn.props'
 
 export const SignIn = memo<SignInProps>(({ navigation }) => {
   const { t } = useTranslation('signIn')
   const [loading, setLoading] = useState(false)
   const methods = useForm<SignInFormInputs>({ mode: 'onBlur' })
-  const onSubmit = useCallback(
-    async ({ email, password }: SignInFormInputs) => {
-      setLoading(true)
-      try {
-        await app.auth().signInWithEmailAndPassword(email, password)
-      } catch (error) {
-        showMessage({
-          message: t('errors:signInErrorTitle'),
-          description: t('errors:signInErrorContent'),
-          type: 'danger',
-        })
-      }
-      setLoading(false)
-    },
-    [t]
-  )
+  const onSubmit = useCallback(async ({ email, password }: SignInFormInputs) => {
+    setLoading(true)
+    try {
+      await app.auth().signInWithEmailAndPassword(email, password)
+    } catch (error) {
+      notifier.showNotification({
+        txTitle: 'errors:signInErrorTitle',
+        txDescription: 'errors:signInErrorContent',
+        type: 'error',
+      })
+    }
+    setLoading(false)
+  }, [])
 
   const passwordRef = useRef<TextInput>(null)
   const onBlurEmail = useCallback(() => passwordRef.current?.focus(), [])

@@ -1,7 +1,6 @@
-import { showMessage } from 'react-native-flash-message'
 import app from 'firebase'
 import { onError } from '@apollo/client/link/error'
-import { Logger } from '@services'
+import { Logger, notifier } from '@services'
 import { getOperationType } from '@api/apollo/apollo.utils'
 
 const logoutErrorOperations = ['Unauthorized', 'Expired']
@@ -20,12 +19,16 @@ export const errorLink = onError(({ graphQLErrors, networkError, operation }) =>
       Logger.log(message, 'error')
       if (logoutErrorOperations.includes(message)) app.auth().signOut()
       else if (!selfHandlingErrorOperations.includes(operationName) && !isQuery)
-        showMessage({ message: 'error', type: 'danger' })
+        notifier.showNotification({ txTitle: 'errors:errorTitle', type: 'error' })
     })
   }
 
   if (networkError && !isQuery) {
     Logger.log('network', 'error')
-    showMessage({ message: 'network', type: 'danger' })
+    notifier.showNotification({
+      txTitle: 'errors:serverErrorTitle',
+      txDescription: 'errors:serverErrorContent',
+      type: 'error',
+    })
   }
 })

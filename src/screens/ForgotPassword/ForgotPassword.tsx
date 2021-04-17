@@ -2,9 +2,9 @@ import React, { memo, useCallback, useState } from 'react'
 import app from 'firebase'
 import { useTranslation } from 'react-i18next'
 import { useForm, FormProvider } from 'react-hook-form'
-import { showMessage } from 'react-native-flash-message'
 import { FormInput } from '@components/form'
 import { Text, Button, Screen, BackIcon, View } from '@components/ui'
+import { notifier } from '@services'
 import { ForgotPasswordFormInputs, ForgotPasswordProps } from './ForgotPassword.props'
 
 export const ForgotPassword = memo<ForgotPasswordProps>(({ navigation }) => {
@@ -16,10 +16,10 @@ export const ForgotPassword = memo<ForgotPasswordProps>(({ navigation }) => {
       setLoading(true)
       try {
         await app.auth().sendPasswordResetEmail(email)
-        showMessage({
-          message: t('resetPasswordErrorTitle'),
+        notifier.showNotification({
+          title: t('resetPasswordErrorTitle'),
           description: t('resetPasswordErrorContent'),
-          type: 'success',
+          type: 'error',
         })
         navigation.goBack()
       } catch (error) {}

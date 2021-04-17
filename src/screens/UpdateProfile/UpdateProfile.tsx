@@ -2,13 +2,12 @@ import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import BottomSheet from '@gorhom/bottom-sheet'
-import { showMessage } from 'react-native-flash-message'
 import app from 'firebase'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
 import { Pressable, Screen, View, Button } from '@components/ui'
 import { FormInput } from '@components/form'
 import { Avatar, MediaPickerActionSheet } from '@components'
-import { cache, firebase } from '@services'
+import { cache, firebase, notifier } from '@services'
 import { meQuery } from '@api/graphql'
 import { useUpdateProfileMutation } from '@api/hooks/generated'
 import { UpdateProfileProps, UpdateProfileFormInputs } from './UpdateProfile.props'
@@ -44,15 +43,15 @@ export const UpdateProfile = memo<UpdateProfileProps>(
           setValue('pictureUrl', pictureUrl)
           updateProfile({ variables: { pictureUrl } })
         } catch (e) {
-          showMessage({
-            message: t('errors:uploadPictureErrorTitle'),
-            description: t('errors:uploadPictureErrorContent'),
-            type: 'danger',
+          notifier.showNotification({
+            txTitle: 'errors:uploadPictureErrorTitle',
+            txDescription: 'errors:uploadPictureErrorContent',
+            type: 'error',
           })
         }
         isUploading(false)
       },
-      [data.uuid, setValue, t, updateProfile]
+      [data.uuid, setValue, updateProfile]
     )
 
     const onSubmit = useCallback(

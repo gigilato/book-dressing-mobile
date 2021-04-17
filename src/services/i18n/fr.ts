@@ -57,6 +57,9 @@ export const fr = {
     confirmPasswordErrorDifferent: 'Pas identique*',
   },
   errors: {
+    errorTitle: 'Une erreur est survenue',
+    serverErrorTitle: "Le server n'est pas disponible",
+    serverErrorContent: 'Veuillez réessayer plus tard',
     signInErrorTitle: 'Erreur de connection',
     signInErrorContent: 'Email ou mot de passe incorrect',
     uploadPictureErrorTitle: 'Erreur envoie',
