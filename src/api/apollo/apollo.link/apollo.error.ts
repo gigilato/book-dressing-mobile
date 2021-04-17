@@ -3,14 +3,11 @@ import app from 'firebase'
 import { onError } from '@apollo/client/link/error'
 import { Logger } from '@services'
 import { getOperationType } from '@api/apollo/apollo.utils'
-import { fromPromise } from '@apollo/client'
-import { firebase } from '@services'
 
-const logoutErrorOperations = ['Unauthorized']
-const expiredErrorOperations = ['Expired']
+const logoutErrorOperations = ['Unauthorized', 'Expired']
 const selfHandlingErrorOperations = ['updateProfile']
 
-export const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
+export const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   const {
     query: { definitions },
     operationName,
@@ -21,26 +18,9 @@ export const errorLink = onError(({ graphQLErrors, networkError, operation, forw
   if (graphQLErrors) {
     graphQLErrors.map(({ message }) => {
       Logger.log(message, 'error')
-      if (logoutErrorOperations.includes(message)) {
-        app.auth().signOut()
-      } else if (expiredErrorOperations.includes(message)) {
-        const { currentUser } = app.auth()
-        if (currentUser === null) return app.auth().signOut()
-        return fromPromise(
-          currentUser
-            .getIdToken()
-            .then((idToken) => {
-              firebase.setCurrentIdToken(idToken)
-              return idToken
-            })
-            .catch(() => app.auth().signOut())
-        )
-          .filter((value) => Boolean(value))
-          .flatMap(() => forward(operation))
-      } else if (!selfHandlingErrorOperations.includes(operationName) && !isQuery) {
+      if (logoutErrorOperations.includes(message)) app.auth().signOut()
+      else if (!selfHandlingErrorOperations.includes(operationName) && !isQuery)
         showMessage({ message: 'error', type: 'danger' })
-      }
-      return
     })
   }
 

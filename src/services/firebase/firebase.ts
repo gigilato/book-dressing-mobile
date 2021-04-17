@@ -3,20 +3,21 @@ import 'firebase/auth'
 import 'firebase/storage'
 import { config } from '@config'
 import { Nullable } from '@utils/types'
+import differenceInMinutes from 'date-fns/differenceInMinutes'
 
 app.initializeApp(config.firebase)
 
 export class Firebase {
   private currentIdToken: Nullable<string> = null
+  private lastFetchDate: Nullable<Date> = null
 
   setCurrentIdToken = (currentIdToken: Nullable<string>) => (this.currentIdToken = currentIdToken)
   getCurrentIdToken = () => this.currentIdToken
-  isAuthenticated = () => !!this.currentIdToken
-  refreshToken = async () => {
-    const { currentUser } = app.auth()
-    if (currentUser) this.currentIdToken = await currentUser.getIdToken()
-    return this.currentIdToken
-  }
+
+  setLastFetchDate = (date: Nullable<Date>) => (this.lastFetchDate = date)
+  getLastFetchDate = () => this.lastFetchDate
+  isTokenValid = () =>
+    this.lastFetchDate !== null && differenceInMinutes(new Date(), this.lastFetchDate) < 50
 
   uploadImageAsync = async (uri: string, type: 'book' | 'user', fileName: string) => {
     const blob: Blob = await new Promise((resolve, reject) => {

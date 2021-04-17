@@ -29,7 +29,8 @@ export const App = memo(() => {
     const unsubscribe = app.auth().onAuthStateChanged(async (user) => {
       const idToken = await (async () => (user ? user.getIdToken() : null))()
       Logger.log(`idToken = ${idToken}`)
-      if (idToken) firebase.setCurrentIdToken(idToken)
+      firebase.setCurrentIdToken(idToken)
+      firebase.setLastFetchDate(user ? new Date() : null)
       if (!user) cache.reset()
       setAuthentication(!!user)
       setAuthLoading(false)
