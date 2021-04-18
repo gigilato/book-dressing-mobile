@@ -1,4 +1,4 @@
-export * from './BookCard'
+export * from './BookCover'
 export * from './SearchBar'
 export * from './BookList'
 export * from './Avatar'

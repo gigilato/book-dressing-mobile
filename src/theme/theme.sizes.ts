@@ -6,8 +6,8 @@ export const sizes = {
   defaultLeftInset: 24,
   defaultRightInset: 24,
   separator: 15,
-  bookCardHeight: 150,
-  bookCardWidth: 100,
+  BookCoverHeight: 150,
+  BookCoverWidth: 100,
   navigationIcon: 35,
   hairline: StyleSheet.hairlineWidth,
 }

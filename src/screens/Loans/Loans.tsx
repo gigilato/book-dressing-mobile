@@ -15,7 +15,7 @@ const LoanRoute = memo(() => {
   return (
     <LoanList
       ListHeaderComponent={() => <View h="s" />}
-      onPressLoan={(loan) => console.log(loan)}
+      onPressBook={(book) => console.log(book)}
       queryOptions={{ variables: { where: { userUuid: data?.me.uuid } } }}
       style={styles.loanList}
       variant="loan"
@@ -28,7 +28,7 @@ const RequestRoute = memo(() => {
   return (
     <LoanList
       ListHeaderComponent={() => <View h="s" />}
-      onPressLoan={(loan) => console.log(loan)}
+      onPressBook={(book) => console.log(book)}
       queryOptions={{ variables: { where: { ownerUuid: data?.me.uuid } } }}
       style={styles.loanList}
       variant="request"

@@ -8,7 +8,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { useTranslation } from 'react-i18next'
 import { View, Screen, Text, Button, Pressable, BackIcon, LikeIcon } from '@components/ui'
-import { BookCard, Avatar } from '@components'
+import { BookCover, Avatar } from '@components'
 import { theme } from '@theme'
 import {
   useBookQuery,
@@ -96,7 +96,7 @@ const BookDetail = memo<BookDetailProps>(({ data, onPressBack }) => {
     <>
       <Screen variant="scrollable" safeTop safeBottom>
         <View alignItems="center">
-          <BookCard data={book} ratioWidth={170} />
+          <BookCover data={book} ratioWidth={170} />
         </View>
         <Animated.View style={contentAnimatedStyle}>
           <Text fontFamily="poppins600" fontSize="h2" textAlign="center" mt="l">

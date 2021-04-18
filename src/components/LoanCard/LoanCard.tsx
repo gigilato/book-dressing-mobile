@@ -1,55 +1,39 @@
 import React, { memo } from 'react'
 import { Skeleton } from '@motify/skeleton'
-import { SharedElement } from 'react-navigation-shared-element'
 import { useTranslation } from 'react-i18next'
 import format from 'date-fns/format'
 import { theme } from '@theme'
-import { Image, Pressable, View, Text, Icon } from '@components/ui'
-import { Avatar } from '@components'
+import { View, Text, Icon } from '@components/ui'
+import { Avatar } from '@components/Avatar'
+import { BookCover } from '@components/BookCover'
 import { LoanStatus } from '@api/hooks/generated'
 import { LoanCardProps } from './LoanCard.props'
 
 const {
   colors: { skeletonPrimaryColor, skeletonSecondaryColor },
-  sizes: { bookCardHeight, bookCardWidth },
 } = theme
-
-const width = 65
-const height = (width * bookCardHeight) / bookCardWidth
 
 export const LoanCard = memo<LoanCardProps>(
   ({
-    data,
     data: {
-      uuid,
       user,
       status,
       createdAt,
-      book: { title, pictureUrl, owner },
+      book,
+      book: { title, owner },
     },
-    onPress,
+    onPressBook,
     variant,
   }) => {
     const { t } = useTranslation('loans')
     return (
-      <Pressable
-        onPress={() => onPress && onPress(data)}
-        pressScale={0.98}
-        control="debounce"
-        flexDirection="row"
-        disabled={!onPress}>
-        <SharedElement id={`book.${uuid}`}>
-          <Image
-            source={pictureUrl ? { uri: pictureUrl } : 'bookUnavaliable'}
-            resizeMode="cover"
-            bg="charleston"
-            width={width}
-            height={height}
-          />
-        </SharedElement>
+      <View flexDirection="row">
+        <BookCover data={book} ratioWidth={65} onPress={onPressBook} />
         <View ml="s" justifyContent="center" flex={1}>
           {/* first row */}
-          <Text variant="title">{title}</Text>
+          <Text variant="title" numberOfLines={1} ellipsizeMode="tail">
+            {title}
+          </Text>
           {/* second row */}
           <View flexDirection="row" mt="xxs" py={1} alignItems="center">
             <Avatar size={20} uri={variant === 'loan' ? owner.pictureUrl : user.pictureUrl} />
@@ -84,7 +68,7 @@ export const LoanCard = memo<LoanCardProps>(
             </View>
           </View>
         </View>
-      </Pressable>
+      </View>
     )
   }
 )

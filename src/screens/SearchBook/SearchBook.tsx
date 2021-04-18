@@ -3,7 +3,7 @@ import { FlatList, ActivityIndicator } from 'react-native'
 import axios from 'axios'
 import _ from 'lodash'
 import { View, Text } from '@components/ui'
-import { BookCard, SearchBar } from '@components'
+import { BookCover, SearchBar } from '@components'
 import { theme } from '@theme'
 import { getQueryUrl, GoogleBooksData, parseGoogleBooksItems } from '@utils/googleBooks'
 import { useSafeAreaInsets } from '@hooks'
@@ -50,10 +50,10 @@ export const SearchBook = memo<SearchBookProps>(() => {
           renderItem={({ item }) => (
             <View justifyContent="space-between" flexDirection="row">
               {item.map((book) => (
-                <BookCard key={book.id} onPress={(b) => console.log(b)} data={book} />
+                <BookCover key={book.id} onPress={(b) => console.log(b)} data={book} />
               ))}
               {_.times(3 - item.length, (n) => (
-                <View key={n} height="bookCardHeight" width="bookCardWidth" />
+                <View key={n} height="BookCoverHeight" width="BookCoverWidth" />
               ))}
             </View>
           )}

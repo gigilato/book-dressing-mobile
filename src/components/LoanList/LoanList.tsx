@@ -9,7 +9,7 @@ import { LoanListProps } from './LoanList.props'
 const loaderData = _.times(12, (n) => n.toString())
 const ItemSeparatorComponent = () => <View h="s" />
 
-export const LoanList = memo<LoanListProps>(({ queryOptions, onPressLoan, variant, ...props }) => {
+export const LoanList = memo<LoanListProps>(({ queryOptions, onPressBook, variant, ...props }) => {
   const query = useLoansQuery({ notifyOnNetworkStatusChange: true, ...queryOptions })
   const loans = useMemo(() => query.data?.loans, [query.data])
   return (
@@ -17,7 +17,7 @@ export const LoanList = memo<LoanListProps>(({ queryOptions, onPressLoan, varian
       query={query}
       data={loans}
       renderItem={({ item }) => (
-        <LoanCard variant={variant} data={item.node} onPress={onPressLoan} />
+        <LoanCard variant={variant} data={item.node} onPressBook={onPressBook} />
       )}
       renderLoader={() => (
         <FlatList

@@ -3,7 +3,7 @@ import { FlatList } from 'react-native'
 import _ from 'lodash'
 
 import { AsyncFlatList, View } from '@components/ui'
-import { BookCard, BookCardSkeleton } from '@components/BookCard'
+import { BookCover, BookCoverSkeleton } from '@components/BookCover'
 import { useBooksQuery } from '@api/hooks/generated'
 import { BookListProps } from './BookList.props'
 import { styles } from './BookList.styles'
@@ -40,7 +40,7 @@ export const BookList = memo<BookListProps>(({ queryOptions, onPressBook, ...pro
         item.node.uuid === emptyBookData.uuid ? (
           <View w={ratioWidth} />
         ) : (
-          <BookCard data={item.node} onPress={onPressBook} ratioWidth={ratioWidth} />
+          <BookCover data={item.node} onPress={onPressBook} ratioWidth={ratioWidth} />
         )
       }
       renderLoader={() => (
@@ -53,7 +53,7 @@ export const BookList = memo<BookListProps>(({ queryOptions, onPressBook, ...pro
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <ItemSeparatorComponent />}
-          renderItem={() => <BookCardSkeleton ratioWidth={ratioWidth} />}
+          renderItem={() => <BookCoverSkeleton ratioWidth={ratioWidth} />}
         />
       )}
       ItemSeparatorComponent={() => <ItemSeparatorComponent />}

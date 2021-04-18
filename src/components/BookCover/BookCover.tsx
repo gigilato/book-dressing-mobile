@@ -3,23 +3,23 @@ import { Skeleton } from '@motify/skeleton'
 import { SharedElement } from 'react-navigation-shared-element'
 import { theme } from '@theme'
 import { Image, Pressable } from '@components/ui'
-import { BookCardProps, BookCardSkeletonProps } from './BookCard.props'
+import { BookCoverProps, BookCoverSkeletonProps } from './BookCover.props'
 
 const {
   radii,
   colors: { skeletonPrimaryColor, skeletonSecondaryColor },
-  sizes: { bookCardHeight, bookCardWidth },
+  sizes: { BookCoverHeight, BookCoverWidth },
 } = theme
 
 const borderRadius = radii.xs
 
-export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
+export const BookCover = memo<BookCoverProps>(({ data, onPress, ratioWidth }) => {
   const containerProps = useMemo(
     () => ({
       bg: 'charleston',
       borderRadius: borderRadius,
-      width: ratioWidth ?? bookCardWidth,
-      height: ratioWidth ? (ratioWidth * bookCardHeight) / bookCardWidth : bookCardHeight,
+      width: ratioWidth ?? BookCoverWidth,
+      height: ratioWidth ? (ratioWidth * BookCoverHeight) / BookCoverWidth : BookCoverHeight,
     }),
     [ratioWidth]
   )
@@ -40,13 +40,13 @@ export const BookCard = memo<BookCardProps>(({ data, onPress, ratioWidth }) => {
   )
 })
 
-export const BookCardSkeleton = memo<BookCardSkeletonProps>(({ ratioWidth }) => {
+export const BookCoverSkeleton = memo<BookCoverSkeletonProps>(({ ratioWidth }) => {
   return (
     <Skeleton
       radius={borderRadius}
       colors={[skeletonPrimaryColor, skeletonSecondaryColor]}
-      height={ratioWidth ? (ratioWidth * bookCardHeight) / bookCardWidth : bookCardHeight}
-      width={ratioWidth ?? bookCardWidth}
+      height={ratioWidth ? (ratioWidth * BookCoverHeight) / BookCoverWidth : BookCoverHeight}
+      width={ratioWidth ?? BookCoverWidth}
     />
   )
 })

@@ -89,7 +89,7 @@ export const fr = {
   },
   loans: {
     loans: 'Emprunts',
-    requests: 'Requêtes',
+    requests: 'Demandes',
     pending: 'en attente',
     active: 'en cours',
     finished: 'terminé',
