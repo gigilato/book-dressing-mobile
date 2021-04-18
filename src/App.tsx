@@ -9,6 +9,7 @@ import { fonts, images } from '@assets'
 import { i18n, firebase, Logger, cache } from '@services'
 import { RootNavigator } from '@navigation'
 import { client } from '@api/apollo'
+import { CacheManager } from '@components/ui/Image/Image.cache'
 
 export const App = memo(() => {
   const [isLoading, setLoading] = useState(true)
@@ -31,7 +32,10 @@ export const App = memo(() => {
       Logger.log(`idToken = ${idToken}`)
       firebase.setCurrentIdToken(idToken)
       firebase.setLastFetchDate(user ? new Date() : null)
-      if (!user) cache.reset()
+      if (!user) {
+        cache.reset()
+        CacheManager.clearCache()
+      }
       setAuthentication(!!user)
       setAuthLoading(false)
     })
