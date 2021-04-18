@@ -8,4 +8,9 @@ export const styles = StyleSheet.create({
     paddingLeft: theme.sizes.defaultLeftInset,
     paddingRight: theme.sizes.defaultRightInset,
   },
+  loanLoader: {
+    paddingLeft: theme.sizes.defaultLeftInset,
+    paddingRight: theme.sizes.defaultRightInset,
+    paddingTop: theme.spacings.s,
+  },
 })

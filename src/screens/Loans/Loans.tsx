@@ -18,6 +18,7 @@ const LoanRoute = memo(() => {
       onPressBook={(book) => console.log(book)}
       queryOptions={{ variables: { where: { userUuid: data?.me.uuid } } }}
       style={styles.loanList}
+      loaderStyle={styles.loanLoader}
       variant="loan"
     />
   )
@@ -31,6 +32,7 @@ const RequestRoute = memo(() => {
       onPressBook={(book) => console.log(book)}
       queryOptions={{ variables: { where: { ownerUuid: data?.me.uuid } } }}
       style={styles.loanList}
+      loaderStyle={styles.loanLoader}
       variant="request"
     />
   )
@@ -53,6 +55,7 @@ export const Loans = memo<LoansProps>(() => {
         renderScene={renderScene}
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
+        swipeEnabled={false}
         renderTabBar={(props) => (
           <TabBar
             {...props}

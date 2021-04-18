@@ -38,6 +38,8 @@ export const Explorer = memo<ExplorerProps>(({ navigation }) => {
           marginTop: height,
           paddingBottom: height,
         }}
+        loaderStyle={{ marginTop: height }}
+        errorStateStyle={{ marginTop: height }}
       />
     </Screen>
   )

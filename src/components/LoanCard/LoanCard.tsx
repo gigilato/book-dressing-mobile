@@ -8,10 +8,13 @@ import { Avatar } from '@components/Avatar'
 import { BookCover } from '@components/BookCover'
 import { LoanStatus } from '@api/hooks/generated'
 import { LoanCardProps } from './LoanCard.props'
+import { getBookCoverHeight } from '../../utils/books'
 
 const {
   colors: { skeletonPrimaryColor, skeletonSecondaryColor },
 } = theme
+
+const width = 65
 
 export const LoanCard = memo<LoanCardProps>(
   ({
@@ -28,7 +31,7 @@ export const LoanCard = memo<LoanCardProps>(
     const { t } = useTranslation('loans')
     return (
       <View flexDirection="row">
-        <BookCover data={book} ratioWidth={65} onPress={onPressBook} />
+        <BookCover data={book} ratioWidth={width} onPress={onPressBook} />
         <View ml="s" justifyContent="center" flex={1}>
           {/* first row */}
           <Text variant="title" numberOfLines={1} ellipsizeMode="tail">
@@ -73,6 +76,19 @@ export const LoanCard = memo<LoanCardProps>(
   }
 )
 
+const skeletonColors = [skeletonPrimaryColor, skeletonSecondaryColor]
+const skeletonTextHeight = 18
 export const LoanCardSkeleton = memo(() => {
-  return <Skeleton colors={[skeletonPrimaryColor, skeletonSecondaryColor]} />
+  return (
+    <View flexDirection="row">
+      <Skeleton colors={skeletonColors} width={width} height={getBookCoverHeight(width)} />
+      <View ml="s" justifyContent="center" flex={1}>
+        <Skeleton colors={skeletonColors} width={200} height={skeletonTextHeight} />
+        <View my="xxs">
+          <Skeleton colors={skeletonColors} width={150} height={skeletonTextHeight} />
+        </View>
+        <Skeleton colors={skeletonColors} width={120} height={skeletonTextHeight} />
+      </View>
+    </View>
+  )
 })

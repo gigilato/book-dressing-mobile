@@ -1,7 +1,6 @@
 import React, { memo, useMemo, useState } from 'react'
 import { FlatList } from 'react-native'
 import _ from 'lodash'
-
 import { AsyncFlatList, View } from '@components/ui'
 import { BookCover, BookCoverSkeleton } from '@components/BookCover'
 import { useBooksQuery } from '@api/hooks/generated'

@@ -66,6 +66,8 @@ const UserProfile = memo<UserProfileProps>(({ data, isMyProfile, onPressEdit, on
           marginTop: height + defaultTopInset,
           paddingBottom: height + defaultTopInset,
         }}
+        loaderStyle={{ marginTop: height + defaultTopInset }}
+        errorStateStyle={{ marginTop: height + defaultTopInset }}
       />
     </Screen>
   )

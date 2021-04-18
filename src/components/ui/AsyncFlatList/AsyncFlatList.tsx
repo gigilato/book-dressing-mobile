@@ -3,6 +3,7 @@ import { FlatList, ActivityIndicator, RefreshControl } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { NetworkStatus } from '@apollo/client'
 import { ErrorState } from '@components/ui/ErrorState'
+import { View } from '@components/ui/View'
 import { AsyncFlatListProps, ConnectionInterface, ConnectionNode } from './AsyncFlatList.props'
 import { styles } from './AsyncFlatList.styles'
 
@@ -21,6 +22,8 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
         ListFooterComponent,
         renderLoader,
         errorStateStyle,
+        loaderStyle,
+        emptyStateStyle,
         ...props
       },
       ref
@@ -54,13 +57,18 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
       }, [hasNextPage, fetchMore, variables, pageSize])
 
       if (networkStatus === NetworkStatus.loading || networkStatus === NetworkStatus.setVariables)
-        return renderLoader ? renderLoader() : <ActivityIndicator />
+        return renderLoader ? (
+          <View style={loaderStyle}>{renderLoader()}</View>
+        ) : (
+          <ActivityIndicator />
+        )
       if (error)
         return (
           <ErrorState
             type="error"
             onPressRetry={() => refetch()}
             loading={networkStatus === NetworkStatus.refetch}
+            containerStyle={errorStateStyle}
           />
         )
 
@@ -80,7 +88,7 @@ export const AsyncFlatList: <T, K extends ConnectionInterface<ConnectionNode>>(
           onEndReached={onEndReached}
           onEndReachedThreshold={0.1}
           scrollEventThrottle={16}
-          ListEmptyComponent={() => <ErrorState containerStyle={errorStateStyle} type="empty" />}
+          ListEmptyComponent={() => <ErrorState containerStyle={emptyStateStyle} type="empty" />}
           ListFooterComponent={
             hasNextPage
               ? () => <ActivityIndicator size="small" style={styles.footerActivityIndicator} />

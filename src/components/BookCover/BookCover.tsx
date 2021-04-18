@@ -3,6 +3,7 @@ import { Skeleton } from '@motify/skeleton'
 import { SharedElement } from 'react-navigation-shared-element'
 import { theme } from '@theme'
 import { Image, Pressable } from '@components/ui'
+import { getBookCoverHeight } from '@utils/books'
 import { BookCoverProps, BookCoverSkeletonProps } from './BookCover.props'
 
 const {
@@ -19,7 +20,7 @@ export const BookCover = memo<BookCoverProps>(({ data, onPress, ratioWidth }) =>
       bg: 'charleston',
       borderRadius: borderRadius,
       width: ratioWidth ?? BookCoverWidth,
-      height: ratioWidth ? (ratioWidth * BookCoverHeight) / BookCoverWidth : BookCoverHeight,
+      height: ratioWidth ? getBookCoverHeight(ratioWidth) : BookCoverHeight,
     }),
     [ratioWidth]
   )
@@ -45,7 +46,7 @@ export const BookCoverSkeleton = memo<BookCoverSkeletonProps>(({ ratioWidth }) =
     <Skeleton
       radius={borderRadius}
       colors={[skeletonPrimaryColor, skeletonSecondaryColor]}
-      height={ratioWidth ? (ratioWidth * BookCoverHeight) / BookCoverWidth : BookCoverHeight}
+      height={ratioWidth ? getBookCoverHeight(ratioWidth) : BookCoverHeight}
       width={ratioWidth ?? BookCoverWidth}
     />
   )
